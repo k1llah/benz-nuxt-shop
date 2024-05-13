@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
 import  autoImport  from '@pinia/nuxt'
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -7,10 +6,17 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-  modules: [
-    [
-      '@pinia/nuxt',
-      { autoImports: ['defineStore'] },
-    ],
-  ],
+  modules: [[
+    '@pinia/nuxt',
+    {
+      autoImports: ['defineStore']
+    }
+  ], "@nuxtjs/tailwindcss"],
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
+  imports: {
+    autoImport: true,
+    dirs: ['./stores/**']
+  }
 })

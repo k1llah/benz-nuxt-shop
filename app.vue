@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
+import { useToggle, useDark } from '@vueuse/core'
 import { useOrderStore } from './stores/order';
 const orderStore = useOrderStore();
 const blog = useBlog()
@@ -14,7 +14,7 @@ onMounted(() => {
   authStore.checkAuth();
 });
 const page = ref(window.location.pathname);
-watch(() => route.currentRoute.value.path, (newPath) => {
+watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
 });
 </script>
