@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     }
   ], "@nuxtjs/tailwindcss"],
   pinia: {
-    storesDirs: ['./stores/**'],
+    storesDirs: ['./stores/**', './stores'],
   },
   imports: {
     autoImport: true,

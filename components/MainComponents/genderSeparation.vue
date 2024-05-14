@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useGenderStore } from "@/stores/separate";
 let genderStore = useGenderStore();
 let clickValue = ref("");
 genderStore.onClickOnGender = clickValue.value;

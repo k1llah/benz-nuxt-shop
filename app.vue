@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useToggle, useDark } from '@vueuse/core'
-import { useOrderStore } from './stores/order';
 const orderStore = useOrderStore();
 const blog = useBlog()
 const allStore = useAllStore()
@@ -23,7 +22,7 @@ watch(() => route.currentRoute.value.path, (newPath: any) => {
     <Header/>
     <section>
       <div class="w-full min-h-[800px] m-auto">
-        <RouterView />
+        <NuxtPage />
         <backToTop v-if="page != '/profile' && !allStore.isOpenedFeedBack && !blog.isOpenedModal && !blog.isOpenedModalFeedback && !orderStore.errorPayment && !orderStore.success"/>
       </div>
     </section>

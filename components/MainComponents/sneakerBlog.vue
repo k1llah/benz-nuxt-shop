@@ -1,19 +1,5 @@
 <script setup lang="ts">
-import {
-  ref,
-  onMounted,
-  watchEffect,
-  onBeforeUnmount,
-  onBeforeMount,
-} from "vue";
 import gsap from "gsap";
-import { marked } from "marked";
-import { useAllStore } from "@/stores/all";
-import { useBlog } from "@/stores/sneakerBlog";
-import { onBeforeRouteUpdate } from "vue-router";
-import scrollComponent from "./scrollComponent.vue";
-import coverTemplate from "../blogComponents/cover-template.vue";
-import firstPostComponent from "../blogComponents/firstPostComponent.vue";
 const blogStore = useBlog();
 const content = ref();
 const allStore = useAllStore();

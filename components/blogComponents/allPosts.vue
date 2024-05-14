@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import axios from "axios";
-import { onBeforeMount, ref } from "vue";
-import { useBlog } from "@/stores/sneakerBlog";
-import coverTemplate from "./cover-template.vue";
-import firstPostComponent from "./firstPostComponent.vue";
 const blog = useBlog();
 let idPost = ref();
 let searchInput = ref('');

@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { useBlog } from "@/stores/sneakerBlog";
 import axios from "axios";
-import { ref } from "vue";
-import { onBeforeRouteLeave } from "vue-router";
-import createdModal from "./createdModal.vue";
 const blog = useBlog();
 let email = ref("");
 let ideaText = ref("");

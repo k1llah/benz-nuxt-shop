@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref, reactive } from "vue";
 import axios from "axios";
-import templateItem from "./templateItem.vue";
-import badassLoader from '../badassLoader.vue';
-import { useOrderStore } from "@/stores/order";
-import { useCartStore } from "@/stores/addToCart";
 const cartStore = useCartStore();
 const orderStore = useOrderStore();
 let idItems = ref([] as any);

@@ -1,14 +1,5 @@
 <script setup script lang="ts">
-import Card from "./card.vue";
 import axios from "axios";
-import { ref, } from "vue";
-import { useRouter } from 'vue-router'; 
-import { useAllStore } from '@/stores/all';
-import Overlay from '@/components/cardsComponents/overlay.vue';
-import { useCartStore } from '@/stores/addToCart';
-import { useAuthStore } from '@/stores/authData';
-import { useFavoritesStore } from '@/stores/favorites';
-import CartItem from '../DrawerComponents/CartItem.vue'
 const favoritesStore = useFavoritesStore();
 const authStore = useAuthStore();
 const cartStore = useCartStore();

@@ -1,18 +1,8 @@
 <script setup lang="ts">
 import Swiper from "swiper";
-import sliderMain from "@/components/MainComponents/sliderMain.vue";
-import { ref, onMounted } from "vue";
-import scrollText from "@/components/MainComponents/scrollText.vue";
 import "swiper/css";
-import MainVerticalSlider from "@/components/MainComponents/mainVerticalSlider.vue";
-import buttonBack from '@/components/buttonBack.vue';
-import brands from '@/components/MainComponents/brands.vue';
-import genderSeparation from '@/components/MainComponents/genderSeparation.vue';
-import sneakerBlog from '@/components/MainComponents/sneakerBlog.vue';
-import shipping from '@/components/MainComponents/shipping.vue';
 let mySwiper;
 const swiperContainer = ref<HTMLElement | null>(null);
-
 onMounted(() => {
   if (swiperContainer.value) {
     mySwiper = new Swiper(swiperContainer.value, {

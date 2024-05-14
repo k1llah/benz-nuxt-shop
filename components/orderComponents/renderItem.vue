@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
 import axios from "axios";
-import templateItem from "./templateItem.vue";
-import { useOrderStore } from "@/stores/order";
 const orderStore = useOrderStore();
 const localStorageId = localStorage.getItem("sneakerId");
 let data = ref();

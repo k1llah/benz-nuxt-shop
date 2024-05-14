@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import sign_in from "@/components/profileComponents/sign_in.vue";
-import buttonBack from '@/components/buttonBack.vue';
-import { useAuthStore } from '@/stores/authData';
-import { useCartStore } from '@/stores/addToCart';
 const cartStore = useCartStore()
 const authStore = useAuthStore()
 </script>

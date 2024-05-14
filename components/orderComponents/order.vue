@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import { useOrderStore } from '@/stores/order';
-	import addresses from './addresses.vue';
-	import formVue from './form.vue';
-	import placeAnOrder from './placeAnOrder.vue';
-	import renderItem from './renderItem.vue';
-	import { watch } from 'vue';
-	import itemsFromCartToOrder from './itemsFromCartToOrder.vue';
 	const orderStore = useOrderStore();
 	// https://3dsec.sberbank.ru/payment/rest/register.do
 </script>

@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { ref, watch,onMounted } from 'vue'
-import { useBlog } from '@/stores/sneakerBlog';
 const blog = useBlog()
 const router = useRouter();
 </script>

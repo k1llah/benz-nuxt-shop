@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
 import  { marked }  from 'marked';
 // Define props
 const props = defineProps({

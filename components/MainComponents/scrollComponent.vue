@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from "vue";
 import gsap from "gsap";
 import { useDark } from "@vueuse/core";
 const isDark = useDark();

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { useGenderStore } from "@/stores/separate";
-import CardList from './cardsComponents/CardList.vue';
 const items = ref([])
 const genderStore = useGenderStore();
   let params = localStorage.getItem('gender');

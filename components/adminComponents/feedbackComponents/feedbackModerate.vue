@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import templateFeedback from "@/components/feedBackComponents/templateFeedback.vue";
-import { useIsAdmin } from "@/stores/isAdmin";
-import buttonBack from "@/components/buttonBack.vue";
-import axios from "axios";
-import { useFeedbackStore } from "@/stores/feedback";
 const isAdmin = useIsAdmin();
 const feedbackStore = useFeedbackStore();
 onMounted(() => {

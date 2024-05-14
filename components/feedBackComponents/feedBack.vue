@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import buttonBack from "../buttonBack.vue";
-import { onBeforeMount } from "vue";
-import templateFeedBack from "@/components/feedBackComponents/templateFeedback.vue";
-import { useAllStore } from "@/stores/all";
-import { useFeedbackStore } from "@/stores/feedback";
-import modalFeedback from "@/components/feedBackComponents/modalFeedback.vue";
-import successCreatedModal from "./successCreatedModal.vue";
 let allStore = useAllStore();
 const feedbackStore = useFeedbackStore();
 onBeforeMount(() => {

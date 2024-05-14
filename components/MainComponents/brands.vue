@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from "vue";
 import { Pagination, Autoplay, FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";

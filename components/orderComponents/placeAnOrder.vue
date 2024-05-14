@@ -1,13 +1,6 @@
 <script setup lang="ts">
 // https://3dsec.sberbank.ru/payment/rest/register.do
-import { useAllStore } from "@/stores/all";
-import { useCartStore } from "@/stores/addToCart";
-import { useOrderStore } from "@/stores/order";
-import { useFormStore } from "@/stores/formStore";
 import { useDark } from "@vueuse/core";
-import order from "./order.vue";
-import modalError from "../modalError.vue";
-import modalWindow from "./modalWindow.vue";
 const allStore = useAllStore();
 const isDark = useDark();
 const formStore = useFormStore();

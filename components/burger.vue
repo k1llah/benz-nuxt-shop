@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import { useSneaker } from "@/stores/sneaker";
-import { ref, onMounted, watch, onBeforeMount } from "vue";
-import { useAllStore } from "@/stores/all";
-import burger from "@/components/burger.vue";
-import { useCartStore } from "@/stores/addToCart";
-import { useAuthStore } from "@/stores/authData";
-import { useRouter } from "vue-router";
 import { useDark, useToggle } from '@vueuse/core';
-import switchModeButton from './switchModeButton.vue';
 import axios from "axios";
 const cartStore = useCartStore();
 const allStore = useAllStore();

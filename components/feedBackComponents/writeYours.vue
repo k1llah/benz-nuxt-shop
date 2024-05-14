@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import stars from "./stars.vue";
-import { useFeedbackStore } from "@/stores/feedback";
 const feedbackStore = useFeedbackStore();
 </script>
 <template>

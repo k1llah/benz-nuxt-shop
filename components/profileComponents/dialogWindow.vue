@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import buttonBack from "@/components/buttonBack.vue";
-import { useAllStore } from "@/stores/all";
-import EditProfile from './editProfile.vue';
-import myOrders from './myOrders.vue';
-import myAddress from './myAddress.vue';
-const allStore = useAllStore();
 const target = ref("");
 target.value = localStorage.getItem('page')!;
 </script>

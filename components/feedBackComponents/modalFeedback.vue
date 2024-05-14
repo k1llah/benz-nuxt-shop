@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useAllStore } from "@/stores/all";
-import { useRouter } from 'vue-router';
-import writeYours from "./writeYours.vue";
-import { all } from 'axios'
 const allStore = useAllStore();
 const router = useRouter()
 const beforeRouteLeave = (to:any, from:any, next:any) => {

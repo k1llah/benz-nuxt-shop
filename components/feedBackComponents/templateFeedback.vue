@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { defineProps, ref, computed } from "vue";
-import { useFeedbackStore } from '@/stores/feedback';
-import stars from './stars.vue';
-
-const feedbackStore = useFeedbackStore();
 const props = defineProps({
   id: Number,
   author: String,

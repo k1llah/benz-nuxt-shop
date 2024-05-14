@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import buttonProfile from "@/components/buttonProfile.vue";
-import orderList from "./ordersInProfile/orderList.vue";
-import { ref, onMounted } from "vue";
-import { useMyOrderStore } from "@/stores/myOrders";
-import axios from "axios";
 const dataOrder = ref();
 const myOrders = useMyOrderStore();
 dataOrder.value = myOrders.orders;

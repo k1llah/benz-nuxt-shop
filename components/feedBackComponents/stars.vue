@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useAllStore } from "@/stores/all";
-import { useFeedbackStore } from "@/stores/feedback";
 const allStore = useAllStore();
 const props = defineProps(["prefix", "stats", "index"]);
 const rateFeedback = ref(props.stats);

@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import buttonBack from "@/components/buttonBack.vue";
-import feedBack from "@/components/feedBackComponents/feedBack.vue";
 import { useDark } from '@vueuse/core';
 const isDark = useDark();
 </script>
 <template>
   <div class="container-bg"  :class="{'container-dark': isDark}">
-
 	
   <div>
     <feedBack />

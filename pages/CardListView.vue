@@ -1,8 +1,6 @@
 <script setup script lang="ts">
 import axios from "axios";
-// import { debounce } from "lodash";
-import { useCartStore } from "@/stores/addToCart";
-import { useFavoritesStore } from "@/stores/favorites";
+import { debounce } from "lodash";
 const cartStore = useCartStore();
 const favoritesStore = useFavoritesStore();
 let items = ref<any>([]);

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect, onUnmounted } from "vue";
 import gsap from "gsap";
-import scrollComponent from "./scrollComponent.vue";
 const content = ref();
 const isVisible = ref(false);
 const { title, paragraph1, paragraph2, subtitle } = {

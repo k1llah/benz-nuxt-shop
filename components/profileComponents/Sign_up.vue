@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import axios from "axios";
-import { onMounted } from "vue";
 import { md5 } from "js-md5";
-import { ref } from "vue";
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/authData';
 const passwordsMatch = ref(false)
 const nameNotEmpty = ref(true)
 const passwordLengthValid = ref(true)

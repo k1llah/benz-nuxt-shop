@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { onBeforeRouteLeave } from 'vue-router';
-import { useOrderStore } from '@/stores/order';
-import { useAllStore } from '@/stores/all';
 const allStore = useAllStore()
 const orderStore = useOrderStore();
 onBeforeRouteLeave((to, from, next) => {

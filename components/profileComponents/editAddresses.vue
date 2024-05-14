@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
 import axios from "axios";
-import { useAllStore } from "@/stores/all";
 const allStore = useAllStore();
 
 const name = ref("");

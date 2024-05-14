@@ -1,12 +1,4 @@
 <script setup lang="ts">
-import Bucket from "./bucket.vue";
-import CartItemList from "./CartItemList.vue";
-import axios from "axios";
-import { onBeforeMount, onMounted, watch, computed, ref } from "vue";
-import { useCartStore } from "@/stores/addToCart";
-import { useOrderStore } from "@/stores/order";
-import { useRouter } from "vue-router";
-import { useSneaker } from "@/stores/sneaker";
 const sneakerStore = useSneaker();
 const router = useRouter();
 const orderStore = useOrderStore();

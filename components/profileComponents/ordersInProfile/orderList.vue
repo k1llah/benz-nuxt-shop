@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useAllStore } from "@/stores/all";
-import { onMounted, ref } from "vue";
-import templateOrder from "./templateOrder.vue";
-import { useMyOrderStore } from "@/stores/myOrders";
 const allStore = useAllStore();
 const myOrders = useMyOrderStore();
 onMounted(async () => {

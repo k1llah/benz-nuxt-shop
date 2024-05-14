@@ -1,11 +1,5 @@
 <script setup lang="ts">
 import axios from "axios";
-import { ref, watch } from "vue";
-import { useAllStore } from "@/stores/all";
-import { useMyOrderStore } from "@/stores/myOrders";
-import badassLoader from "@/components/badassLoader.vue";
-import dialogWindow from "@/components/profileComponents/dialogWindow.vue";
-
 const myOrders = useMyOrderStore();
 const email = ref("");
 const first_name = ref("");

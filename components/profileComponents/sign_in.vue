@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import axios from "axios";
-
 import md5 from "md5";
-import profileData from "./profile_data.vue";
-import { useAuthStore } from "@/stores/authData";
-import { useCartStore } from "@/stores/addToCart";
 const cartStore = useCartStore();
 const email = ref("");
 const password = ref("");

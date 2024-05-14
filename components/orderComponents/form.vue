@@ -1,15 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import axios from "axios";
-import { useAllStore } from "@/stores/all";
-import { useOrderStore } from "@/stores/order";
-import { useFormStore } from '@/stores/formStore';
-import order from './order.vue'
 const formStore = useFormStore();
 const orderStore = useOrderStore();
-
-
-
 </script>
 <template>
   <div class="md:mt-16 sm:mt-8 overflow-scroll md:max-h-[auto] sm:max-h-[650px]max-w-[350px] pl-3 ">

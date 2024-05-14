@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { useBlog } from "@/stores/sneakerBlog";
-import { onBeforeMount } from "vue";
-import { useRouter, onBeforeRouteLeave } from 'vue-router';
 const router = useRouter();
-import renderData from "../blogComponents/renderData.vue";
-import modalPostFeedback from './modalPostFeedback.vue';
 
 const blog = useBlog();
 const idPost = parseInt(localStorage.getItem("idPost") || "0", 10);

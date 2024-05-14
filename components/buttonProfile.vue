@@ -1,7 +1,4 @@
 <script setup lang="ts">
-	import { ref } from 'vue';
-	import { useRouter } from 'vue-router';
-	import { useAllStore } from '@/stores/all';
 	const router = useRouter();
 	const allStore = useAllStore();
 	let toggle = ref(true)

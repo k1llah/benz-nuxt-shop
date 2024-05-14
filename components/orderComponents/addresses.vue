@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeMount, watchEffect } from "vue";
 import axios from "axios";
-import addressTemplate from "./addressTemplate.vue";
 let isAddress = ref(false);
 let address = ref();
 

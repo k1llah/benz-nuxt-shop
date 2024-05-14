@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { ref, watch,onMounted } from 'vue'
-import{ useFeedbackStore } from '@/stores/feedback';
-import { useAllStore } from '@/stores/all';
 const allStore = useAllStore();
 const feedbackStore = useFeedbackStore();
 const router = useRouter();

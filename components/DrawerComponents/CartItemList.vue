@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import CartItem from "./CartItem.vue";
-import { onBeforeMount, ref, watch } from "vue";
-import { useCartStore } from "@/stores/addToCart";
-import { useAuthStore } from "@/stores/authData";
-import {useSneaker}  from '@/stores/sneaker';
-import axios from "axios";
 const sneakerStore = useSneaker()
 const authStore = useAuthStore();
 const cartStore = useCartStore();

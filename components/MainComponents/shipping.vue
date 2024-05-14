@@ -1,4 +1,3 @@
-<script setup lang="ts"></script>
 
 <template>
   <div class="flex flex-wrap justify-center gap-10 p-10 border-t-2 border-slate-500 pb-24 dark:bg-primaryDark dark:border-white dark:text-ghostWhiteText">

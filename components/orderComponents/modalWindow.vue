@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { useRouter, onBeforeRouteLeave } from 'vue-router';
-import { useOrderStore } from '@/stores/order';
-import { useAllStore } from '@/stores/all';
-import { useCartStore } from '@/stores/addToCart';
-import { ref } from 'vue'
 const cartStore = useCartStore()
 const allStore = useAllStore()
 const orderStore = useOrderStore()

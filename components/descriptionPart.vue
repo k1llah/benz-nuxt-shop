@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { useAllStore } from "@/stores/all";
-import buttonBack from "./buttonBack.vue";
-import { useRouter } from "vue-router";
-import { useAuthStore } from "@/stores/authData";
-import { useOrderStore } from "@/stores/order";
-import order from './orderComponents/order.vue'
 const orderStore = useOrderStore();
 const authData = useAuthStore();
 const router = useRouter();

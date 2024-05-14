@@ -1,8 +1,3 @@
-<script setup lang="ts">
-	import SignUp_View from '@/components/profileComponents/Sign_up.vue';
-  import buttonBack from '@/components/buttonBack.vue';
-</script>
-
 <template>
 	
 		<div class="min-h-[600px]">

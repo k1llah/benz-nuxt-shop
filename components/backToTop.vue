@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
 
 const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" }); //scrollUp
 let buttonToTopVisible = ref(false);

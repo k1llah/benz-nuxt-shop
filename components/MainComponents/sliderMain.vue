@@ -1,5 +1,4 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
 import { Pagination, Navigation, EffectFade, Autoplay } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import "swiper/css";

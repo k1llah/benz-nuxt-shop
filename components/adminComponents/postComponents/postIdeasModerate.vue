@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import axios from 'axios'
-import { onBeforeMount, ref } from 'vue';
-import ideasTemplate from './ideasTemplate.vue';
-import { useIsAdmin } from '@/stores/isAdmin';
 const isAdmin = useIsAdmin();
 const dataIdeas = ref()
 const role = ref()

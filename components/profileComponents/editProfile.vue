@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import buttonProfile from "@/components/buttonProfile.vue";
 import axios from "axios";
-import { ref, watch, onMounted, computed } from "vue";
 const uuid = localStorage.getItem("uuid");
 const id = localStorage.getItem("id");
 const email = ref("");

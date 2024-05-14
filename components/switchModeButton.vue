@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { watch, ref, onMounted } from 'vue';
 const props = defineProps({
 	isDark: Boolean,
 	changeTheme: Function

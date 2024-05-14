@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useOrderStore } from "@/stores/order";
 const orderStore = useOrderStore();
 const props = defineProps({
   id: Number,

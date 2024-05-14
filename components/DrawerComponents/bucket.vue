@@ -1,5 +1,4 @@
 <script  setup lang="ts">
-import {useSneaker}  from '@/stores/sneaker';
 const sneakerStore = useSneaker()
 </script>
 

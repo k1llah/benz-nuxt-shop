@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
 import axios from "axios";
-import { onMounted, watch } from "vue";
-import buttonBack from "@/components/buttonBack.vue";
-import badassLoader from '@/components/badassLoader.vue';
-import FavList from "@/components/cardsComponents/Fav-list.vue";
-import { useAuthStore } from "@/stores/authData";
-import { useFavoritesStore } from "@/stores/favorites";
-import { useCartStore } from "@/stores/addToCart";
 const cartStore = useCartStore();
 const favoriteStore = useFavoritesStore();
 const authStore = useAuthStore();

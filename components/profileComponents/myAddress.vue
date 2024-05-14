@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref, watch } from "vue";
-import axios from "axios";
-import buttonProfile from "@/components/buttonProfile.vue";
-import addressComp from "@/components/profileComponents/addressComp.vue";
-import addressAdd from "./addressAdd.vue";
-import editAddress from "./editAddresses.vue";
-import { useAddressStore } from "@/stores/address";
 const addressStore = useAddressStore();
-import { useAllStore } from "@/stores/all";
 const allStore = useAllStore();
 onBeforeMount(() => {
   addressStore.dataAddress();

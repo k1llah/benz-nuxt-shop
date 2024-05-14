@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { defineProps } from "vue";
-import { useAllStore } from "@/stores/all";
-import axios from "axios";
-import { useAddressStore } from '@/stores/address';
 const addressStore = useAddressStore()
 const props = defineProps({
   id: Number,
