@@ -23,7 +23,7 @@ async function checkIsAdmin() {
   }
   setTimeout(() => {
     if (role.value === "ADMIN") {
-      router.push({ name: "admin" });
+      router.push({ name: "/admin" });
     } else {
       location.reload();
       alert("Еще че придумал? сегодня не твой день салага");
@@ -77,10 +77,10 @@ const toggleDropdown = (index: number) => {
   <div class="w-full overflow-hidden">
     <div class="flex justify-between w-full items-center">
       <div class="flex gap-3">
-      <router-link to="/">
+      <NuxtLink to="/">
         <img v-if="!isDark" src="/logo_3.jpeg" alt="Logo" class="w-16" />
         <img v-else-if="isDark" src="/footer-logo.jpeg" alt="Logo" class="w-16 rounded-[50%]" />
-      </router-link>
+      </NuxtLink>
       <switchModeButton :isDark="!isDark" :changeTheme="toggleDark"/>
     </div>
       <input type="checkbox" id="checkbox" v-model="dropdowns[0]" @click="toggleDropdown(0)" />
@@ -98,9 +98,9 @@ const toggleDropdown = (index: number) => {
     >
       <ul class="flex items-center gap-10 flex-col w-full md:gap-5 mt-12 ">
         <li class="border-b-2 border-slate-300 dark:border-black w-full flex justify-center pb-2">
-          <router-link to="/sneakers_page" @click="toggleDropdown(0)">
+          <NuxtLink to="/CardList" @click="toggleDropdown(0)">
             <span class="text-[19px] font-light md:text-[14px]"> Все кроссовки</span>
-          </router-link>
+          </NuxtLink>
         </li>
         <li v-if="localRole != 'ADMIN'"
           class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s border-b-2 w-full justify-center pb-2 dark:border-black"

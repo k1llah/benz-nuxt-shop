@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-import { nextTick } from "vue";
 import axios from "axios";
 interface Item {
   id: number;

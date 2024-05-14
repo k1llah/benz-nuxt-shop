@@ -16,6 +16,9 @@ const page = ref(window.location.pathname);
 watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
 });
+if(process.client == false){
+  console.log('sadly')
+}
 </script>
 <template>
   <div class="md:w-[85%] sm:w-full m-auto bg-white rounded-xl shadow-xl mt-14 dark:bg-[#3f3f46]">

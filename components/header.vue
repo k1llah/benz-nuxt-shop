@@ -64,22 +64,22 @@ let toggleShow = () => {
   >
     <div class="" id="header">
       <div class="flex items-center md:gap-5 lg:gap-4">
-        <router-link to="/">
+        <NuxtLink to="/">
           <img v-if="!isDark" src="/logo_3.jpeg" alt="Logo" class="w-16" />
           <img v-else-if="isDark" src="/footer-logo.jpeg" alt="Logo" class="w-16 rounded-[50%]" />
-        </router-link>
+        </NuxtLink>
         <h2
           class="font-medium uppercase lg:text-xl md:text-base hidden sm:text-base"
         >
           Benz Shöp
         </h2>
-        <router-link to="sneakers_page">
+        <NuxtLink to="CardList">
           <p
             class="text-slate-700 hover:scale-[1.05] transition-all 1.3s lg:text-lg md:text-lg sm:text-sm dark:text-ghostWhiteText"
           >
             Все кроссовки
           </p>
-        </router-link>
+        </NuxtLink>
         <div>
           <switchModeButton :isDark="!isDark" :changeTheme="toggleDark"/>
         </div>
@@ -115,7 +115,7 @@ let toggleShow = () => {
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push({ name: 'Profile' })"
+        @click="$router.push( '/profile_user' )"
       >
         <img src="/profile.svg" alt="Cart" />
         <span class="text-[19px] font-light md:text-[14px]">Профиль</span>

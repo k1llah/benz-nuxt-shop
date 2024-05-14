@@ -18,5 +18,6 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
     dirs: ['./stores/**']
-  }
+  },
+  ssr:false
 })

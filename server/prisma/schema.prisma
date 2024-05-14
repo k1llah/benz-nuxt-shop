@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int           @id @default(autoincrement())
+  email      String        @unique
+  hash       String        @map("password_hash")
+  uuid       String        @default(uuid())
+  first_name String         @db.VarChar(35)
+  last_name  String        @default("Не указано") @db.VarChar(35)
+  profileImg String         @default("prof.jpeg")
+  age        Int?
+  gender     Gender        @default(notSelected)
+  role       Role          @default(USER)
+  created_at DateTime      @default(now())
+  updated_at DateTime      @updatedAt
+  is_active  Boolean       @default(false)
+  profile    Profile?
+  Favorite   SneakerData[]
+  order      order[]
+  feedback  feedback[]
+  address    address[]
+  cart       cart?
+
+  @@map("users")
+}
+
+model cart {
+  id     Int           @id @default(autoincrement())
+  userId Int           @unique
+  items  SneakerData[]
+  user   User?         @relation(fields: [userId], references: [id])
+}
+
+model feedback {
+  id              Int      @id @default(autoincrement())
+  userId          Int      
+  authorName      String
+  messageFeedback String
+  dateCreated     DateTime @default(now())
+  isModerated     Boolean  @default(false)
+  imageFeedback   String?
+  rating          Int
+  user            User     @relation(fields: [userId], references: [id])
+}
+
+model SneakerData {
+  id             Int     @id @default(autoincrement())
+  title          String  @unique
+  sneakerId      Int?
+  imageUrl       String
+  price          Int
+  sex            SexShoe
+  color          String
+  brand          String
+  description    String
+  materials      String
+  countryMade    String
+  typeOfSneakers Type    @default(all)
+  isAvailabile   Boolean @default(true)
+
+  user  User[]
+  cart  cart[]
+  order order[]
+
+  @@map("SneakInfo")
+}
+
+model address {
+  id             Int     @id @default(autoincrement())
+  userId         Int
+  firstName      String
+  lastName       String
+  surname        String?
+  phoneNumber    String
+  city           String
+  postalCode     Int
+  street         String
+  buildingNumber String?
+  houseNumber    Int
+  apartment      Int
+  user           User    @relation(fields: [userId], references: [id])
+  order          order[]
+}
+model order {
+  id            Int         @id @default(autoincrement())
+  orderNumber   String      @unique @default(uuid())
+  userId        Int
+  user          User        @relation(fields: [userId], references: [id])
+  createdAt     DateTime    @default(now())
+  status        OrderStatus @default(PENDING)
+  sneakerDataId Int[]
+  sneakerData   SneakerData @relation(fields: [id], references: [id])
+  amount        Float
+  payStatus     PayStatus
+  addressId     Int?
+  address       address?    @relation(fields: [addressId], references: [id])
+  orderMessage  String?     @db.VarChar(150)
+}
+
+model postIdeas{
+  id            Int         @id @default(autoincrement())
+  name          String      
+  email         String
+  ideaText      String
+  
+}
+
+
+enum OrderStatus {
+  PREPAIRING
+  PENDING
+  SENDED
+  COMPLETED
+  RECEIVED
+  CANCELED
+}
+
+enum PayStatus {
+  success
+  whenReceived
+  failed
+}
+
+enum SexShoe {
+  male
+  female
+  unisex
+  all
+}
+
+enum Type {
+  sneakers
+  boots
+  basketball
+  all
+}
+
+enum Gender {
+  male
+  female
+  notSelected
+}
+
+model Profile {
+  id       Int    @id @default(autoincrement())
+  nickName String
+  userId   Int    @unique
+  user     User   @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}

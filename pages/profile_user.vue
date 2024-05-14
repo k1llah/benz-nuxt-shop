@@ -34,7 +34,7 @@ const authStore = useAuthStore()
     </div>
 
     <div></div>
-    <sign_in />
+    <sign_in/>
     
   </div>
 </template>

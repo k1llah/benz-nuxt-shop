@@ -5,7 +5,7 @@ const router = createRouter({
     {
       name: 'main',
       path: '/',
-      component: () => import('~/pages/View_main.vue'),
+      component: () => import('~/pages/index.vue'),
     },
     {
       name: 'Purchases',
@@ -25,7 +25,7 @@ const router = createRouter({
     {
       name: 'Sneakers_page',
       path: '/sneakers_page',
-      component: () => import('~/pages/CardListView.vue'),
+      component: () => import('~/pages/CardList.vue'),
     },
     {
       name: 'gender',
