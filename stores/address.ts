@@ -1,7 +1,4 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import axios from "axios";
-
 export const useAddressStore = defineStore({
   id: "address",
   state: () => ({
@@ -11,14 +8,17 @@ export const useAddressStore = defineStore({
   actions: {
     async dataAddress() {
       try {
-        const data = await axios.post(
+        const data = await useFetch<any>(
           "http://localhost:3001/api/get-addresses",
           {
-            userId: localStorage.getItem("id"),
+            method: "POST",
+            body:{
+              userId: useCookie('id'),
+            }
           }
         );
 
-        this.addressData = data.data;
+        this.addressData = data.data.value;
         this.isAddress = this.addressData.length > 0;
       } catch (error) {
         console.log(error);
@@ -26,11 +26,14 @@ export const useAddressStore = defineStore({
     },
     async deleteAddress(id: number) {
       try {
-        const data = await axios.post(
+        const data = await useFetch<any>(
           "http://localhost:3001/api/delete-address",
           {
-            id: id,
-            userId: localStorage.getItem("id"),
+            method: "POST",
+            body:{
+              id: id,
+              userId: useCookie('id'),
+            }
           }
         );
         this.addressData = this.addressData.filter(

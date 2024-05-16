@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import axios from "axios";
 let isAddress = ref(false);
 let address = ref();
 
 const dataAddress = async () => {
   try {
-    const data = await axios.post("http://localhost:3001/api/get-addresses", {
-      userId: localStorage.getItem("id"),
+    const data = await useFetch<any>("http://localhost:3001/api/get-addresses", {
+      method: "POST",
+      body:{
+        userId: useCookie("id").value,
+      }
     });
     address.value = data.data;
     isAddress.value = address.value.length > 0;

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import axios from "axios";
 const allStore = useAllStore();
-
 const name = ref("");
 const lastName = ref("");
 const surname = ref("");
@@ -63,9 +61,12 @@ const ChangeBack = () => {
 };
 const editAddress = async () => {
   try {
-    const data = await axios.post("http://localhost:3001/api/get-address", {
-      addressId: allStore.idAddress,
-      userId: localStorage.getItem("id"),
+    const data = await useFetch<any>("http://localhost:3001/api/get-address", {
+      method: "POST",
+      body:{
+        addressId: allStore.idAddress,
+        userId: useCookie("id").value,
+      }
     });
     dataAddress.value = data.data;
     name.value = dataAddress.value.firstName;
@@ -97,19 +98,22 @@ editAddress();
 
 const updateAddress = async () => {
   try {
-    const data = await axios.post("http://localhost:3001/api/update-address", {
-      id: allStore.idAddress,
-      userId: localStorage.getItem("id"),
-      firstName: name.value,
-      lastName: lastName.value,
-      surname: surname.value,
-      city: city.value,
-      street: street.value,
-      phoneNumber: phoneNumber.value,
-      postalCode: postalCode.value,
-      buildingNumber: buildingNumber.value,
-      houseNumber: houseNumber.value,
-      apartment: apartment.value,
+    const data = await useFetch<any>("http://localhost:3001/api/update-address", {
+      method: 'POST',
+      body:{
+        id: allStore.idAddress,
+        userId: useCookie("id"),
+        firstName: name.value,
+        lastName: lastName.value,
+        surname: surname.value,
+        city: city.value,
+        street: street.value,
+        phoneNumber: phoneNumber.value,
+        postalCode: postalCode.value,
+        buildingNumber: buildingNumber.value,
+        houseNumber: houseNumber.value,
+        apartment: apartment.value,
+      }
     });
     location.reload();
   } catch (error) {

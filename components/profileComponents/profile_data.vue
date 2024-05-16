@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 const myOrders = useMyOrderStore();
 const email = ref("");
 const first_name = ref("");
@@ -10,18 +9,21 @@ import { useAuthStore } from "@/stores/authData";
 const authStore = useAuthStore();
 
 const getData = async function () {
-  const uuid = localStorage.getItem("uuid");
-  const id = localStorage.getItem("id");
+  const uuid = useCookie("uuid").value;
+  const id = useCookie("id").value;
   if (authStore.isAuthenticated == true) {
     try {
-      const data = await axios.post("http://localhost:3001/api/get-data", {
-        uuid,
-        id,
+      const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+        method: "POST",
+        body: {
+          uuid,
+          id,
+        }
       });
-      email.value = data.data.user.email;
-      first_name.value = data.data.user.first_name;
-      lastName.value = data.data.user.last_name;
-      profileImg.value = data.data.user.profileImg;
+      email.value = data.data.value.user.email;
+      first_name.value = data.data.value.user.first_name;
+      lastName.value = data.data.value.user.last_name;
+      profileImg.value = data.data.value.user.profileImg;
     } catch (error) {
       authStore.isAuthenticated = false;
     }
@@ -37,7 +39,7 @@ const handleOpenPage = (page: string) => {
   target.value = page;
   toggle.value = true;
   allStore.isOpened = toggle.value;
-  localStorage.setItem("page", page);
+  useCookie("page").value = page
   document.body.style.overflow = "hidden";
 };
 

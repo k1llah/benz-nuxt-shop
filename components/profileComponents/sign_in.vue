@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 import md5 from "md5";
 const cartStore = useCartStore();
 const email = ref("");
@@ -12,18 +11,20 @@ const logInFunc = async (event: any) => {
   const password = document.getElementById("password") as HTMLInputElement;
   if (email.value !== null && password.value !== null) {
     try {
-      const data = await axios.post("http://localhost:3001/api/login", {
-        email: email.value,
-        hash: md5(password.value),
+      const data = await useFetch<any>("http://localhost:3001/api/login", {
+        method: "POST",
+        body:{
+          email: email.value,
+          hash: md5(password.value),
+        }
       });
-
       if (data.data) {
-        localStorage.setItem("id", data.data.user.id);
-        localStorage.setItem("uuid", data.data.user.uuid);
-        localStorage.setItem("role", data.data.user.role);
-        authStore.id = data.data.user.id;
-        authStore.uuid = data.data.user.uuid;
-        authStore.role = data.data.user.role;
+        useCookie("id").value = data.data.value.user.id
+        useCookie("uuid").value = data.data.value.user.uuid
+        useCookie("role").value = data.data.value.user.role
+        authStore.id = data.data.value.user.id;
+        authStore.uuid = data.data.value.user.uuid;
+        authStore.role = data.data.value.user.role;
         email.value = "";
         password.value = "";
         formReport.value = "";
@@ -33,7 +34,7 @@ const logInFunc = async (event: any) => {
 
           await cartStore.items.forEach((el: any) => {
             cartStore.totalPrice += el.price;
-            localStorage.setItem("totalPrice", cartStore.totalPrice.toString());
+            useCookie("totalPrice").value = cartStore.totalPrice.toString();
           });
         }
       }

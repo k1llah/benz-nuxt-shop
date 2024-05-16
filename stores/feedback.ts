@@ -1,11 +1,9 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import axios from "axios";
 export const useFeedbackStore = defineStore({
   id: "feedback",
   state: () => ({
     starRating: 0,
-    userId: localStorage.getItem("id"),
+    userId: useCookie('id'),
     message: "",
     imageFeedback: ref(),
     tempFileURL: ref(),
@@ -33,12 +31,15 @@ export const useFeedbackStore = defineStore({
     async createFeedback() {
       event?.preventDefault();
       try {
-        const data = await axios.post("http://localhost:3001/api/get-data", {
-          uuid: localStorage.getItem("uuid"),
-          id: localStorage.getItem("id"),
+        const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+          method: "POST",
+          body: {
+            uuid: useCookie('uuid'),
+            id: useCookie('id'),
+          }
         });
 
-        this.authorName = data.data.user.first_name;
+        this.authorName = data.data.value.user.first_name;
         if (
           this.starRating !== 0 &&
           this.message.length >= 5 &&
@@ -47,14 +48,18 @@ export const useFeedbackStore = defineStore({
         ) {
           const formData = new FormData();
           formData.append("imageFeedback", this.imageFeedback);
-          formData.append("userId", this.userId);
+          formData.append("userId", this.userId!);
           formData.append("starRating", this.starRating.toString());
           formData.append("messageFeedback", this.message);
           formData.append("authorName", this.authorName);
           formData.append("rating", this.starRating.toString());
-          const createFeedback = await axios.post(
-            "http://localhost:3001/api/create-feedback",
-            formData
+          const createFeedback = await useFetch(
+            "http://localhost:3001/api/create-feedback",{
+            method: 'POST',
+            body:{
+              formData
+            }
+          }
           );
           this.modalFeedback = true;
           this.message = "";
@@ -92,10 +97,12 @@ export const useFeedbackStore = defineStore({
     },
     async getFeedbacksToModerate() {
       try {
-        const dataFeedback = await axios.get(
+        const dataFeedback = await useFetch<any>(
           "http://localhost:3001/api/get-feedback-to-moderate"
-        );
-        this.feedBackData = dataFeedback.data;
+        );{
+          method: "GET"
+        }
+        this.feedBackData = dataFeedback.data.value;
         if (this.isModeratedFeedback == false) {
           this.feedBackData.forEach((el: any) => {
             el.isModeratedFeedback = false;
@@ -107,20 +114,24 @@ export const useFeedbackStore = defineStore({
     },
     async getFeedbacks() {
       try {
-        const dataFeedback = await axios.get(
-          "http://localhost:3001/api/get-feedback"
-        );
-        this.feedBackData = dataFeedback.data;
+        const dataFeedback = await useFetch<any>(
+          "http://localhost:3001/api/get-feedback", {
+          method: "GET"
+        })
+        this.feedBackData = dataFeedback.data.value;
       } catch (error) {
         console.log(error);
       }
     },
     async moderateFeedback(id: number) {
       try {
-        const dataFeedback = await axios.post(
+        const dataFeedback = await useFetch(
           "http://localhost:3001/api/moderate-feedback",
           {
-            id: id,
+            method: "POST",
+            body: {
+              id: id,
+            }
           }
         );
         this.isModeratedFeedback = true;
@@ -133,10 +144,13 @@ export const useFeedbackStore = defineStore({
     },
     async feedbackDelete(id: number) {
       try {
-        const dataFeedback = await axios.post(
+        const dataFeedback = await useFetch(
           "http://localhost:3001/api/delete-feedback",
           {
-            id: id,
+            method: "POST",
+            body: {
+              id: id,
+            }
           }
         );
         this.isModeratedFeedback = true;

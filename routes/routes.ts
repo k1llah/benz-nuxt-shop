@@ -10,12 +10,12 @@ const router = createRouter({
     {
       name: 'Purchases',
       path: '/purchases',
-      component: () => import('~/pages/View_favorites.vue'),
+      component: () => import('~/pages/favorites.vue'),
     },
     {
       name: 'Profile',
       path: '/profile',
-      component: () => import('~/pages/profile_user.vue'),
+      component: () => import('~/pages/profile-user.vue'),
     },
     {
       name: 'Sign_up',
@@ -25,7 +25,7 @@ const router = createRouter({
     {
       name: 'Sneakers_page',
       path: '/sneakers_page',
-      component: () => import('~/pages/CardList.vue'),
+      component: () => import('~/pages/sneakers-page.vue'),
     },
     {
       name: 'gender',
@@ -35,7 +35,7 @@ const router = createRouter({
     {
       name: 'description',
       path: '/description',
-      component: () => import('~/pages/View_sneakerDs.vue'),
+      component: () => import('~/pages/sneaker-description.vue'),
     },
     {
       name: 'feedback',
@@ -60,7 +60,7 @@ const router = createRouter({
     {
       name: 'post_page',
       path: '/post_page',
-      component: () => import('~/pages/View_post.vue'),
+      component: () => import('~/pages/post.vue'),
     },
     {
       name: 'ideas_admin',
@@ -70,7 +70,7 @@ const router = createRouter({
     {
       name: 'all_posts',
       path: '/all_posts',
-      component: () => import('~/pages/View_all_posts.vue'),
+      component: () => import('~/pages/all-posts.vue'),
     },
   ],
 });

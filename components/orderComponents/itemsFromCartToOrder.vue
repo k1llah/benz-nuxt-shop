@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import axios from "axios";
 const cartStore = useCartStore();
 const orderStore = useOrderStore();
 let idItems = ref([] as any);
 let data = ref();
 const getDataShoe = async function (params: any) {
   try {
-    const dataShoe = await axios.post(
+    const dataShoe = await useFetch<any>(
       `http://localhost:3001/api/sneakers-to-order`,
       {
-        id: params,
+        method: "POST",
+        body:{
+          id: params,
+        }
       }
     );
     data.value = dataShoe.data;
     orderStore.idParam = idItems.value
-    orderStore.amount = dataShoe.data.reduce(
+    orderStore.amount = dataShoe.data.value.reduce(
       (acc: any, item: any) => acc + item.price,
       0
     );
@@ -26,7 +28,7 @@ onBeforeMount(async () => {
   await cartStore.cartDataGet();
   cartStore.items.forEach((el: any) => {
     idItems.value.push(el.id);
-    localStorage.setItem("sneakerId", JSON.stringify(idItems.value));
+    useCookie("sneakerId").value = JSON.stringify(idItems.value)
     orderStore.idParam = idItems.value
   });
   if (idItems.value.length > 0) {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios';
 const favoritesStore = useFavoritesStore();
 const cartStore = useCartStore();
 const authStore = useAuthStore();
@@ -27,11 +26,14 @@ const props = defineProps({
 const showOverlay = ref(false)
 const onFavoriteRemove = async (sneakerId: number, item:Item) => {
   try {
-    const postData = await axios.post(
+    const postData = await useFetch<any>(
       "http://localhost:3001/api/remove-from-favorites",
       {
-        userId: localStorage.getItem("id"),
-        sneakerId: sneakerId,
+        method: 'POST',
+        body:{
+          userId: useCookie('id'),
+          sneakerId: sneakerId,
+        }
       }
     );
 		item.isFavorite = false

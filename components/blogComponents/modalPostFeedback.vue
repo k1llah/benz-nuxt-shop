@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 const blog = useBlog();
 let email = ref("");
 let ideaText = ref("");
@@ -20,10 +19,13 @@ async function submit() {
       ideaText.value.length < 700 &&
       name.value.length >= 2
     ) {
-      const submit = await axios.post("http://localhost:3001/api/post-idea", {
-        name: name.value,
-        email: email.value,
-        ideaText: ideaText.value,
+      const submit = await useFetch<any>("http://localhost:3001/api/post-idea", {
+        method: "POST",
+        body: {
+          name: name.value,
+          email: email.value,
+          ideaText: ideaText.value,
+        }
       });
 
       blog.isOpenedModalFeedback = true;

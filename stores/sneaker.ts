@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
-
 interface Item {
   id: number;
   title: string;
@@ -19,17 +17,22 @@ export const useSneaker = defineStore('sneaker', {
   actions: {
     async fetchItems() {
       try {
-        const response = await axios.get('http://localhost:3001/api/items')
-        this.items = response.data
+        const response = await useFetch<any>('http://localhost:3001/api/items', {
+          method: 'GET'
+        })
+        this.items = response.data.value
       } catch (error) {
         console.error('Error fetching items:', error)
       }
     },
     async addToFavorites(userId: string, sneakerId: number) {
       try {
-        const response = await axios.post('http://localhost:3001/api/add-to-favorites', {
+        const response = await useFetch('http://localhost:3001/api/add-to-favorites', {
+          method: 'POST',
+          body: JSON.stringify({
           userId: userId,
           sneakerId: sneakerId,
+          })
         })
         // Обновляем состояние элемента, чтобы отразить его в избранном
         const index = this.items.findIndex(item => item.id === sneakerId)

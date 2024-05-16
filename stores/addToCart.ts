@@ -1,6 +1,4 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import axios from "axios";
 interface CartItem {
   id: number;
   title: string;
@@ -16,10 +14,10 @@ export const useCartStore = defineStore({
     items: [] as CartItem[],
     isAdded: false,
     cartCounter: 0,
-    localCounter: parseInt(localStorage.getItem("cartCounter") || "0", 10),
+    localCounter: parseInt(useCookie('cartCounter').value || "0", 10),
     counter: 1,
     totalPrice: 0,
-    localPrice: parseInt(localStorage.getItem("totalPrice") || "0", 10),
+    localPrice: parseInt(useCookie('totalPrice').value || "0", 10),
     axiosGetParamsStore: function () {},
     favorites: function () {},
   }),
@@ -35,20 +33,23 @@ export const useCartStore = defineStore({
 
     async onCartAdd(sneakerId: number, item: any, price: any) {
       try {
-        const postAddData = await axios.post(
+        const postAddData = await useFetch<any>(
           "http://localhost:3001/api/add-to-cart",
           {
-            userId: localStorage.getItem("id"),
-            sneakerId: sneakerId,
+            method: "POST",
+            body: {
+              userId: useCookie("id"),
+              sneakerId: sneakerId,
+            }
           }
         );
-        this.items = postAddData.data.items;
+        this.items = postAddData.data.value.items;
         item.isAdded = true;
         this.totalPrice += price;
         this.axiosGetParamsStore();
-        localStorage.setItem("totalPrice", this.totalPrice.toString());
+        useCookie("totalPrice").value = this.totalPrice.toString()
         this.cartCounter = this.items.length;
-        localStorage.setItem("cartCounter", this.cartCounter.toString());
+        useCookie("cartCounter").value = this.cartCounter.toString();
       } catch (error) {
         console.log(error);
       }
@@ -56,21 +57,24 @@ export const useCartStore = defineStore({
     async onDeleteItem(id: number, item: any, price: any) {
       if (item.isAdded) {
         try {
-          const removeData = await axios.post(
+          const removeData = await useFetch(
             "http://localhost:3001/api/remove-from-cart",
             {
-              userId: localStorage.getItem("id"),
-              sneakerId: id,
+              method: "POST",
+              body:{
+                userId: useCookie('id'),
+                sneakerId: id,
+              }
             }
           );
           if (this.cartCounter > 0) {
             this.cartCounter -= 1;
-            localStorage.setItem("cartCounter", this.cartCounter.toString());
+            useCookie("cartCounter").value = this.cartCounter.toString()
           }
 
           if (this.totalPrice > 0) {
             this.totalPrice -= price;
-            localStorage.setItem("totalPrice", this.totalPrice.toString());
+            useCookie("totalPrice").value = this.totalPrice.toString()
           }
           if (this.totalPrice < 0) {
             this.totalPrice = 0;
@@ -87,13 +91,16 @@ export const useCartStore = defineStore({
 
     async cartDataGet() {
       try {
-        const dataCart = await axios.post(
+        const dataCart = await useFetch<any>(
           "http://localhost:3001/api/get-cart-items",
           {
-            userId: localStorage.getItem("id"),
+            method: "POST",
+            body:{
+              userId: useCookie('id'),
+            }
           }
         );
-        this.items = dataCart.data.items;
+        this.items = dataCart.data.value.items;
         if (this.items !== undefined) {
           this.isAdded = this.items.length > 0;
         }
@@ -104,12 +111,11 @@ export const useCartStore = defineStore({
           });
         }
         this.totalPrice = parseInt(
-          localStorage.getItem("totalPrice") || "0",
+          useCookie('totalPrice').value || "0",
           10
         );
         if(this.items !== undefined) this.cartCounter = this.items.length;
-        
-        localStorage.setItem("cartCounter", this.cartCounter.toString());
+        useCookie("cartCounter").value = this.cartCounter.toString();
       } catch (error) {
         console.log(error);
       }

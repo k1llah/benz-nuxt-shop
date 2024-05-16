@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 import { md5 } from "js-md5";
 const passwordsMatch = ref(false)
 const nameNotEmpty = ref(true)
@@ -60,17 +59,21 @@ const submitForm = async (event: Event) => {
     password === password_confirmation
   ) {
     try {
-      const create = await axios.post("http://localhost:3001/api/createUser", {
-        name: name,
-        email: email,
-        password: md5(password).toString(),
+      const create = await useFetch<any>("http://localhost:3001/api/createUser", {
+        method: "POST",
+        body:{
+          name: name,
+          email: email,
+          password: md5(password).toString(),
+        }
       });
       isSuccessSignUp.value = true
       textSuccessSignUp.value = "Вы успешно зарегистрировались!"
-      const infoUser = await create.data
-      localStorage.id = infoUser.id
-      localStorage.uuid = infoUser.uuid
-      localStorage.role = infoUser.role
+      const infoUser = await create.data.value
+      useCookie("id").value = infoUser.id
+      useCookie("uuid").value = infoUser.uuid
+      useCookie('role').value = infoUser.role
+      
       authStore.id = infoUser.id
       authStore.uuid = infoUser.uuid
       startTimer();
@@ -79,7 +82,7 @@ const submitForm = async (event: Event) => {
       localStorageMatch.value = true
 
       // исправить на роутер
-      const prevPage = localStorage.getItem("prevPage")
+      const prevPage = useCookie("prevPage").value
       if(prevPage && prevPage.includes('description')){
 
         await setTimeout( async () => {await router.go(-1)}, 5000)

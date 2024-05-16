@@ -2,7 +2,7 @@
 const router = useRouter();
 
 const blog = useBlog();
-const idPost = parseInt(localStorage.getItem("idPost") || "0", 10);
+const idPost = parseInt(useCookie("idPost").value || "0", 10);
 onBeforeMount(async () => {
   await blog.getPostById(idPost);
 });
@@ -36,7 +36,7 @@ onBeforeRouteLeave ((to:any, from:any, next:any) => {
       </div>
     </div>
     <div>
-      <button class="learn-more w-52 h-auto" @click="router.push('/all_posts')">
+      <button class="learn-more w-52 h-auto" @click="router.push('/all-posts')">
         <span class="circle" aria-hidden="true">
           <span class="icon arrow"></span>
         </span>

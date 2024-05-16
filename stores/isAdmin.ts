@@ -1,7 +1,4 @@
 import { defineStore } from "pinia"
-import { ref } from "vue"
-import axios from "axios"
-
 export const useIsAdmin = defineStore({
   id: "isAdmin",
   state: () => ({
@@ -10,12 +7,15 @@ export const useIsAdmin = defineStore({
   actions: {
 		async checkIsAdmin() {
 			try {
-						const data = await axios.post("http://localhost:3001/api/get-data", {
-							uuid: localStorage.getItem("uuid"),
-							id: localStorage.getItem("id"),
+						const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+							method: "POST",
+							body: {
+								uuid: useCookie('uuid'),
+								id: useCookie('id'),
+							}
 						});
-						this.role = data.data.user.role
-						localStorage.setItem("role", this.role)
+						this.role = data.data.value.user.role
+						
 					}catch(error){
 						console.log(error)
 					}
@@ -23,7 +23,8 @@ export const useIsAdmin = defineStore({
 							console.log(this.role)
 						}
 						else{
-							localStorage.setItem('role', 'USER')
+							let setRole = useCookie('role')
+							setRole.value = 'USER'
 							location.assign('/')
 							alert('Еще че придумал? сегодня не твой день салага')
 						}

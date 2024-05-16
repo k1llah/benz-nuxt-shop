@@ -2,10 +2,10 @@
 const blog = useBlog();
 let idPost = ref();
 let searchInput = ref('');
-const idPostStorage = parseInt(localStorage.getItem("idPost") || "0", 10);
+const idPostStorage = parseInt(useCookie("idPost").value || "0", 10);
 async function handleGetId(id: number | string) {
   idPost.value = id;
-  localStorage.setItem("idPost", idPost.value);
+  useCookie("idPost").value = idPost.value
 }
 if(searchInput.value == '' || searchInput.value.length <= 2){
 	blog.getStrapiData();
@@ -17,9 +17,7 @@ blog.getPostByHashtag('chill')
 
 
 onMounted(() => {
-  
   blog.getPostById(idPostStorage);
-	
 });
 // Я сделал debounce КЛЯНУСЬ!!! НО ПОТОМ Я УВИДЕЛ ЧТО ОН УБИРАЕТ МНЕ ПЛАВНУЮ АНИМАЦИЮ И Я РЕШИЛ УБРАТЬ ЕГО!!!!
 </script>

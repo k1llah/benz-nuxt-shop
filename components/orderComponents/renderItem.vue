@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import axios from "axios";
 const orderStore = useOrderStore();
-const localStorageId = localStorage.getItem("sneakerId");
+const cookieId = useCookie("sneakerId").value;
 let data = ref();
 let idItems = ref([] as any);
 const getDateShoe = async function (params: any) {
   try {
-    const dataShoe = await axios.get(`http://localhost:3001/api/sneaker`, {
+    const dataShoe = await useFetch<any>(`http://localhost:3001/api/sneaker`, {
+      method: "GET",
       params: {
         id: params,
       },
     });
     data.value = dataShoe.data;
-    idItems.value = [dataShoe.data.id];
+    idItems.value = [dataShoe.data.value.id];
     orderStore.idParam = idItems.value;
-    orderStore.amount = dataShoe.data.price;
+    orderStore.amount = dataShoe.data.value.price;
   } catch (error) {
     console.log(error);
   }
 };
 onBeforeMount(() => {
-  getDateShoe(localStorageId);
+  getDateShoe(cookieId);
 });
 </script>
 <template>

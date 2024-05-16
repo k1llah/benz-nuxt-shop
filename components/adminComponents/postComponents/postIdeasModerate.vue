@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios'
 const isAdmin = useIsAdmin();
 const dataIdeas = ref()
 const role = ref()
@@ -10,7 +9,7 @@ onBeforeMount(() => {
 
 async function getIdeas(){
 	try{
-		const response = await axios.get('http://localhost:3001/api/get-ideas')
+		const response = await useFetch<any>('http://localhost:3001/api/get-ideas',{method: "GET"})
 		dataIdeas.value = response.data
 	} catch(error){
 		console.log(error)
@@ -18,8 +17,11 @@ async function getIdeas(){
 }
 async function deleteIdea(id: number){
 	try{
-		const response = await axios.post('http://localhost:3001/api/delete-idea', {
-			id: id
+		const response = await useFetch<any>('http://localhost:3001/api/delete-idea', {
+			method: "POST",
+			body:{
+				id: id
+			}
 		})
 		dataIdeas.value = dataIdeas.value.filter((idea:any) => idea.id !== id);
 	} catch(error){

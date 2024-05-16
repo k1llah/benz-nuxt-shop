@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import axios from "axios";
-const uuid = localStorage.getItem("uuid");
-const id = localStorage.getItem("id");
+const uuid = useCookie("uuid").value;
+const id = useCookie("id").value;
 const email = ref("");
 const first_name = ref("");
 const lastName = ref("");
@@ -53,11 +52,14 @@ const handleFileUpload = (event: Event) => {
 };
 const getData = async function () {
   try {
-    let infoUser = await axios.post("http://localhost:3001/api/get-data", {
-      uuid,
-      id,
+    let infoUser = await useFetch<any>("http://localhost:3001/api/get-data", {
+      method: "POST",
+      body:{
+        uuid,
+        id,
+      }
     });
-    let data = infoUser.data;
+    let data = infoUser.data.value;
     email.value = data.user.email;
     first_name.value = data.user.first_name;
     lastName.value = data.user.last_name;
@@ -90,9 +92,13 @@ const submitForm = async (event: Event) => {
           profileImg: newProfileImg.value,
         })
       );
-      const changedData = axios.post(
-        "http://localhost:3001/api/edit-profile",
-        formData
+      const changedData = useFetch<any>(
+        "http://localhost:3001/api/edit-profile",{
+        method: "POST",
+        body:{
+          formData
+        }
+      }
       );
       location.reload();
     } else if (lastName.value.includes(" ") || lastName.value.length < 2) {

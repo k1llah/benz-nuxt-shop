@@ -1,6 +1,4 @@
 import { defineStore } from "pinia"
-import { ref } from "vue"
-import axios from "axios"
 interface Item {
   id: number;
   title: string;
@@ -19,15 +17,18 @@ export const useFavoritesStore = defineStore({
   actions: {
 		async favorites(){
 			try {
-				const { data } = await axios.post(
+				const { data } = await useFetch<any>(
 					"http://localhost:3001/api/favorites-user",
 					{
-						id: localStorage.getItem("id"),
+						method: "POST",
+						body: {
+							id: useCookie("id"),
+						}
 					}
 				);
 		
 				this.isFav = true;
-				this.items = data[0].Favorite;
+				this.items = data.value[0].Favorite;
 				this.items.forEach((el:any) => {
 					el.isFavorite = true
 				})
@@ -41,11 +42,14 @@ export const useFavoritesStore = defineStore({
 		},
 		async onFavoriteRemove (sneakerId: number, item:Item) {
 			try {
-				const postData = await axios.post(
+				const postData = await useFetch(
 					"http://localhost:3001/api/remove-from-favorites",
 					{
-						userId: localStorage.getItem("id"),
-						sneakerId: sneakerId,
+						method: "POST",
+						body: {
+							userId: useCookie("id").value,
+							sneakerId: sneakerId,
+						}
 					}
 				);
 				item.isFavorite = false

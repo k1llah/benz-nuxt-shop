@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const isAdmin = useIsAdmin();
-const localRole = ref(localStorage.getItem("role"));
+const localRole = ref(useCookie("role").value);
 onBeforeMount(() => {
   isAdmin.checkIsAdmin()
 })

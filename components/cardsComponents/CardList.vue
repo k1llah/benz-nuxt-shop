@@ -1,5 +1,4 @@
 <script setup script lang="ts">
-import axios from "axios";
 const favoritesStore = useFavoritesStore();
 const authStore = useAuthStore();
 const cartStore = useCartStore();
@@ -31,18 +30,21 @@ defineProps({
 const allStore = useAllStore()
 let paramsId;
 const onClickOnCard = async (sneakerId: number) => {
-  router.push(`/description`);
+  router.push(`/sneaker-description`);
   paramsId = sneakerId
-  localStorage.setItem('sneakerId', paramsId.toString())
+  useCookie('sneakerId').value = paramsId.toString()
 };
 let showOverlay = ref(false)
 const onFavoriteAdd = async (sneakerId: number, item:Item) => {
   try {
-    const postData = await axios.post(
+    const postData = await useFetch(
       "http://localhost:3001/api/add-to-favorites",
       {
-        userId: localStorage.getItem("id"),
-        sneakerId: sneakerId,
+        method: "POST",
+        body: {
+          userId: useCookie('id').value,
+          sneakerId: sneakerId,
+        }
       }
     );
     item.isFavorite = true

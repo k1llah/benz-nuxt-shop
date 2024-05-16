@@ -11,19 +11,19 @@ const handleOpenPage = (page: string) => {
     toggle.value = true;
     allStore.isOpened = toggle.value
   },200)
-  localStorage.setItem('page', page)
+  useCookie('page').value = page
 };
 function clearDataAfterOrdered () {
   cartStore.localCounter = 0
-  localStorage.setItem('counter', cartStore.localCounter.toString())
-  localStorage.setItem('totalPrice', '0')
+  useCookie('counter').value = cartStore.localCounter.toString()
+  useCookie('totalPrice').value = '0'
   cartStore.totalPrice = 0
   cartStore.items = []
   cartStore.axiosGetParamsStore()
   cartStore.cartDataGet()
 }
 onBeforeRouteLeave ((to, from, next) => {
-  if (to.path === '/profile' || to.path === '/sneakers_page') {
+  if (to.path === '/profile-user' || to.path === '/sneakers-page') {
     orderStore.success = false;
     orderStore.isSelected = false;
     orderStore.isFormCorrect = false;
@@ -72,10 +72,10 @@ onBeforeRouteLeave ((to, from, next) => {
             </p>
           
           <div class="flex gap-2">
-            <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]" @click="router.push('/profile'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, handleOpenPage('orders'), clearDataAfterOrdered() , allStore.unlock()">
+            <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]" @click="router.push('/profile-user'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, handleOpenPage('orders'), clearDataAfterOrdered() , allStore.unlock()">
               К заказу
             </button>
-            <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]"@click="router.push('/sneakers_page'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, clearDataAfterOrdered(), allStore.unlock()">
+            <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]"@click="router.push('/sneakers-page'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, clearDataAfterOrdered(), allStore.unlock()">
               Продолжить покупки
             </button>
           </div>

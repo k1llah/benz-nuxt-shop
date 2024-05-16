@@ -1,5 +1,4 @@
-import { useCookieControl } from '@dargmuesli/nuxt-cookie-control/runtime/composables';
-import axios from "axios";
+
 interface Item {
   id: number;
   title: string;
@@ -71,36 +70,43 @@ export const useOrderStore = defineStore({
     async placeAnOrder(isFormCorrect: boolean, ...args: any) {
       try {
         if (this.isSelected == true && this.methodPayment == "online") {
-          const pay = await axios.post(
-            "http://localhost:3001/api/sberbank/pay",
-            {
-              userName: "",
-              password: "",
-              orderNumber: "",
-              amount: 125.0,
-            }
-          );
+          // const pay = await useFetch(
+          //   "http://localhost:3001/api/sberbank/pay",
+          //   {
+          //     userName: "",
+          //     password: "",
+          //     orderNumber: "",
+          //     amount: 125.0,
+          //   }
+          // );
         } else if (
           this.methodPayment === "payWhenReceiving" &&
           this.isSelected &&
           this.idParam.length > 0
         ) {
-          const pay = await axios.post(
+          const pay = await useFetch<any>(
             "http://localhost:3001/api/create-new-order",
             {
-              userId: useCookie("id"),
-              sneakerDataId: this.idParam,
-              amount: this.amount,
-              addressId: this.addressId,
-              PayStatus: "whenReceived",
+              method: "POST",
+              body: JSON.stringify({
+                userId: useCookie("id"),
+                sneakerDataId: this.idParam,
+                amount: this.amount,
+                addressId: this.addressId,
+                PayStatus: "whenReceived",
+              })
             }
           );
-          if (pay.status === 200) {
-            this.orderNumber = pay.data.orderNumber;
+          if (pay.status.value === 'success') {
+            this.orderNumber = pay.data.value.orderNumber;
             this.success = true;
             document.body.style.overflow = "hidden";
-            const clear = axios.post("http://localhost:3001/api/clear-cart", {
-              userId: useCookie("id"),
+            const clear = await useFetch("http://localhost:3001/api/clear-cart", {
+              method: "POST",
+              body: JSON.stringify({
+                userId: useCookie("id"),
+                
+              })
             });
             nextTick(() => {
               const element = document.getElementById(
@@ -120,40 +126,49 @@ export const useOrderStore = defineStore({
           isFormCorrect &&
           this.idParam.length > 0
         ) {
-          const newAddress = await axios.post(
+          const newAddress = await useFetch<any>(
             "http://localhost:3001/api/create-address",
             {
-              userId: useCookie("id"),
-              firstName: this.firstName,
-              lastName: this.lastName,
-              surname: this.surname,
-              city: this.city,
-              street: this.street,
-              phoneNumber: this.phone,
-              postalCode: this.postalCode,
-              buildingNumber: this.buildingNumber,
-              houseNumber: this.house,
-              apartment: this.apartment,
+              method: "POST",
+              body: JSON.stringify({
+                userId: useCookie("id"),
+                firstName: this.firstName,
+                lastName: this.lastName,
+                surname: this.surname,
+                city: this.city,
+                street: this.street,
+                phoneNumber: this.phone,
+                postalCode: this.postalCode,
+                buildingNumber: this.buildingNumber,
+                houseNumber: this.house,
+                apartment: this.apartment,
+              })
             }
           );
-          this.addressId = newAddress.data.id;
+          this.addressId = newAddress.data.value.id;
 
-          const pay = await axios.post(
+          const pay = await useFetch<any>(
             "http://localhost:3001/api/create-new-order",
             {
-              userId: useCookie("id"),
-              sneakerDataId: this.idParam,
-              amount: this.amount,
-              addressId: this.addressId,
-              PayStatus: "whenReceived",
-              orderMessage: this.comment,
+              method: "POST",
+              body: JSON.stringify({
+                userId: useCookie("id"),
+                sneakerDataId: this.idParam,
+                amount: this.amount,
+                addressId: this.addressId,
+                PayStatus: "whenReceived",
+                orderMessage: this.comment,
+              })
             }
           );
-          if (pay.status === 200) {
+          if (pay.status.value === 'success') {
             this.success = true;
-            this.orderNumber = pay.data.orderNumber;
-            const clear = axios.post("http://localhost:3001/api/clear-cart", {
-              userId: useCookie("id"),
+            this.orderNumber = pay.data.value.orderNumber;
+            const clear = await useFetch("http://localhost:3001/api/clear-cart", {
+              method: "POST",
+              body: JSON.stringify({
+                userId: useCookie("id"),
+              })
             });
             nextTick(() => {
               const element = document.getElementById(

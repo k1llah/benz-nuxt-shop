@@ -19,5 +19,10 @@ export default defineNuxtConfig({
     autoImport: true,
     dirs: ['./stores/**']
   },
+  runtimeConfig: {
+    public: {
+      apiBase:'http://localhost:3001/api'
+    }
+  },
   ssr:true
 })

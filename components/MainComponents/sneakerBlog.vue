@@ -8,7 +8,7 @@ const { title, span } = {
   title: ref(null),
   span: ref(null),
 };
-const idPostStorage = parseInt(localStorage.getItem("idPost") || "0", 10);
+const idPostStorage = parseInt(useCookie("idPost").value || "0", 10);
 const handleScroll = () => {
   const contentPosition = content.value.getBoundingClientRect().top;
   const screenPosition = window.innerHeight / 1.6;
@@ -37,7 +37,7 @@ const animateText = () => {
 let idPost = ref();
 async function handleGetId(id: number | string) {
   idPost.value = id;
-  localStorage.setItem("idPost", idPost.value);
+  useCookie("idPost").value = idPost.value
 }
 
 onMounted(() => {
@@ -101,8 +101,8 @@ onBeforeUnmount(() => {
       class="flex w-full flex-row gap-5 flex-wrap md:justify-start sm:justify-center md:mt-5 m-auto dark:bg-primaryDark"
     >
       <div v-for="(post, index) in blogStore.posts" :key="index">
-        <router-link
-          to="/post_page"
+        <NuxtLink
+          to="/post"
           @click="handleGetId(post.id), blogStore.getPostById(post.id)"
         >
           <firstPostComponent
@@ -130,7 +130,7 @@ onBeforeUnmount(() => {
             "
             @click.native="handleGetId(post.id)"
           />
-        </router-link>
+        </NuxtLink>
       </div>
     </div>
     <div v-if="blogStore.posts.length == 0" class="flex justify-center w-full md:p-10 sm:p-7">

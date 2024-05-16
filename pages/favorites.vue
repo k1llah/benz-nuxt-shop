@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 const cartStore = useCartStore();
 const favoriteStore = useFavoritesStore();
 const authStore = useAuthStore();
@@ -7,15 +6,18 @@ const items = ref<any>([]);
 const isFav = ref<Boolean>(true);
 async function favorites() {
   try {
-    const { data } = await axios.post(
+    const { data } = await useFetch<any>(
       "http://localhost:3001/api/favorites-user",
       {
-        id: localStorage.getItem("id"),
+        method:"POST",
+        body:{
+          id: localStorage.getItem("id"),
+        }
       }
     );
 
     items.value = data;
-    items.value = data[0].Favorite;
+    items.value = data.value[0].Favorite;
     items.value.forEach((el: any) => {
       el.isFavorite = true;
     });

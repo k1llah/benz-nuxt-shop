@@ -1,5 +1,4 @@
 <script setup script lang="ts">
-import axios from "axios";
 import { debounce } from "lodash";
 const cartStore = useCartStore();
 const favoritesStore = useFavoritesStore();
@@ -24,7 +23,8 @@ const axiosGetParams = async () => {
       //@ts-ignore
       params.title = filters.searchQuery;
     }
-    const { data } = await axios.get(`http://localhost:3001/api`, {
+    const { data } = await useFetch(`http://localhost:3001/api`, {
+      method: "GET",
       params,
     });
 

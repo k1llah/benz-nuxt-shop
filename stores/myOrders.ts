@@ -1,7 +1,4 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import axios from "axios";
-
 export const useMyOrderStore = defineStore({
   id: "myOrders",
   state: () => ({
@@ -13,31 +10,37 @@ export const useMyOrderStore = defineStore({
   actions: {
     async getDataOrder() {
       try {
-        const resOrders = await axios.post(
+        const resOrders = await useFetch<any>(
           "http://localhost:3001/api/get-orders",
           {
-            userId: localStorage.getItem("id"),
+            method: "POST",
+            body: {
+              userId: useCookie("id"),
+            }
           }
         );
-        this.orders = resOrders.data;
+        this.orders = resOrders.data.value;
         for (const order of this.orders) {
-          const resItems = await axios.post(
+          const resItems = await useFetch(
             "http://localhost:3001/api/sneakers-to-order",
             {
-              id: order.sneakerDataId,
+              method: "POST",
+              body:{
+                id: order.sneakerDataId,
+              }
             }
           );
           order.items = resItems.data;
         }
         if (
-          resOrders.data.status !== "CANCELED" ||
-          resOrders.data.status !== "RECEIVED"
+          resOrders.data.value.status !== "CANCELED" ||
+          resOrders.data.value.status !== "RECEIVED"
         ) {
           this.active = true;
         }
         if (
-          resOrders.data.status == "RECEIVED" ||
-          resOrders.data.status == "CANCELED"
+          resOrders.data.value.status == "RECEIVED" ||
+          resOrders.data.value.status == "CANCELED"
         ) {
           this.history = true;
         }

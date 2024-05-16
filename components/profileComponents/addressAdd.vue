@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const allStore = useAllStore();
-import axios from 'axios';
 const name = ref("");
 const lastName = ref("");
 const surname = ref("");
@@ -29,20 +28,23 @@ const correctDataInput = computed(
 const createAddress = async () => {
   try {
     if (correctDataInput.value == true) {
-      const newAddress = await axios.post(
+      const newAddress = await useFetch<any>(
         "http://localhost:3001/api/create-address",
         {
-          userId: localStorage.getItem("id"),
-          firstName: name.value,
-          lastName: lastName.value,
-          surname: surname.value,
-          city: city.value,
-          street: street.value,
-          phoneNumber: phoneNumber.value,
-          postalCode: postalCode.value,
-          buildingNumber: buildingNumber.value,
-          houseNumber: houseNumber.value,
-          apartment: apartment.value,
+          method: "POST",
+          body:{
+            userId: useCookie("id").value,
+            firstName: name.value,
+            lastName: lastName.value,
+            surname: surname.value,
+            city: city.value,
+            street: street.value,
+            phoneNumber: phoneNumber.value,
+            postalCode: postalCode.value,
+            buildingNumber: buildingNumber.value,
+            houseNumber: houseNumber.value,
+            apartment: apartment.value,
+          }
         },
         )
         location.reload()

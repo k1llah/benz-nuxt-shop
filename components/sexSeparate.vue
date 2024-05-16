@@ -1,30 +1,34 @@
 <script setup lang="ts">
-import axios from "axios";
-const items = ref([])
+const items = ref([]);
 const genderStore = useGenderStore();
-  let params = localStorage.getItem('gender');
-	let genderText = ref('');
-	if(localStorage.getItem('gender') == 'man'){
-		genderText.value = 'Мужская обувь'
-	}
-	else if(localStorage.getItem('gender') == 'woman'){
-		genderText.value = 'Женская обувь'
-	}
-  async function genderRoute() {
-		try{
-			if(localStorage.getItem('gender') == 'man' || localStorage.getItem('gender') == 'woman'){
-				const {data} = await axios.get(`http://localhost:3001/api/${params}Sneakers`)
-				items.value = data
-			}
-
-		}
-		catch(error){
-			console.log(error)
-		}
-		}
+let params = useCookie("gender").value;
+let genderText = ref("");
+if (useCookie("gender").value == "man") {
+  genderText.value = "Мужская обувь";
+} else if (useCookie("gender").value == "woman") {
+  genderText.value = "Женская обувь";
+}
+async function genderRoute() {
+  try {
+    if (
+      useCookie("gender").value == "man" ||
+      useCookie("gender").value == "woman"
+    ) {
+      const { data } = await useFetch<any>(
+        `http://localhost:3001/api/${params}Sneakers`,
+        {
+          method: "GET",
+        }
+      );
+      items.value = data.value;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 onMounted(() => {
-	genderRoute();
+  genderRoute();
 });
 </script>
 <template>
@@ -39,7 +43,7 @@ onMounted(() => {
       <h2 class="text-3xl">{{ genderText }}</h2>
     </div>
   </div>
-	<div class="mt-[30px]">
-		<CardList :items="items"/>
-	</div>
+  <div class="mt-[30px]">
+    <CardList :items="items" />
+  </div>
 </template>

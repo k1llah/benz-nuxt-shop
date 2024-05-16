@@ -1,6 +1,4 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import axios from "axios";
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
@@ -13,20 +11,23 @@ export const useAuthStore = defineStore({
   actions: {
     async getRole() {
       try {
-        const data = await axios.post("http://localhost:3001/api/get-data", {
-          uuid: localStorage.getItem("uuid"),
-          id: localStorage.getItem("id"),
+        const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+          method: "POST",
+          body:{
+            uuid: useCookie('uuid'),
+            id: useCookie('id'),
+          }
         });
-        this.role = data.data.user.role;
-        localStorage.setItem("role", this.role);
+        this.role = data.data.value.user.role;
+        useCookie('role').value = this.role
       } catch (error) {
         console.log(error);
       }
     },
     checkAuth() {
-      const idLocal = localStorage.getItem("id");
-      const uuidLocal = localStorage.getItem("uuid");
-      const roleLocal = localStorage.getItem("role");
+      const idLocal = useCookie('id').value
+      const uuidLocal = useCookie('uuid').value
+      const roleLocal = useCookie('role').value
       if (idLocal && uuidLocal && roleLocal) {
         this.isAuthenticated = true;
         this.currentUser = { id: idLocal, uuid: uuidLocal };
@@ -34,15 +35,15 @@ export const useAuthStore = defineStore({
       } else {
         this.isAuthenticated = false;
         this.currentUser = this.currentUser = { id: "", uuid: "" };
-        localStorage.setItem("totalPrice", "0");
+        useCookie('totalPrice').value = '0'
       }
     },
     logOut() {
-      localStorage.removeItem("id");
-      localStorage.removeItem("uuid");
-      localStorage.removeItem("role");
-      localStorage.setItem("cartCounter", "0");
-      localStorage.setItem("totalPrice", "0");
+      useCookie("id").value = "";
+      useCookie("uuid").value = "";
+      useCookie("role").value = "";
+      useCookie('cartCounter').value = '0'
+      useCookie('totalPrice').value = '0'
       this.isAuthenticated = false;
       this.currentUser = this.currentUser = { id: "", uuid: "" };
       this.role = "";

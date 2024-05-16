@@ -1,10 +1,8 @@
 <script setup lang="ts">
+import gsap from "gsap";
 import { useDark, useToggle } from '@vueuse/core';
-import axios from "axios";
 const cartStore = useCartStore();
-const allStore = useAllStore();
-const authStore = useAuthStore();
-const localRole = ref(localStorage.getItem("role"));
+const localRole = ref(useCookie("role").value);
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const role = ref();
@@ -12,12 +10,15 @@ let timer = ref(false);
 const router = useRouter();
 async function checkIsAdmin() {
   try {
-    const data = await axios.post("http://localhost:3001/api/get-data", {
-      uuid: localStorage.getItem("uuid"),
-      id: localStorage.getItem("id"),
+    const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+      method: "POST",
+      body:{
+        uuid: useCookie("uuid"),
+        id: useCookie("id"),
+      }
     });
-    role.value = data.data.user.role;
-    localStorage.setItem("role", role.value);
+    role.value = data.data.value.user.role;
+    useCookie("role").value = role.value
   } catch (error) {
     console.log(error);
   }
@@ -48,7 +49,6 @@ const sneakerStore = useSneaker();
 let toggleShow = () => {
   sneakerStore.show = !sneakerStore.show;
 };
-import gsap from "gsap";
 const dropdowns = ref<boolean[]>([false]);
 const toggleDropdown = (index: number) => {
   dropdowns.value[index] = !dropdowns.value[index];

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import axios from "axios";
 const orderStore = useOrderStore();
 const authData = useAuthStore();
 const router = useRouter();
 const allStore = useAllStore();
-const paramsId = localStorage.getItem("sneakerId");
+const paramsId = useCookie('sneakerId').value;
 
 // orderStore.idParam = Number(paramsId);
 let itemData = ref();
@@ -13,14 +12,15 @@ let brandImageUrl = ref();
 const brands = allStore.brandImages;
 const getDateShoe = async function () {
   try {
-    const dataShoe = await axios.get(`http://localhost:3001/api/sneaker`, {
+    const dataShoe = await useFetch<any>(`http://localhost:3001/api/sneaker`, {
+      method: "GET",
       params: {
         id: paramsId,
       },
     });
     itemData.value = dataShoe.data;
-    orderStore.items = dataShoe.data;
-    brand.value = dataShoe.data.brand;
+    orderStore.items = dataShoe.data.value;
+    brand.value = dataShoe.data.value.brand;
     brandImageUrl.value = allStore.getBrandImageUrl(brand.value);
   } catch (error) {
     console.log(error);
@@ -30,7 +30,7 @@ function getPathName() {
   if (authData.isAuthenticated == true) {
     router.push("/order");
   } else {
-    localStorage.setItem("prevPage", location.pathname);
+    useCookie("prevPage").value = location.pathname
     router.push("/sign_up");
   }
 }

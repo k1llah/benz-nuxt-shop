@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useDark, useToggle } from "@vueuse/core";
-import axios from "axios";
 const cartStore = useCartStore();
 const router = useRouter();
 const sneakerStore = useSneaker();
 const allStore = useAllStore();
 const authStore = useAuthStore();
-const localRole = ref(localStorage.getItem("role"));
+const localRole = ref(useCookie("role").value);
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
@@ -18,12 +17,15 @@ onBeforeMount(() => {
 });
 async function checkIsAdmin() {
   try {
-    const data = await axios.post("http://localhost:3001/api/get-data", {
-      uuid: localStorage.getItem("uuid"),
-      id: localStorage.getItem("id"),
+    const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+      method: "POST",
+      body:{
+        uuid: useCookie('uuid'),
+        id: useCookie("id"),
+      }
     });
-    role.value = data.data.user.role;
-    localStorage.setItem("role", role.value);
+    role.value = data.data.value.user.role;
+    useCookie("role").value = role.value
   } catch (error) {
     console.log(error);
   }
@@ -101,21 +103,21 @@ let toggleShow = () => {
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push({ name: 'Purchases' })"
+        @click="$router.push('/favorites')"
       >
         <img src="/heart.svg" alt="Cart" />
         <span class="text-[19px] font-light md:text-[14px]">Закладки</span>
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push('/all_posts')"
+        @click="$router.push('/all-posts')"
       >
         <img src="/newspaper.png" alt="Cart" class="max-w-[25px]"  />
         <span class="text-[19px] font-light md:text-[14px]">Блог</span>
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push( '/profile_user' )"
+        @click="$router.push( '/profile-user' )"
       >
         <img src="/profile.svg" alt="Cart" />
         <span class="text-[19px] font-light md:text-[14px]">Профиль</span>
