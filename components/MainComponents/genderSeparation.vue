@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { NuxtLink } from '#build/components'
+
 let genderStore = useGenderStore();
 let clickValue = ref("");
 genderStore.onClickOnGender = clickValue.value;
@@ -17,7 +19,7 @@ watch(clickValue, () => {
   <div
     class="flex md:gap-20 sm:gap-0 justify-center md:pt-36 sm:pt-24 flex-wrap dark:bg-primaryDark"
   >
-    <router-link to="Gender">
+    <NuxtLink to="gender">
       <div
         class="relative hover:scale-[1.05] transition-all 1.3s"
         @click="setGender('man')"
@@ -36,9 +38,9 @@ watch(clickValue, () => {
           </p>
         </div>
       </div>
-    </router-link>
+    </NuxtLink>
 
-    <router-link to="Gender">
+    <NuxtLink to="gender">
       <div
         class="relative hover:scale-[1.05] transition-all 1.3s"
         @click="setGender('woman')"
@@ -57,6 +59,6 @@ watch(clickValue, () => {
           </p>
         </div>
       </div>
-    </router-link>
+    </NuxtLink>
   </div>
 </template>

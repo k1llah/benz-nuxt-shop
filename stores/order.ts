@@ -1,3 +1,4 @@
+import { useCookieControl } from '@dargmuesli/nuxt-cookie-control/runtime/composables';
 import axios from "axios";
 interface Item {
   id: number;
@@ -29,12 +30,13 @@ export const useOrderStore = defineStore({
     success: false,
     errorPayment: false,
     isFormCorrect: false,
-    targetPage: localStorage.getItem("pageT"),
+    targetPage: useCookie("pageT"),
     orderNumber: "",
   }),
   actions: {
     targetPageDefine(targetName: string) {
-      this.targetPage = localStorage.setItem("pageT", targetName)!;
+      this.targetPage = useCookie('pageT').value
+      console.log(useCookie('pageT').value)
       this.targetPage = targetName;
     },
     validateOnClick() {
@@ -86,7 +88,7 @@ export const useOrderStore = defineStore({
           const pay = await axios.post(
             "http://localhost:3001/api/create-new-order",
             {
-              userId: localStorage.getItem("id"),
+              userId: useCookie("id"),
               sneakerDataId: this.idParam,
               amount: this.amount,
               addressId: this.addressId,
@@ -98,7 +100,7 @@ export const useOrderStore = defineStore({
             this.success = true;
             document.body.style.overflow = "hidden";
             const clear = axios.post("http://localhost:3001/api/clear-cart", {
-              userId: localStorage.getItem("id"),
+              userId: useCookie("id"),
             });
             nextTick(() => {
               const element = document.getElementById(
@@ -121,7 +123,7 @@ export const useOrderStore = defineStore({
           const newAddress = await axios.post(
             "http://localhost:3001/api/create-address",
             {
-              userId: localStorage.getItem("id"),
+              userId: useCookie("id"),
               firstName: this.firstName,
               lastName: this.lastName,
               surname: this.surname,
@@ -139,7 +141,7 @@ export const useOrderStore = defineStore({
           const pay = await axios.post(
             "http://localhost:3001/api/create-new-order",
             {
-              userId: localStorage.getItem("id"),
+              userId: useCookie("id"),
               sneakerDataId: this.idParam,
               amount: this.amount,
               addressId: this.addressId,
@@ -151,7 +153,7 @@ export const useOrderStore = defineStore({
             this.success = true;
             this.orderNumber = pay.data.orderNumber;
             const clear = axios.post("http://localhost:3001/api/clear-cart", {
-              userId: localStorage.getItem("id"),
+              userId: useCookie("id"),
             });
             nextTick(() => {
               const element = document.getElementById(

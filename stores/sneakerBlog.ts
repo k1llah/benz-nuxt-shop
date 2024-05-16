@@ -13,15 +13,12 @@ export const useBlog = defineStore("blog", {
   actions: {
     async getStrapiData() {
       try {
-        const res = await axios.get(
-          "http://localhost:1337/api/posts?populate=*",
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
-          }
-        );
-        this.posts = res.data.data.map((post: any) => post);
+        const { data } = useFetch<any>("http://localhost:1337/api/posts?populate=*", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+        this.posts = data.value.data.map((post: any) => post);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +26,7 @@ export const useBlog = defineStore("blog", {
     async getPostById(id: number) {
       try {
         if (id !== null && id !== undefined) {
-          const response = await axios.get(
+          const  {data}  = await useFetch<any>(
             `http://localhost:1337/api/posts/${id}`,
             {
               params: {
@@ -40,7 +37,7 @@ export const useBlog = defineStore("blog", {
               },
             }
           );
-          this.infoPost = response.data.data;
+          this.infoPost = data.value.data;
         }
       } catch (error) {
         console.error(error);
@@ -49,7 +46,7 @@ export const useBlog = defineStore("blog", {
     async getPostByHashtag(hashtag: string) {
       try {
         if (hashtag !== null && hashtag !== undefined) {
-          const response = await axios.get(
+          const {data} = await useFetch<any>(
             `http://localhost:1337/api/posts?filters\[hashtags\][hashtagName][$contains]=${hashtag}`,
             {
               params: {
@@ -60,7 +57,7 @@ export const useBlog = defineStore("blog", {
               },
             }
           );
-          this.posts = response.data.data;
+          this.posts = data.value.data.data;
         }
       } catch (error) {
         console.error(error);
