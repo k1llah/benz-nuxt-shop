@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { NuxtLink } from '#build/components'
 import md5 from "md5";
 const cartStore = useCartStore();
 const email = ref("");

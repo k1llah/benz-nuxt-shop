@@ -49,7 +49,7 @@ onBeforeMount(() => {
     <img src="/package-icon.png" alt="" class="max-w-[100px]" />
     <h3 class="text-2xl">Корзина пустая</h3>
     <p class="text-slate-500">
-     <NuxtLink to="/profile" @click="sneakerStore.show = !sneakerStore.show" class="text-[#7747ff]"> Войдите </NuxtLink> или <NuxtLink to="/sign_up" @click="sneakerStore.show = !sneakerStore.show" class="text-[#7747ff]">зарегистрируйтесь</NuxtLink> чтобы добавлять товары в корзину
+     <NuxtLink to="/profile-user" @click="sneakerStore.show = !sneakerStore.show" class="text-[#7747ff]"> Войдите </NuxtLink> или <NuxtLink to="/sign-up" @click="sneakerStore.show = !sneakerStore.show" class="text-[#7747ff]">зарегистрируйтесь</NuxtLink> чтобы добавлять товары в корзину
     </p>
   </div>
 </template>

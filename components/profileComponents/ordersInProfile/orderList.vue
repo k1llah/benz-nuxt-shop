@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { NuxtLink } from '#build/components'
-
 const allStore = useAllStore();
 const myOrders = useMyOrderStore();
 onMounted(async () => {

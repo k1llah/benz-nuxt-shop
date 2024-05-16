@@ -7,7 +7,6 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const route = useRouter();
 const authStore = useAuthStore();
-const sneakerStore = useSneaker();
 onMounted(() => {
   authStore.getRole();
   authStore.checkAuth();
