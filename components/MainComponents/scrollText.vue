@@ -97,9 +97,9 @@ onUnmounted(() => {
       :class="{ 'hidden-text': !isVisible }"
     >
       Погрузитесь в
-      <router-link to="/sneakers_page" class="cursor-pointer">
+      <NuxtLink to="/sneakers-page" class="cursor-pointer">
         <span class="text-[#7747ff] dark:text-[#10b981]">мир кроссовок </span>
-      </router-link>
+      </NuxtLink>
       с нами!
     </h3>
   </div>

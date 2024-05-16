@@ -98,7 +98,7 @@ const toggleDropdown = (index: number) => {
     >
       <ul class="flex items-center gap-10 flex-col w-full md:gap-5 mt-12 ">
         <li class="border-b-2 border-slate-300 dark:border-black w-full flex justify-center pb-2">
-          <NuxtLink to="/CardList" @click="toggleDropdown(0)">
+          <NuxtLink to="/sneakers-page" @click="toggleDropdown(0)">
             <span class="text-[19px] font-light md:text-[14px]"> Все кроссовки</span>
           </NuxtLink>
         </li>
@@ -112,7 +112,7 @@ const toggleDropdown = (index: number) => {
       </li>
         <li
           class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s border-b-2 w-full justify-center pb-2 dark:border-black"
-          @click="$router.push({ name: 'Purchases' }), toggleDropdown(0)"
+          @click="$router.push('/favorites'), toggleDropdown(0)"
         >
           <img src="/heart.svg" alt="Cart" />
           <span class="text-[19px] font-light md:text-[14px]">Закладки</span>
@@ -120,14 +120,14 @@ const toggleDropdown = (index: number) => {
         
         <li
           class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s pb-5 border-b-2 dark:border-black w-full justify-center"
-          @click="$router.push({ name: 'Profile' }), toggleDropdown(0)"
+          @click="$router.push('/profile-user'), toggleDropdown(0)"
         >
           <img src="/profile.svg" alt="Cart" />
           <span class="text-[19px] font-light md:text-[14px]">Профиль</span>
         </li>
         <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:border-black"
-        @click="$router.push('/all_posts'), toggleDropdown(0)"
+        @click="$router.push('/all-posts'), toggleDropdown(0)"
       >
         <img src="/newspaper.png" alt="Cart" class="max-w-[25px]"  />
         <span class="text-[19px] font-light md:text-[14px]">Блог</span>

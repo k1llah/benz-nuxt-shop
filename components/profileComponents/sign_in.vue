@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NuxtLink } from '#build/components'
 import md5 from "md5";
 const cartStore = useCartStore();
 const email = ref("");
@@ -106,11 +107,10 @@ const logInFunc = async (event: any) => {
     </form>
     <div class="text-sm text-center mt-[1.6rem]">
       У вас нет аккаунта?
-      <router-link to="Sign_up">
+      <NuxtLink to="/sign-up">
         <p class="text-sm text-[#7747ff] dark:text-green-500">
           Зарегистрируйтесь
-        </p></router-link
-      >
+        </p></NuxtLink>
     </div>
   </div>
 

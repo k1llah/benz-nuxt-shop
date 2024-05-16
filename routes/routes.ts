@@ -20,7 +20,7 @@ const router = createRouter({
     {
       name: 'Sign_up',
       path: '/sign_up',
-      component: () => import('~/pages/View_signUp.vue'),
+      component: () => import('~/pages/sign-up.vue'),
     },
     {
       name: 'Sneakers_page',
@@ -40,7 +40,7 @@ const router = createRouter({
     {
       name: 'feedback',
       path: '/feedback',
-      component: () => import('~/pages/View_feedback.vue'),
+      component: () => import('~/pages/feedback.vue'),
     },
     {
       name: 'order',

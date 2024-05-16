@@ -17,12 +17,18 @@ export default defineNuxtConfig({
   },
   imports: {
     autoImport: true,
-    dirs: ['./stores/**']
+    dirs: ['./stores/**', '.components/**', '/components/main-components/**',  './components/**/*/*'],
   },
+  components: [
+    {
+      path: '~/components', // will get any components nested in let's say /components/test too
+      pathPrefix: false,
+    },
+  ],
   runtimeConfig: {
     public: {
       apiBase:'http://localhost:3001/api'
     }
   },
-  ssr:true
+  ssr:false
 })

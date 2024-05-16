@@ -3,7 +3,6 @@ import { useDark, useToggle } from "@vueuse/core";
 const cartStore = useCartStore();
 const router = useRouter();
 const sneakerStore = useSneaker();
-const allStore = useAllStore();
 const authStore = useAuthStore();
 const localRole = ref(useCookie("role").value);
 const isDark = useDark();
@@ -75,7 +74,7 @@ let toggleShow = () => {
         >
           Benz Shöp
         </h2>
-        <NuxtLink to="CardList">
+        <NuxtLink to="/sneakers-page">
           <p
             class="text-slate-700 hover:scale-[1.05] transition-all 1.3s lg:text-lg md:text-lg sm:text-sm dark:text-ghostWhiteText"
           >

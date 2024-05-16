@@ -35,7 +35,7 @@ console.log('sadly', process.client)
 
   
   <transition name="fade">
-    <Drawer />
+    <Drawer/>
   </transition>
 </template>
 

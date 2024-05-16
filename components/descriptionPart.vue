@@ -31,7 +31,7 @@ function getPathName() {
     router.push("/order");
   } else {
     useCookie("prevPage").value = location.pathname
-    router.push("/sign_up");
+    router.push("/sign-up");
   }
 }
 onMounted(async () => {

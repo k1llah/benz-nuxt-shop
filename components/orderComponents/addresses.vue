@@ -4,12 +4,15 @@ let address = ref();
 
 const dataAddress = async () => {
   try {
-    const data = await useFetch<any>("http://localhost:3001/api/get-addresses", {
-      method: "POST",
-      body:{
-        userId: useCookie("id").value,
+    const data = await useFetch<any>(
+      "http://localhost:3001/api/get-addresses",
+      {
+        method: "POST",
+        body: {
+          userId: useCookie("id").value,
+        },
       }
-    });
+    );
     address.value = data.data;
     isAddress.value = address.value.length > 0;
   } catch (error) {
@@ -51,11 +54,11 @@ onBeforeMount(() => {
       <p class="text-xl dark:text-white">
         К сожалению, у вас нет добавленных адресов, но вы можете добавить свой
         адрес на странице профиля
-        <router-link
-          to="profile"
+        <NuxtLink
+          to="/profile-user"
           class="text-[#7747ff] dark:text-green-500 cursor-pointer"
-          >во вкладке мои адреса</router-link
-        >
+          >во вкладке мои адреса
+          </NuxtLink>
       </p>
     </div>
   </div>

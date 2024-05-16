@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { NuxtLink } from '#build/components'
+
 const allStore = useAllStore();
 const myOrders = useMyOrderStore();
 onMounted(async () => {
@@ -135,12 +137,11 @@ onMounted(async () => {
   >
     <h3 class="text-2xl font-extralight dark:text-ghostWhiteText">
       К сожалению у вас пока нет заказов, вы можете перейти в
-      <router-link
-        to="sneakers_page"
+      <NuxtLink
+        to="sneakers-page"
         @click="allStore.unlock()"
         class="text-[#7747ff] dark:text-[#10b981]"
-        >Каталог</router-link
-      >
+        >Каталог</NuxtLink>
       и сделать первый заказ
     </h3>
     <img src="/emoji-2.png" alt="" class="max-w-[60px]" />

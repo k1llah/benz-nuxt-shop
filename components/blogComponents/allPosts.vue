@@ -65,8 +65,8 @@ onMounted(() => {
       v-auto-animate
     >
       <div v-for="(post, index) in blog.posts" :key="index">
-        <router-link
-          to="/post_page"
+        <NuxtLink
+          to="/post"
           @click="handleGetId(post.id), blog.getPostById(post.id)"
         >
           <firstPostComponent
@@ -94,7 +94,7 @@ onMounted(() => {
             "
             @click.native="handleGetId(post.id)"
           />
-        </router-link>
+        </NuxtLink>
       </div>
     </div>
   </div>
