@@ -4,7 +4,7 @@ let address = ref();
 
 const dataAddress = async () => {
   try {
-    const data = await useFetch<any>(
+    const data = await $fetch<any>(
       "http://localhost:3001/api/get-addresses",
       {
         method: "POST",
@@ -13,7 +13,7 @@ const dataAddress = async () => {
         },
       }
     );
-    address.value = data.data;
+    address.value = data;
     isAddress.value = address.value.length > 0;
   } catch (error) {
     console.log(error);

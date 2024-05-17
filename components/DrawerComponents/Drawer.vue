@@ -20,6 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <div>
   <div v-if="sneakerStore.show" class="" :class="{ 'cartVisible transition-opacity duration-700 opacity-100': sneakerStore.show, 'cart opacity-0 transition-opacity  duration-700' : !sneakerStore.show }">
       
     <div
@@ -61,6 +62,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
+</div>
 </template>
 <style scoped>
 .cart{

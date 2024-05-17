@@ -70,7 +70,7 @@ export const useOrderStore = defineStore({
     async placeAnOrder(isFormCorrect: boolean, ...args: any) {
       try {
         if (this.isSelected == true && this.methodPayment == "online") {
-          // const pay = await useFetch(
+          // const pay = await $fetch<any>(
           //   "http://localhost:3001/api/sberbank/pay",
           //   {
           //     userName: "",
@@ -84,12 +84,12 @@ export const useOrderStore = defineStore({
           this.isSelected &&
           this.idParam.length > 0
         ) {
-          const pay = await useFetch<any>(
+          const pay = await $fetch<any>(
             "http://localhost:3001/api/create-new-order",
             {
               method: "POST",
               body: JSON.stringify({
-                userId: useCookie("id"),
+                userId: useCookie("id").value,
                 sneakerDataId: this.idParam,
                 amount: this.amount,
                 addressId: this.addressId,
@@ -97,14 +97,15 @@ export const useOrderStore = defineStore({
               })
             }
           );
-          if (pay.status.value === 'success') {
-            this.orderNumber = pay.data.value.orderNumber;
+          
+          if (pay) {
+            this.orderNumber = pay.orderNumber;
             this.success = true;
             document.body.style.overflow = "hidden";
-            const clear = await useFetch("http://localhost:3001/api/clear-cart", {
+            const clear = await $fetch("http://localhost:3001/api/clear-cart", {
               method: "POST",
               body: JSON.stringify({
-                userId: useCookie("id"),
+                userId: useCookie("id").value,
                 
               })
             });
@@ -118,7 +119,7 @@ export const useOrderStore = defineStore({
             });
             this.methodPayment = "";
           } else {
-            console.log("Ошибка при выполнении запроса");
+            console.log("Ошибка при выполнении запроса", pay)
           }
         } else if (
           this.methodPayment === "payWhenReceiving" &&
@@ -126,12 +127,12 @@ export const useOrderStore = defineStore({
           isFormCorrect &&
           this.idParam.length > 0
         ) {
-          const newAddress = await useFetch<any>(
+          const newAddress = await $fetch<any>(
             "http://localhost:3001/api/create-address",
             {
               method: "POST",
               body: JSON.stringify({
-                userId: useCookie("id"),
+                userId: useCookie("id").value,
                 firstName: this.firstName,
                 lastName: this.lastName,
                 surname: this.surname,
@@ -145,14 +146,14 @@ export const useOrderStore = defineStore({
               })
             }
           );
-          this.addressId = newAddress.data.value.id;
+          this.addressId = newAddress.id;
 
-          const pay = await useFetch<any>(
+          const pay = await $fetch<any>(
             "http://localhost:3001/api/create-new-order",
             {
               method: "POST",
               body: JSON.stringify({
-                userId: useCookie("id"),
+                userId: useCookie("id").value,
                 sneakerDataId: this.idParam,
                 amount: this.amount,
                 addressId: this.addressId,
@@ -161,13 +162,13 @@ export const useOrderStore = defineStore({
               })
             }
           );
-          if (pay.status.value === 'success') {
+          if (pay.ok) {
             this.success = true;
             this.orderNumber = pay.data.value.orderNumber;
-            const clear = await useFetch("http://localhost:3001/api/clear-cart", {
+            const clear = await $fetch("http://localhost:3001/api/clear-cart", {
               method: "POST",
               body: JSON.stringify({
-                userId: useCookie("id"),
+                userId: useCookie("id").value,
               })
             });
             nextTick(() => {
@@ -196,7 +197,6 @@ export const useOrderStore = defineStore({
             }
           });
         }
-        
       } catch (error) {
         console.log(error);
       }

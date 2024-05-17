@@ -33,17 +33,17 @@ export const useCartStore = defineStore({
 
     async onCartAdd(sneakerId: number, item: any, price: any) {
       try {
-        const postAddData = await useFetch<any>(
+        const postAddData = await $fetch<any>(
           "http://localhost:3001/api/add-to-cart",
           {
             method: "POST",
             body: {
-              userId: useCookie("id"),
+              userId: useCookie("id").value,
               sneakerId: sneakerId,
             }
           }
         );
-        this.items = postAddData.data.value.items;
+        this.items = postAddData.items;
         item.isAdded = true;
         this.totalPrice += price;
         this.axiosGetParamsStore();
@@ -57,12 +57,12 @@ export const useCartStore = defineStore({
     async onDeleteItem(id: number, item: any, price: any) {
       if (item.isAdded) {
         try {
-          const removeData = await useFetch(
+          const removeData = await $fetch(
             "http://localhost:3001/api/remove-from-cart",
             {
               method: "POST",
               body:{
-                userId: useCookie('id'),
+                userId: useCookie('id').value,
                 sneakerId: id,
               }
             }
@@ -96,7 +96,7 @@ export const useCartStore = defineStore({
           {
             method: "POST",
             body:{
-              userId: useCookie('id'),
+              userId: useCookie('id').value,
             }
           }
         );

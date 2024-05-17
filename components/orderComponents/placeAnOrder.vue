@@ -3,11 +3,11 @@
 import { useDark } from "@vueuse/core";
 const allStore = useAllStore();
 const isDark = useDark();
-const formStore = useFormStore();
 const orderStore = useOrderStore();
 const cartStore = useCartStore();
 </script>
 <template>
+  <div>
   <div class="lg:max-w-full md:max-w-[90%]">
     <div>
       <h3 class="text-2xl font-medium p-3 dark:text-ghostWhiteText">
@@ -100,6 +100,7 @@ const cartStore = useCartStore();
   </div>
   <modalWindow v-if="orderStore.success" />
   <modalError v-if="orderStore.errorPayment" />
+</div>
 </template>
 <style scoped>
 .radio-inputs {

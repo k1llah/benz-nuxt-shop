@@ -5,7 +5,7 @@ let idItems = ref([] as any);
 let data = ref();
 const getDataShoe = async function (params: any) {
   try {
-    const dataShoe = await useFetch<any>(
+    const dataShoe = await $fetch<any>(
       `http://localhost:3001/api/sneakers-to-order`,
       {
         method: "POST",
@@ -14,9 +14,9 @@ const getDataShoe = async function (params: any) {
         }
       }
     );
-    data.value = dataShoe.data;
+    data.value = dataShoe;
     orderStore.idParam = idItems.value
-    orderStore.amount = dataShoe.data.value.reduce(
+    orderStore.amount = dataShoe.reduce(
       (acc: any, item: any) => acc + item.price,
       0
     );
