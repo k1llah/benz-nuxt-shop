@@ -16,7 +16,7 @@ async function favorites() {
       }
     );
 
-    items.value = data
+    items.value = data[0].Favorite;
     console.log(data)
     if(items !== undefined && items.value !== null){
       items.value.forEach((el: any) => {

@@ -12,7 +12,6 @@ export const useFavoritesStore = defineStore({
   state: () => ({
     items: [] as Array<Item>,
 		isFav: true,
-		
   }),
   actions: {
 		async favorites(){
@@ -52,8 +51,10 @@ export const useFavoritesStore = defineStore({
 						}
 					}
 				);
+				
 				item.isFavorite = false
 				this.items = this.items.filter((el:any) => el.id != sneakerId)
+				console.log('')
 			} catch (error) {
 				console.log(error);
 			}

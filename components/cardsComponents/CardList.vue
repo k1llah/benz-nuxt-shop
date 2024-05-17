@@ -1,16 +1,18 @@
-<script setup script lang="ts">
+<script setup lang="ts">
 const favoritesStore = useFavoritesStore();
 const authStore = useAuthStore();
 const cartStore = useCartStore();
 let addToCart = ref()
 let deleteFromCart = ref()
-if(authStore.isAuthenticated == true){
-  addToCart.value = cartStore.onCartAdd
-  deleteFromCart.value = cartStore.onDeleteItem
-}
-else if(authStore.isAuthenticated == false){
-  console.log('you must need to log in or register')
-}
+onMounted(async () => {
+  if(authStore.isAuthenticated){
+    addToCart.value = cartStore.onCartAdd
+    deleteFromCart.value = cartStore.onDeleteItem
+  }
+  else if(!authStore.isAuthenticated){
+    console.log('you must need to log in or register')
+  }
+})
 
 const router = useRouter(); 
 interface Item {

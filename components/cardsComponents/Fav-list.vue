@@ -36,12 +36,10 @@ const onFavoriteRemove = async (sneakerId: number, item:Item) => {
         }
       }
     );
+    
 		item.isFavorite = false
     favoritesStore.items = favoritesStore.items.filter((el:any) => el.id != sneakerId)
-    showOverlay.value = true;
-    setTimeout(() => {
-      showOverlay.value = false;
-    }, 150);
+    console.log('yep')
     
   } catch (error) {
     console.log(error);

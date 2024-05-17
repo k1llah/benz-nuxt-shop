@@ -12,15 +12,15 @@ let brandImageUrl = ref();
 const brands = allStore.brandImages;
 const getDateShoe = async function () {
   try {
-    const dataShoe = await useFetch<any>(`http://localhost:3001/api/sneaker`, {
+    const dataShoe = await $fetch<any>(`http://localhost:3001/api/sneaker`, {
       method: "GET",
       params: {
         id: paramsId,
       },
     });
-    itemData.value = dataShoe.data;
-    orderStore.items = dataShoe.data.value;
-    brand.value = dataShoe.data.value.brand;
+    itemData.value = dataShoe;
+    orderStore.items = dataShoe;
+    brand.value = dataShoe.brand;
     brandImageUrl.value = allStore.getBrandImageUrl(brand.value);
   } catch (error) {
     console.log(error);
@@ -35,13 +35,14 @@ function getPathName() {
   }
 }
 onMounted(async () => {
-  if (paramsId) {
+  
     await getDateShoe();
-  }
+  
 });
 
 </script>
 <template>
+  <div>
   <div class="flex md:ml-[50px] sm:ml-3 mt-5 gap-[15px] dark:text-ghostWhiteText">
     <div class="flex gap-5 items-center">
       <buttonBack />
@@ -138,6 +139,7 @@ onMounted(async () => {
       товара, либо в технической документации к нему.
     </h4>
   </div>
+</div>
 </template>
 <style scoped>
 .shadow {

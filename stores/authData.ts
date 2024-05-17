@@ -11,14 +11,14 @@ export const useAuthStore = defineStore({
   actions: {
     async getRole() {
       try {
-        const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+        const data = await $fetch<any>("http://localhost:3001/api/get-data", {
           method: "POST",
           body:{
-            uuid: useCookie('uuid'),
-            id: useCookie('id'),
+            uuid: useCookie('uuid').value,
+            id: useCookie('id').value,
           }
         });
-        this.role = data.data.value.user.role;
+        this.role = data.user.role;
         useCookie('role').value = this.role
       } catch (error) {
         console.log(error);

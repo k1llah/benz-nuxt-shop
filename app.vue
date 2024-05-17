@@ -7,10 +7,10 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const route = useRouter();
 const authStore = useAuthStore();
-onMounted(() => {
+onBeforeMount(() => {
   authStore.getRole();
   authStore.checkAuth();
-});
+})
 const page = ref(window.location.pathname);
 watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
