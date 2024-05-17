@@ -3,6 +3,7 @@ const sneakerStore = useSneaker();
 const router = useRouter();
 const orderStore = useOrderStore();
 const cartStore = useCartStore();
+const authStore = useAuthStore();
 watch(
   [() => cartStore.totalPrice, () => cartStore.items],
   ([newTotalPrice, newItems]) => {
@@ -10,7 +11,9 @@ watch(
   }
 );
 onMounted(() => {
-  cartStore.cartDataGet();
+  if(authStore.isAuthenticated == true){
+    cartStore.cartDataGet();
+  }
   cartStore.localPrice;
 });
 

@@ -27,7 +27,6 @@ defineProps({
   // Указываем, что items является массивом объектов типа Item
   items: Array<Item>,
 });
-const allStore = useAllStore()
 let paramsId;
 const onClickOnCard = async (sneakerId: number) => {
   router.push(`/sneaker-description`);
@@ -37,7 +36,7 @@ const onClickOnCard = async (sneakerId: number) => {
 let showOverlay = ref(false)
 const onFavoriteAdd = async (sneakerId: number, item:Item) => {
   try {
-    const postData = await useFetch(
+    const postData = await $fetch(
       "http://localhost:3001/api/add-to-favorites",
       {
         method: "POST",

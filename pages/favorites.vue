@@ -2,25 +2,27 @@
 const cartStore = useCartStore();
 const favoriteStore = useFavoritesStore();
 const authStore = useAuthStore();
-const items = ref<any>([]);
+const items = ref<any>([]as any);
 const isFav = ref<Boolean>(true);
 async function favorites() {
   try {
-    const { data } = await useFetch<any>(
+    const data  = await $fetch<any>(
       "http://localhost:3001/api/favorites-user",
       {
         method:"POST",
         body:{
-          id: localStorage.getItem("id"),
+          id: useCookie("id").value,
         }
       }
     );
 
-    items.value = data;
-    items.value = data.value[0].Favorite;
-    items.value.forEach((el: any) => {
-      el.isFavorite = true;
-    });
+    items.value = data
+    console.log(data)
+    if(items !== undefined && items.value !== null){
+      items.value.forEach((el: any) => {
+        el.isFavorite = true;
+      });
+    }
     if(cartStore.items !== undefined){
       cartStore.items.forEach((el: any) => {
         items.value.forEach((item: any) => {
@@ -54,7 +56,7 @@ onBeforeMount(() => {
       </div>
 
       <div
-        v-if="authStore.isAuthenticated == true && isFav == true"
+        v-if="authStore.isAuthenticated == true && isFav == true && items"
         class="mt-[30px]"
       >
         <FavList :items="items" />

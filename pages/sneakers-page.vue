@@ -23,12 +23,12 @@ const axiosGetParams = async () => {
       //@ts-ignore
       params.title = filters.searchQuery;
     }
-    const { data } = await useFetch(`http://localhost:3001/api`, {
+    const data  = await $fetch(`http://localhost:3001/api`, {
       method: "GET",
       params,
     });
 
-    items.value = data;
+    items.value = data
     cartStore.items.forEach((el: any) => {
       items.value.forEach((item: any) => {
         if (el.id == item.id) {
@@ -63,6 +63,7 @@ watch(filters, debounce(axiosGetParams, 350));
 </script>
 
 <template>
+  <div>
   <div class="p-10">
     <div
       class="flex justify-between gap-3 sm:flex-wrap md:flex-nowrap items-center"
@@ -95,8 +96,10 @@ watch(filters, debounce(axiosGetParams, 350));
       </div>
     </div>
   </div>
+  
   <CardList :items="items" />
   <div v-if="items == ''" class="flex justify-center w-full">
     <badassLoader/>
   </div>
+</div>
 </template>

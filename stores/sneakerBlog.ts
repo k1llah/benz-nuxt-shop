@@ -11,12 +11,12 @@ export const useBlog = defineStore("blog", {
   actions: {
     async getStrapiData() {
       try {
-        const { data } = useFetch<any>("http://localhost:1337/api/posts?populate=*", {
+        const data = await $fetch<any>("http://localhost:1337/api/posts?populate=*", {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
         });
-        this.posts = data.value.data.map((post: any) => post);
+        this.posts = data.data.map((post: any) => post);
       } catch (error) {
         console.log(error);
       }
@@ -43,8 +43,8 @@ export const useBlog = defineStore("blog", {
     },
     async getPostByHashtag(hashtag: string) {
       try {
-        if (hashtag !== null && hashtag !== undefined) {
-          const {data} = await useFetch<any>(
+        if (hashtag !== null && hashtag !== undefined || hashtag !== "") {
+          const data = await $fetch<any>(
             `http://localhost:1337/api/posts?filters\[hashtags\][hashtagName][$contains]=${hashtag}`,
             {
               params: {
@@ -55,7 +55,8 @@ export const useBlog = defineStore("blog", {
               },
             }
           );
-          this.posts = data.value.data.data;
+
+          this.posts = data.data.map((post: any) => post);
         }
       } catch (error) {
         console.error(error);

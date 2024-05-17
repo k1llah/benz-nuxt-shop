@@ -20,18 +20,18 @@ interface Item {
   isFavorite: boolean;
 }
 const props = defineProps({
-  items: Array<Item>
+  items: Array<Item> && Object,
 });
 
 const showOverlay = ref(false)
 const onFavoriteRemove = async (sneakerId: number, item:Item) => {
   try {
-    const postData = await useFetch<any>(
+    const postData = await $fetch<any>(
       "http://localhost:3001/api/remove-from-favorites",
       {
         method: 'POST',
         body:{
-          userId: useCookie('id'),
+          userId: useCookie('id').value,
           sneakerId: sneakerId,
         }
       }

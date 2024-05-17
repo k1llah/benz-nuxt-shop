@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const formStore = useFormStore();
 const orderStore = useOrderStore();
 </script>
 <template>
