@@ -2,5 +2,7 @@
 	let genderStore = useGenderStore()
 	</script>
 <template>
+	<div>
 	<sexSeparate/>
+</div>
 </template>

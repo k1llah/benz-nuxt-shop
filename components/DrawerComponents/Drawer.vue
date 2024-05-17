@@ -54,7 +54,7 @@ onMounted(() => {
 
         <button
           class="bg-lime-500 w-full rounded-xl py-3 text-white hover:bg-lime-700 transition disabled:bg-slate-400 cursor-pointer mt-4"
-          @click="orderStore.targetPageDefine('classic'), router.push('/order'), sneakerStore.show = false" :disabled="cartStore.localCounter <= 0"
+          @click="orderStore.targetPageDefine('classic'), router.push('/LazyOrder'), sneakerStore.show = false" :disabled="cartStore.localCounter <= 0"
         >
           Оформить Заказ
         </button>

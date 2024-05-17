@@ -19,15 +19,18 @@ export const useAuthStore = defineStore({
           }
         });
         this.role = data.user.role;
-        useCookie('role').value = this.role
+        if(this.role !== '') useCookie('role').value = this.role
+        
       } catch (error) {
         console.log(error);
       }
     },
-    checkAuth() {
+    async checkAuth() {
       const idLocal = useCookie('id').value
       const uuidLocal = useCookie('uuid').value
       const roleLocal = useCookie('role').value
+      this.isAuthenticated = true;
+      
       if (idLocal && uuidLocal && roleLocal) {
         this.isAuthenticated = true;
         this.currentUser = { id: idLocal, uuid: uuidLocal };

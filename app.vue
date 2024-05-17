@@ -8,8 +8,8 @@ const toggleDark = useToggle(isDark)
 const route = useRouter();
 const authStore = useAuthStore();
 onBeforeMount(() => {
-  authStore.getRole();
   authStore.checkAuth();
+  authStore.getRole();
 })
 const page = ref(window.location.pathname);
 watch(() => route.currentRoute.value.path, (newPath: any) => {
@@ -26,10 +26,10 @@ console.log('sadly', process.client)
     <section>
       <div class="w-full min-h-[800px] m-auto">
         <NuxtPage />
-        <backToTop v-if="page != '/profile' && !allStore.isOpenedFeedBack && !blog.isOpenedModal && !blog.isOpenedModalFeedback && !orderStore.errorPayment && !orderStore.success"/>
+        <backToTop v-if="page != '/LazyProfileUser' && !allStore.isOpenedFeedBack && !blog.isOpenedModal && !blog.isOpenedModalFeedback && !orderStore.errorPayment && !orderStore.success"/>
       </div>
     </section>
-    <Footer v-if="page != '/profile' && page != '/description'" />
+    <Footer v-if="page != '/LazyProfileUser' && page != '/description'" />
   </div>
 
   

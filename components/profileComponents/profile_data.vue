@@ -11,19 +11,19 @@ const authStore = useAuthStore();
 const getData = async function () {
   const uuid = useCookie("uuid").value;
   const id = useCookie("id").value;
-  if (authStore.isAuthenticated == true) {
+  if (authStore.isAuthenticated == true && uuid && id) {
     try {
-      const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+      const data = await $fetch<any>("http://localhost:3001/api/get-data", {
         method: "POST",
         body: {
           uuid,
           id,
         }
       });
-      email.value = data.data.value.user.email;
-      first_name.value = data.data.value.user.first_name;
-      lastName.value = data.data.value.user.last_name;
-      profileImg.value = data.data.value.user.profileImg;
+      email.value = data.user.email;
+      first_name.value = data.user.first_name;
+      lastName.value = data.user.last_name;
+      profileImg.value = data.user.profileImg;
     } catch (error) {
       authStore.isAuthenticated = false;
     }

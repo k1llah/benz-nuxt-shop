@@ -19,8 +19,8 @@ async function checkIsAdmin() {
     const data = await useFetch<any>("http://localhost:3001/api/get-data", {
       method: "POST",
       body:{
-        uuid: useCookie('uuid'),
-        id: useCookie("id"),
+        uuid: useCookie('uuid').value,
+        id: useCookie("id").value,
       }
     });
     role.value = data.data.value.user.role;
@@ -30,7 +30,7 @@ async function checkIsAdmin() {
   }
   setTimeout(() => {
     if (role.value === "ADMIN") {
-      router.push({ name: "admin" });
+      router.push( "/LazyAdmin" );
     } else {
       location.reload();
       alert("Еще че придумал? сегодня не твой день салага");
@@ -116,7 +116,7 @@ let toggleShow = () => {
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push( '/profile-user' )"
+        @click="$router.push( '/LazyProfileUser' )"
       >
         <img src="/profile.svg" alt="Cart" />
         <span class="text-[19px] font-light md:text-[14px]">Профиль</span>

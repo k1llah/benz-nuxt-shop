@@ -226,7 +226,7 @@ onMounted(() => {
       </button>
       <div class="text-sm text-center mt-[1.6rem] dark:text-ghostWhiteText">
         Уже есть аккаунт?
-        <NuxtLink to="/profile-user">
+        <NuxtLink to="/LazyProfileUser">
           <p class="text-sm text-[#7747ff] dark:text-green-500">Войдите!</p>
         </NuxtLink>
       </div>

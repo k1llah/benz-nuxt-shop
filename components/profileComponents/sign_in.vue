@@ -5,33 +5,37 @@ const email = ref("");
 const password = ref("");
 const formReport = ref("");
 const authStore = useAuthStore();
+const setCookiesAndState = async (user: any) => {
+  useCookie("id").value = user.id;
+  useCookie("uuid").value = user.uuid;
+  useCookie("role").value = user.role;
+
+  authStore.id = user.id;
+  authStore.uuid = user.uuid;
+  authStore.role = user.role;
+  authStore.isAuthenticated = true;
+  authStore.currentUser = { id: user.id, uuid: user.uuid };
+};
 const logInFunc = async (event: any) => {
   event.preventDefault();
-  const email = document.getElementById("email") as HTMLInputElement;
-  const password = document.getElementById("password") as HTMLInputElement;
   if (email.value !== null && password.value !== null) {
     try {
-      const data = await useFetch<any>("http://localhost:3001/api/login", {
+      const data = await $fetch<any>("http://localhost:3001/api/login", {
         method: "POST",
         body:{
           email: email.value,
           hash: md5(password.value),
         }
       });
-      if (data.data) {
-        useCookie("id").value = data.data.value.user.id
-        useCookie("uuid").value = data.data.value.user.uuid
-        useCookie("role").value = data.data.value.user.role
-        authStore.id = data.data.value.user.id;
-        authStore.uuid = data.data.value.user.uuid;
-        authStore.role = data.data.value.user.role;
+      if (data) {
+        await setCookiesAndState(data.user)
         email.value = "";
         password.value = "";
         formReport.value = "";
-        authStore.checkAuth();
+        authStore.checkAuth();        
         if (authStore.isAuthenticated == true && cartStore.items.length > 0) {
           await cartStore.cartDataGet();
-
+          console.log('true')
           await cartStore.items.forEach((el: any) => {
             cartStore.totalPrice += el.price;
             useCookie("totalPrice").value = cartStore.totalPrice.toString();
@@ -47,6 +51,13 @@ const logInFunc = async (event: any) => {
     }
   }
 };
+watchEffect(() => {
+  if (authStore.isAuthenticated == true) {
+    // Действия после успешного входа
+
+    console.log('User is authenticated', authStore.isAuthenticated);
+  }
+});
 </script>
 <template>
   <div
@@ -77,6 +88,7 @@ const logInFunc = async (event: any) => {
           type="text"
           id="email"
           class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
+          v-model="email"
         />
       </div>
       <div class="block relative">
@@ -89,6 +101,7 @@ const logInFunc = async (event: any) => {
           type="password"
           id="password"
           class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0"
+          v-model="password"
         />
       </div>
       <div>
@@ -106,14 +119,14 @@ const logInFunc = async (event: any) => {
     </form>
     <div class="text-sm text-center mt-[1.6rem]">
       У вас нет аккаунта?
-      <NuxtLink to="/sign-up">
+      <NuxtLink to="/LazySignUp">
         <p class="text-sm text-[#7747ff] dark:text-green-500">
           Зарегистрируйтесь
         </p></NuxtLink>
     </div>
   </div>
 
-  <div class="p-5" v-if="authStore.isAuthenticated == true">
+  <div class="p-5" v-if="authStore.isAuthenticated">
     <profile-data />
   </div>
 </template>

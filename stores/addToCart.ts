@@ -91,7 +91,7 @@ export const useCartStore = defineStore({
 
     async cartDataGet() {
       try {
-        const dataCart = await useFetch<any>(
+        const dataCart = await $fetch<any>(
           "http://localhost:3001/api/get-cart-items",
           {
             method: "POST",
@@ -100,7 +100,7 @@ export const useCartStore = defineStore({
             }
           }
         );
-        this.items = dataCart.data.value.items;
+        this.items = dataCart.items;
         if (this.items !== undefined) {
           this.isAdded = this.items.length > 0;
         }

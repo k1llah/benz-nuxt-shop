@@ -13,8 +13,8 @@ async function checkIsAdmin() {
     const data = await useFetch<any>("http://localhost:3001/api/get-data", {
       method: "POST",
       body:{
-        uuid: useCookie("uuid"),
-        id: useCookie("id"),
+        uuid: useCookie("uuid").value,
+        id: useCookie("id").value,
       }
     });
     role.value = data.data.value.user.role;
@@ -24,7 +24,7 @@ async function checkIsAdmin() {
   }
   setTimeout(() => {
     if (role.value === "ADMIN") {
-      router.push({ name: "/admin" });
+      router.push("/admin");
     } else {
       location.reload();
       alert("Еще че придумал? сегодня не твой день салага");
@@ -120,7 +120,7 @@ const toggleDropdown = (index: number) => {
         
         <li
           class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s pb-5 border-b-2 dark:border-black w-full justify-center"
-          @click="$router.push('/profile-user'), toggleDropdown(0)"
+          @click="$router.push('/LazyProfileUser'), toggleDropdown(0)"
         >
           <img src="/profile.svg" alt="Cart" />
           <span class="text-[19px] font-light md:text-[14px]">Профиль</span>

@@ -17,7 +17,7 @@ watch(clickValue, () => {
   <div
     class="flex md:gap-20 sm:gap-0 justify-center md:pt-36 sm:pt-24 flex-wrap dark:bg-primaryDark"
   >
-    <NuxtLink to="/gender">
+    <NuxtLink to="/LazyGender">
       <div
         class="relative hover:scale-[1.05] transition-all 1.3s"
         @click="setGender('man')"
@@ -38,7 +38,7 @@ watch(clickValue, () => {
       </div>
     </NuxtLink>
 
-    <NuxtLink to="/gender">
+    <NuxtLink to="/LazyGender">
       <div
         class="relative hover:scale-[1.05] transition-all 1.3s"
         @click="setGender('woman')"

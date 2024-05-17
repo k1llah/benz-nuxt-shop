@@ -52,7 +52,7 @@ const handleFileUpload = (event: Event) => {
 };
 const getData = async function () {
   try {
-    let infoUser = await useFetch<any>("http://localhost:3001/api/get-data", {
+    let infoUser = await $fetch<any>("http://localhost:3001/api/get-data", {
       method: "POST",
       body:{
         uuid,

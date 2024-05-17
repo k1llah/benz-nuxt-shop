@@ -102,7 +102,7 @@ const updateAddress = async () => {
       method: 'POST',
       body:{
         id: allStore.idAddress,
-        userId: useCookie("id"),
+        userId: useCookie("id").value,
         firstName: name.value,
         lastName: lastName.value,
         surname: surname.value,

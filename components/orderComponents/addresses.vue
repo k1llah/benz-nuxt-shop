@@ -55,7 +55,7 @@ onBeforeMount(() => {
         К сожалению, у вас нет добавленных адресов, но вы можете добавить свой
         адрес на странице профиля
         <NuxtLink
-          to="/profile-user"
+          to="/LazyProfileUser"
           class="text-[#7747ff] dark:text-green-500 cursor-pointer"
           >во вкладке мои адреса
           </NuxtLink>
