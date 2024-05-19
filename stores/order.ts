@@ -148,7 +148,7 @@ export const useOrderStore = defineStore({
           );
           this.addressId = newAddress.id;
 
-          const pay = await $fetch<any>(
+          const pay = await $fetch.raw<any>(
             "http://localhost:3001/api/create-new-order",
             {
               method: "POST",
@@ -164,41 +164,41 @@ export const useOrderStore = defineStore({
           );
           if (pay.ok) {
             this.success = true;
-            this.orderNumber = pay.data.value.orderNumber;
+            this.orderNumber = pay._data.orderNumber
             const clear = await $fetch("http://localhost:3001/api/clear-cart", {
               method: "POST",
               body: JSON.stringify({
                 userId: useCookie("id").value,
               })
-            });
+            })
             nextTick(() => {
               const element = document.getElementById(
                 "success"
-              ) as HTMLDivElement;
+              ) as HTMLDivElement
               if (element) {
-                element.scrollIntoView({ behavior: "smooth", block: "center" });
+                element.scrollIntoView({ behavior: "smooth", block: "center" })
               }
             });
-            this.methodPayment = "";
-            document.body.style.overflow = "hidden";
+            this.methodPayment = ""
+            document.body.style.overflow = "hidden"
           } else {
-            console.log("Ошибка при выполнении запроса");
+            console.log("Ошибка при выполнении запроса")
           }
         } else if (
           (this.isSelected && this.methodPayment === "") ||
           (this.methodPayment === "" && this.isFormCorrect)
         ) {
-          this.errorPayment = true;
-          document.body.style.overflow = "hidden";
+          this.errorPayment = true
+          document.body.style.overflow = "hidden"
           nextTick(() => {
-            const element = document.getElementById("error") as HTMLDivElement;
+            const element = document.getElementById("error") as HTMLDivElement
             if (element) {
-              element.scrollIntoView({ behavior: "smooth", block: "center" });
+              element.scrollIntoView({ behavior: "smooth", block: "center" })
             }
           });
         }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     },
   },

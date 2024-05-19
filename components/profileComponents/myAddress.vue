@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import EditAddresses from './editAddresses.vue'
+
 const addressStore = useAddressStore();
 const allStore = useAllStore();
 onBeforeMount(() => {
@@ -6,6 +8,7 @@ onBeforeMount(() => {
 });
 </script>
 <template>
+  <div>
   <div class="flex md:gap-5 items-center sm:gap-2 md:p-3 sm:p-3">
     <div>
       <buttonProfile
@@ -21,7 +24,7 @@ onBeforeMount(() => {
   </div>
 
   <div v-if="allStore.targetPage == 'editAddress'">
-    <editAddress />
+    <EditAddresses />
   </div>
   <div v-else-if="allStore.targetPage == 'addressAdd'">
     <addressAdd />
@@ -77,4 +80,5 @@ onBeforeMount(() => {
       </button>
     </div>
   </div>
+</div>
 </template>

@@ -14,13 +14,13 @@ async function genderRoute() {
       useCookie("gender").value == "man" ||
       useCookie("gender").value == "woman"
     ) {
-      const { data } = await useFetch<any>(
+      const data  = await $fetch<any>(
         `http://localhost:3001/api/${params}Sneakers`,
         {
           method: "GET",
         }
       );
-      items.value = data.value;
+      items.value = data
     }
   } catch (error) {
     console.log(error);

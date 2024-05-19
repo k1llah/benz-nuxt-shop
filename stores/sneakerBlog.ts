@@ -24,7 +24,7 @@ export const useBlog = defineStore("blog", {
     async getPostById(id: number) {
       try {
         if (id !== null && id !== undefined) {
-          const  {data}  = await useFetch<any>(
+          const  {data}  = await $fetch<any>(
             `http://localhost:1337/api/posts/${id}`,
             {
               params: {
@@ -35,7 +35,7 @@ export const useBlog = defineStore("blog", {
               },
             }
           );
-          this.infoPost = data.value.data;
+          this.infoPost = data
         }
       } catch (error) {
         console.error(error);

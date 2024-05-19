@@ -5,16 +5,17 @@ let data = ref();
 let idItems = ref([] as any);
 const getDateShoe = async function (params: any) {
   try {
-    const dataShoe = await useFetch<any>(`http://localhost:3001/api/sneaker`, {
+    const dataShoe = await $fetch<any>(`http://localhost:3001/api/sneaker`, {
       method: "GET",
       params: {
         id: params,
       },
     });
-    data.value = dataShoe.data;
-    idItems.value = [dataShoe.data.value.id];
+    console.log(dataShoe);
+    data.value = dataShoe;
+    idItems.value = [dataShoe.id];
     orderStore.idParam = idItems.value;
-    orderStore.amount = dataShoe.data.value.price;
+    orderStore.amount = dataShoe.price;
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +25,7 @@ onBeforeMount(() => {
 });
 </script>
 <template>
-  <div class="md:ml-10 sm:ml-5 sm:mt-5">
+  <div class="md:ml-10 sm:ml-5 sm:mt-5" v-if="data">
     <templateItem
       :id="data?.id"
       :title="data?.title"

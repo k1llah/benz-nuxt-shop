@@ -34,7 +34,9 @@ const isFormChanged = computed(
     lastName.value !== prevLastName.value ||
     newProfileImg.value !== prevProfileImg.value
 );
-
+watchEffect(() => {
+  console.log(lastName.value, )
+})
 const handleFileUpload = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const files = target.files;
@@ -59,7 +61,7 @@ const getData = async function () {
         id,
       }
     });
-    let data = infoUser.data.value;
+    let data = infoUser
     email.value = data.user.email;
     first_name.value = data.user.first_name;
     lastName.value = data.user.last_name;
@@ -92,15 +94,15 @@ const submitForm = async (event: Event) => {
           profileImg: newProfileImg.value,
         })
       );
-      const changedData = useFetch<any>(
+      if(formData){
+      const changedData = $fetch<any>(
         "http://localhost:3001/api/edit-profile",{
         method: "POST",
-        body:{
-          formData
-        }
+        body: formData
       }
       );
       location.reload();
+    }
     } else if (lastName.value.includes(" ") || lastName.value.length < 2) {
       setTimeout(() => {
         lastNameWarning.value = "";

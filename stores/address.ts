@@ -8,17 +8,16 @@ export const useAddressStore = defineStore({
   actions: {
     async dataAddress() {
       try {
-        const data = await useFetch<any>(
+        const data = await $fetch<any>(
           "http://localhost:3001/api/get-addresses",
           {
             method: "POST",
             body:{
-              userId: useCookie('id'),
+              userId: useCookie('id').value,
             }
           }
         );
-
-        this.addressData = data.data.value;
+        this.addressData = data;
         this.isAddress = this.addressData.length > 0;
       } catch (error) {
         console.log(error);

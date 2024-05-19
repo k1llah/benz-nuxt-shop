@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NuxtLink } from '#build/components'
 import { useDark } from '@vueuse/core';
 const isDark = useDark();
 </script>
