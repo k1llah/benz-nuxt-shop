@@ -16,14 +16,14 @@ onBeforeMount(() => {
 });
 async function checkIsAdmin() {
   try {
-    const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+    const data = await $fetch<any>("http://localhost:3001/api/get-data", {
       method: "POST",
       body:{
         uuid: useCookie('uuid').value,
         id: useCookie("id").value,
       }
     });
-    role.value = data.data.value.user.role;
+    role.value = data.user.role;
     useCookie("role").value = role.value
   } catch (error) {
     console.log(error);

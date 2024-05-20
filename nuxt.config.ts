@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   },
   imports: {
     autoImport: true,
-    dirs: ['./stores/**', '.components/**', '/components/main-components/**',  './components/**/*/*'],
+    dirs: ['./stores/**', '.components/**', '/components/main-components/**',  './components/**/*/*', './components/adminComponents/**/*', './components/adminComponents/**/*', './components/adminComponents/**/*/*/*'],
   },
   components: [
     {

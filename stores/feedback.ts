@@ -3,7 +3,7 @@ export const useFeedbackStore = defineStore({
   id: "feedback",
   state: () => ({
     starRating: 0,
-    userId: useCookie('id'),
+    userId: useCookie('id').value,
     message: "",
     imageFeedback: ref(),
     tempFileURL: ref(),
@@ -31,15 +31,15 @@ export const useFeedbackStore = defineStore({
     async createFeedback() {
       event?.preventDefault();
       try {
-        const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+        const data = await $fetch<any>("http://localhost:3001/api/get-data", {
           method: "POST",
           body: {
-            uuid: useCookie('uuid'),
-            id: useCookie('id'),
+            uuid: useCookie('uuid').value,
+            id: useCookie('id').value,
           }
         });
 
-        this.authorName = data.data.value.user.first_name;
+        this.authorName = data.user.first_name;
         if (
           this.starRating !== 0 &&
           this.message.length >= 5 &&
@@ -53,12 +53,11 @@ export const useFeedbackStore = defineStore({
           formData.append("messageFeedback", this.message);
           formData.append("authorName", this.authorName);
           formData.append("rating", this.starRating.toString());
-          const createFeedback = await useFetch(
+          const createFeedback = await $fetch(
             "http://localhost:3001/api/create-feedback",{
             method: 'POST',
-            body:{
-              formData
-            }
+            body: formData
+            
           }
           );
           this.modalFeedback = true;
@@ -97,12 +96,12 @@ export const useFeedbackStore = defineStore({
     },
     async getFeedbacksToModerate() {
       try {
-        const dataFeedback = await useFetch<any>(
+        const dataFeedback = await $fetch<any>(
           "http://localhost:3001/api/get-feedback-to-moderate"
         );{
           method: "GET"
         }
-        this.feedBackData = dataFeedback.data.value;
+        this.feedBackData = dataFeedback;
         if (this.isModeratedFeedback == false) {
           this.feedBackData.forEach((el: any) => {
             el.isModeratedFeedback = false;
@@ -114,18 +113,18 @@ export const useFeedbackStore = defineStore({
     },
     async getFeedbacks() {
       try {
-        const dataFeedback = await useFetch<any>(
+        const dataFeedback = await $fetch<any>(
           "http://localhost:3001/api/get-feedback", {
           method: "GET"
         })
-        this.feedBackData = dataFeedback.data.value;
+        this.feedBackData = dataFeedback
       } catch (error) {
         console.log(error);
       }
     },
     async moderateFeedback(id: number) {
       try {
-        const dataFeedback = await useFetch(
+        const dataFeedback = await $fetch(
           "http://localhost:3001/api/moderate-feedback",
           {
             method: "POST",
@@ -144,7 +143,7 @@ export const useFeedbackStore = defineStore({
     },
     async feedbackDelete(id: number) {
       try {
-        const dataFeedback = await useFetch(
+        const dataFeedback = await $fetch(
           "http://localhost:3001/api/delete-feedback",
           {
             method: "POST",

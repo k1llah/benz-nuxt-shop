@@ -28,7 +28,7 @@ const correctDataInput = computed(
 const createAddress = async () => {
   try {
     if (correctDataInput.value == true) {
-      const newAddress = await useFetch<any>(
+      const newAddress = await $fetch<any>(
         "http://localhost:3001/api/create-address",
         {
           method: "POST",

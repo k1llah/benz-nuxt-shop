@@ -7,14 +7,14 @@ export const useIsAdmin = defineStore({
   actions: {
 		async checkIsAdmin() {
 			try {
-						const data = await useFetch<any>("http://localhost:3001/api/get-data", {
+						const data = await $fetch<any>("http://localhost:3001/api/get-data", {
 							method: "POST",
 							body: {
-								uuid: useCookie('uuid'),
-								id: useCookie('id'),
+								uuid: useCookie('uuid').value,
+								id: useCookie('id').value,
 							}
 						});
-						this.role = data.data.value.user.role
+						this.role = data.user.role
 						
 					}catch(error){
 						console.log(error)
@@ -23,8 +23,8 @@ export const useIsAdmin = defineStore({
 							console.log(this.role)
 						}
 						else{
-							let setRole = useCookie('role')
-							setRole.value = 'USER'
+							let setRole = useCookie('role').value
+							setRole = 'USER'
 							location.assign('/')
 							alert('Еще че придумал? сегодня не твой день салага')
 						}

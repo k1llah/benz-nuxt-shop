@@ -10,18 +10,18 @@ export const useMyOrderStore = defineStore({
   actions: {
     async getDataOrder() {
       try {
-        const resOrders = await useFetch<any>(
+        const resOrders = await $fetch<any>(
           "http://localhost:3001/api/get-orders",
           {
             method: "POST",
             body: {
-              userId: useCookie("id"),
+              userId: useCookie("id").value,
             }
           }
         );
-        this.orders = resOrders.data.value;
+        this.orders = resOrders;
         for (const order of this.orders) {
-          const resItems = await useFetch(
+          const resItems = await $fetch<any>(
             "http://localhost:3001/api/sneakers-to-order",
             {
               method: "POST",
@@ -30,17 +30,17 @@ export const useMyOrderStore = defineStore({
               }
             }
           );
-          order.items = resItems.data;
+          order.items = resItems;
         }
         if (
-          resOrders.data.value.status !== "CANCELED" ||
-          resOrders.data.value.status !== "RECEIVED"
+          resOrders.status !== "CANCELED" ||
+          resOrders.status !== "RECEIVED"
         ) {
           this.active = true;
         }
         if (
-          resOrders.data.value.status == "RECEIVED" ||
-          resOrders.data.value.status == "CANCELED"
+          resOrders.status == "RECEIVED" ||
+          resOrders.status == "CANCELED"
         ) {
           this.history = true;
         }

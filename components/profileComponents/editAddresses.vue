@@ -61,14 +61,14 @@ const ChangeBack = () => {
 };
 const editAddress = async () => {
   try {
-    const data = await useFetch<any>("http://localhost:3001/api/get-address", {
+    const data = await $fetch<any>("http://localhost:3001/api/get-address", {
       method: "POST",
       body:{
         addressId: allStore.idAddress,
         userId: useCookie("id").value,
       }
     });
-    dataAddress.value = data.data;
+    dataAddress.value = data;
     name.value = dataAddress.value.firstName;
     lastName.value = dataAddress.value.lastName;
     surname.value = dataAddress.value.surname;
@@ -98,7 +98,7 @@ editAddress();
 
 const updateAddress = async () => {
   try {
-    const data = await useFetch<any>("http://localhost:3001/api/update-address", {
+    const data = await $fetch<any>("http://localhost:3001/api/update-address", {
       method: 'POST',
       body:{
         id: allStore.idAddress,

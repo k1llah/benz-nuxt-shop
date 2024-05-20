@@ -17,17 +17,17 @@ export const useSneaker = defineStore('sneaker', {
   actions: {
     async fetchItems() {
       try {
-        const response = await useFetch<any>('http://localhost:3001/api/items', {
+        const response = await $fetch<any>('http://localhost:3001/api/items', {
           method: 'GET'
         })
-        this.items = response.data.value
+        this.items = response
       } catch (error) {
         console.error('Error fetching items:', error)
       }
     },
     async addToFavorites(userId: string, sneakerId: number) {
       try {
-        const response = await useFetch('http://localhost:3001/api/add-to-favorites', {
+        const response = await $fetch('http://localhost:3001/api/add-to-favorites', {
           method: 'POST',
           body: JSON.stringify({
           userId: userId,

@@ -9,15 +9,15 @@ onBeforeMount(() => {
 
 async function getIdeas(){
 	try{
-		const response = await useFetch<any>('http://localhost:3001/api/get-ideas',{method: "GET"})
-		dataIdeas.value = response.data
+		const response = await $fetch<any>('http://localhost:3001/api/get-ideas',{method: "GET"})
+		dataIdeas.value = response
 	} catch(error){
 		console.log(error)
 	}
 }
 async function deleteIdea(id: number){
 	try{
-		const response = await useFetch<any>('http://localhost:3001/api/delete-idea', {
+		const response = await $fetch<any>('http://localhost:3001/api/delete-idea', {
 			method: "POST",
 			body:{
 				id: id

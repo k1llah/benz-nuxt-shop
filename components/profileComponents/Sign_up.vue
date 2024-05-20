@@ -59,7 +59,7 @@ const submitForm = async (event: Event) => {
     password === password_confirmation
   ) {
     try {
-      const create = await useFetch<any>("http://localhost:3001/api/createUser", {
+      const create = await $fetch<any>("http://localhost:3001/api/createUser", {
         method: "POST",
         body:{
           name: name,
@@ -69,7 +69,7 @@ const submitForm = async (event: Event) => {
       });
       isSuccessSignUp.value = true
       textSuccessSignUp.value = "Вы успешно зарегистрировались!"
-      const infoUser = await create.data.value
+      const infoUser = await create
       useCookie("id").value = infoUser.id
       useCookie("uuid").value = infoUser.uuid
       useCookie('role').value = infoUser.role

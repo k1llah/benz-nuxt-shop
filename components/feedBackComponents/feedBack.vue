@@ -45,7 +45,7 @@ onBeforeMount(() => {
       class="flex flex-wrap gap-5 justify-center items-center"
     >
       <div v-for="feedback in feedbackStore.feedBackData" :key="feedback.id">
-        <templateFeedBack
+        <templateFeedback
           v-if="feedback.rating != 0"
           :author="feedback.authorName"
           :image="feedback.imageFeedback"

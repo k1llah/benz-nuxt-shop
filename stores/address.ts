@@ -25,13 +25,13 @@ export const useAddressStore = defineStore({
     },
     async deleteAddress(id: number) {
       try {
-        const data = await useFetch<any>(
+        const data = await $fetch<any>(
           "http://localhost:3001/api/delete-address",
           {
             method: "POST",
             body:{
               id: id,
-              userId: useCookie('id'),
+              userId: useCookie('id').value,
             }
           }
         );

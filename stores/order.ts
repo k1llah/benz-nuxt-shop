@@ -29,7 +29,7 @@ export const useOrderStore = defineStore({
     success: false,
     errorPayment: false,
     isFormCorrect: false,
-    targetPage: useCookie("pageT"),
+    targetPage: useCookie("pageT").value,
     orderNumber: "",
   }),
   actions: {
