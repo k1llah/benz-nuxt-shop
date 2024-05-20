@@ -1,6 +1,12 @@
 <script setup lang="ts">
-const target = ref("");
-target.value = useCookie('page').value!;
+const target = ref('')
+if(useCookie('page').value !== ''){
+	target.value = useCookie('page').value!
+}
+onMounted(()	=> {
+	target.value = useCookie('page').value!
+})
+
 </script>
 <template>
   <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>

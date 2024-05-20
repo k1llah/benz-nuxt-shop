@@ -4,10 +4,11 @@ const email = ref("");
 const first_name = ref("");
 const lastName = ref("");
 const profileImg = ref("");
-
-import { useAuthStore } from "@/stores/authData";
 const authStore = useAuthStore();
-
+watchEffect(() => {
+  console.log(useCookie('page').value)
+  
+})
 const getData = async function () {
   const uuid = useCookie("uuid").value;
   const id = useCookie("id").value;
@@ -36,12 +37,13 @@ const allStore = useAllStore();
 let toggle = ref(false);
 let target = ref("");
 const handleOpenPage = (page: string) => {
-  target.value = page;
-  toggle.value = true;
-  allStore.isOpened = toggle.value;
-  useCookie("page").value = page
-  document.body.style.overflow = "hidden";
-};
+  target.value = page
+  toggle.value = true
+  allStore.isOpened = toggle.value
+  useCookie("page").value = target.value
+
+  document.body.style.overflow = "hidden"
+}
 
 watch(
   () => allStore.isOpened,
