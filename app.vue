@@ -59,10 +59,3 @@ console.log('sadly', process.client)
   opacity: 0;
 }
 </style>
-  
-
-
-
-
-
-

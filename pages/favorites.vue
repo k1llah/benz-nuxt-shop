@@ -44,6 +44,9 @@ onBeforeMount(() => {
   cartStore.cartDataGet();
   favorites();
 });
+watchEffect(() =>{
+  console.log(isFav.value, items.value.length)
+})
 </script>
 <template>
   <div>
@@ -65,7 +68,7 @@ onBeforeMount(() => {
         <badassLoader />
       </div>
       <div
-        v-else-if="authStore.isAuthenticated == true && isFav == false"
+        v-else-if="authStore.isAuthenticated == true && !isFav"
         class="flex flex-col justify-center items-center h-[500px]"
       >
         <div class="md:w-[500px] sm:w-auto text-center">

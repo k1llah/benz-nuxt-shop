@@ -102,7 +102,7 @@ onBeforeRouteLeave((to:any, from:any, next:any) => {
         <div class="relative">
           <input
             placeholder="Введите свой email *"
-            class="w-full rounded-lg border-gray-300 p-4 pe-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent dark:bg-transparent dark:border-[1px] dark:border-green-600"
+            class="w-full rounded-lg border-gray-300 p-4 pe-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent dark:bg-transparent dark:border-[1px] dark:border-green-600 dark:text-ghostWhiteText"
             id="email"
             type="email"
             v-model="email"
@@ -136,7 +136,7 @@ onBeforeRouteLeave((to:any, from:any, next:any) => {
         <div class="relative">
           <input
             placeholder="Введите свое имя *"
-            class="w-full rounded-lg border-gray-300 p-4 pe-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent dark:bg-transparent dark:border-[1px] dark:border-green-600"
+            class="w-full rounded-lg border-gray-300 p-4 pe-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent dark:bg-transparent dark:border-[1px] dark:border-green-600 dark:text-ghostWhiteText"
             id="name"
             type="text"
             v-model="name"
@@ -151,7 +151,7 @@ onBeforeRouteLeave((to:any, from:any, next:any) => {
         <div class="relative">
           <input
             placeholder="Введите сообщение *"
-            class="w-full rounded-lg border-gray-300 p-4 pe-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent dark:bg-transparent dark:border-[1px] dark:border-green-600"
+            class="w-full rounded-lg border-gray-300 p-4 pe-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent dark:bg-transparent dark:border-[1px] dark:border-green-600 dark:text-ghostWhiteText"
             id="message"
             type="text"
             v-model="ideaText"

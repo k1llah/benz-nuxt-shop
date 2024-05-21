@@ -40,7 +40,6 @@ const onFavoriteRemove = async (sneakerId: number, item:Item) => {
 		item.isFavorite = false
     favoritesStore.items = favoritesStore.items.filter((el:any) => el.id != sneakerId)
     console.log('yep')
-    
   } catch (error) {
     console.log(error);
   }

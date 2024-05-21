@@ -25,7 +25,7 @@ export const useIsAdmin = defineStore({
 						else{
 							let setRole = useCookie('role').value
 							setRole = 'USER'
-							location.assign('/')
+							// location.assign('/')
 							alert('Еще че придумал? сегодня не твой день салага')
 						}
 		}

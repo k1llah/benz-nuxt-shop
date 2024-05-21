@@ -6,12 +6,18 @@ import multer from 'multer'
 import fs from 'fs'
 import sharp from 'sharp'
 // import compression from 'compression'
-import routes from '#root/routes/index'
-import apiRoutes from '#root/routes/api'
+import routes from './routes/index'
+import apiRoutes from './routes/api'
 import dotenv from 'dotenv'
-import sberbankRoutes from '#root/routes/sberbank';
 dotenv.config()
 // import helmet from "helmet"
+declare global {
+  interface ImportMeta {
+    env: {
+      PROD: boolean;
+    };
+  }
+}
 
 // Создаём сервер
 const app = express()
@@ -113,9 +119,7 @@ app.use(bodyParser.json())
 
 app.use(express.static('static'))
 app.use('/api', apiRoutes)
-app.use('/api/sberbank', sberbankRoutes);
 app.use(routes)
-
 // Запуск на проде
 if (import.meta.env.PROD)
   app.listen(3001)
