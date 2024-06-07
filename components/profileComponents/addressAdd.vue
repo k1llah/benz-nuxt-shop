@@ -11,6 +11,13 @@ const buildingNumber = ref("");
 const houseNumber = ref();
 const apartment = ref();
 let warningAll = ref("");
+const router = useRouter();
+const reloadPage = () => {
+  router.push({
+    path: router.currentRoute.value.fullPath,
+    force: true
+  })
+}
 const correctDataInput = computed(
   () =>
    
@@ -47,7 +54,7 @@ const createAddress = async () => {
           }
         },
         )
-        location.reload()
+        reloadPage()
     } else if (!correctDataInput.value) {
       setTimeout(() => {
         warningAll.value = "";

@@ -8,6 +8,12 @@ const toggleDark = useToggle(isDark);
 const role = ref();
 let timer = ref(false);
 const router = useRouter();
+const reloadPage = () => {
+  router.push({
+    path: router.currentRoute.value.fullPath,
+    force: true
+  })
+}
 async function checkIsAdmin() {
   try {
     const data = await $fetch<any>("http://localhost:3001/api/get-data", {
@@ -26,7 +32,7 @@ async function checkIsAdmin() {
     if (role.value === "ADMIN") {
       router.push("/admin");
     } else {
-      location.reload();
+      reloadPage()
       alert("Еще че придумал? сегодня не твой день салага");
     }
     timer.value = false;

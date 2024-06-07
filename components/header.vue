@@ -7,7 +7,12 @@ const authStore = useAuthStore();
 const localRole = ref(useCookie("role").value);
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-
+const reloadPage = () => {
+  router.push({
+    path: router.currentRoute.value.fullPath,
+    force: true
+  })
+}
 const role = ref();
 let timer = ref(false);
 onBeforeMount(() => {
@@ -32,7 +37,7 @@ async function checkIsAdmin() {
     if (role.value === "ADMIN") {
       router.push( "/LazyAdmin" );
     } else {
-      location.reload();
+      reloadPage()
       alert("Еще че придумал? сегодня не твой день салага");
     }
     timer.value = false;

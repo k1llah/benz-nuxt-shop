@@ -117,7 +117,9 @@ export const useFeedbackStore = defineStore({
           "http://localhost:3001/api/get-feedback", {
           method: "GET"
         })
-        this.feedBackData = dataFeedback
+        
+        console.log(dataFeedback)
+        // this.feedBackData = dataFeedback
       } catch (error) {
         console.log(error);
       }

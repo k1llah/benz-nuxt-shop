@@ -22,6 +22,13 @@ const prevHouseNumber = ref();
 const prevApartment = ref();
 let warningAll = ref("");
 let dataAddress = ref();
+const router = useRouter()
+const reloadPage = () => {
+  router.push({
+    path: router.currentRoute.value.fullPath,
+    force: true
+  })
+}
 const correctDataInput = computed(
   () =>
     houseNumber.value !== null &&
@@ -115,7 +122,7 @@ const updateAddress = async () => {
         apartment: apartment.value,
       }
     });
-    location.reload();
+    reloadPage()
   } catch (error) {
     console.log(error);
   }

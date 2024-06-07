@@ -11,7 +11,8 @@ onBeforeMount(() => {
   authStore.checkAuth();
   authStore.getRole();
 })
-const page = ref(window.location.pathname);
+const router = useRoute()
+const page = ref(router.path);
 watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
 });

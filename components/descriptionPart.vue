@@ -4,8 +4,7 @@ const authData = useAuthStore();
 const router = useRouter();
 const allStore = useAllStore();
 const paramsId = useCookie('sneakerId').value;
-
-// orderStore.idParam = Number(paramsId);
+const route = useRoute()
 let itemData = ref();
 const brand = ref();
 let brandImageUrl = ref();
@@ -30,7 +29,7 @@ function getPathName() {
   if (authData.isAuthenticated == true) {
     router.push("/LazyOrder");
   } else {
-    useCookie("prevPage").value = location.pathname
+    useCookie("prevPage").value = route.path
     router.push("/LazySignUp");
   }
 }

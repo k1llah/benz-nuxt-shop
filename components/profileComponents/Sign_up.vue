@@ -88,7 +88,7 @@ const submitForm = async (event: Event) => {
         await setTimeout( async () => {await router.go(-1)}, 5000)
       }
       else{
-      await setTimeout( async () => {await location.assign('/');}, 5000)
+      await setTimeout( async () => {await router.push('/');}, 5000)
       }
     } catch (err) {
       console.error(err);

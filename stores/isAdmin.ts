@@ -3,6 +3,7 @@ export const useIsAdmin = defineStore({
   id: "isAdmin",
   state: () => ({
   role: '',
+	router: useRouter()
   }),
   actions: {
 		async checkIsAdmin() {
@@ -25,7 +26,7 @@ export const useIsAdmin = defineStore({
 						else{
 							let setRole = useCookie('role').value
 							setRole = 'USER'
-							// location.assign('/')
+							this.router.push('/')
 							alert('Еще че придумал? сегодня не твой день салага')
 						}
 		}

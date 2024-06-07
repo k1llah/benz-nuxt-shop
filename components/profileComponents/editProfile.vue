@@ -16,6 +16,13 @@ const isChanged = ref(false);
 const nameWarning = ref("");
 const emailWarning = ref("");
 const lastNameWarning = ref("");
+const router = useRouter()
+const reloadPage = () => {
+  router.push({
+    path: router.currentRoute.value.fullPath,
+    force: true
+  })
+}
 const correctDataInput = computed(
   () =>
     email.value !== "" &&
@@ -101,7 +108,7 @@ const submitForm = async (event: Event) => {
         body: formData
       }
       );
-      location.reload();
+      reloadPage()
     }
     } else if (lastName.value.includes(" ") || lastName.value.length < 2) {
       setTimeout(() => {
