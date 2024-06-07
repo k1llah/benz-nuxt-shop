@@ -12,7 +12,7 @@ router.beforeEach(beforeRouteLeave)
   <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
   <div class="w-full flex justify-center rounded-lg">
     <div
-      class="bg-[#212121] md:w-[600px] md:h-[800px] sm:w-[300px] sm:h-fit fixed  z-20 md:p-10 sm:p-5 md:pb-10 sm:pb-0 m-auto rounded-2xl sm:top-36 md:top-10"
+      class="bg-[#212121] md:w-[600px] md:h-[800px] sm:w-[300px] sm:h-fit fixed  z-20 md:p-10 sm:p-5 md:pb-10 sm:pb-0 m-auto rounded-2xl sm:top-28 md:top-10"
     >
       <div class="flex md:gap-5 items-center md:p-2 sm:gap-1 sm:p-0 rounded-lg">
         <button class="button" @click="allStore.isOpenedFeedBack = false, allStore.unlock()">
