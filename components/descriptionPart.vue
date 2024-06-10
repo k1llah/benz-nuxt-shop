@@ -1,14 +1,15 @@
 <script setup lang="ts">
-const orderStore = useOrderStore();
-const authData = useAuthStore();
-const router = useRouter();
-const allStore = useAllStore();
-const paramsId = useCookie('sneakerId').value;
+const orderStore = useOrderStore()
+const authData = useAuthStore()
+const router = useRouter()
+const allStore = useAllStore()
+let paramsId = useCookie('sneakerId').value
 const route = useRoute()
-let itemData = ref();
-const brand = ref();
-let brandImageUrl = ref();
-const brands = allStore.brandImages;
+let itemData = ref()
+const brand = ref()
+let brandImageUrl = ref()
+const brands = allStore.brandImages
+
 const getDateShoe = async function () {
   try {
     const dataShoe = await $fetch<any>(`http://localhost:3001/api/sneaker`, {
@@ -17,12 +18,12 @@ const getDateShoe = async function () {
         id: paramsId,
       },
     });
-    itemData.value = dataShoe;
-    orderStore.items = dataShoe;
-    brand.value = dataShoe.brand;
-    brandImageUrl.value = allStore.getBrandImageUrl(brand.value);
+    itemData.value = dataShoe
+    orderStore.items = dataShoe
+    brand.value = dataShoe.brand
+    brandImageUrl.value = allStore.getBrandImageUrl(brand.value)
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 function getPathName() {
@@ -34,9 +35,7 @@ function getPathName() {
   }
 }
 onMounted(async () => {
-  
     await getDateShoe();
-  
 });
 
 </script>
@@ -69,7 +68,7 @@ onMounted(async () => {
       <div class="flex md:gap-5 sm:gap-2 mt-9 md:flex-nowrap sm:mt-2">
         <button
           class="overflow-hidden relative w-36 p-2 h-[40px] bg-black text-white border-none rounded-md text-[15px] font-[500] cursor-pointer z-10 group flex justify-center items-center"
-          @click="orderStore.targetPageDefine('fast'), getPathName()"
+          @click="useCookie('pageT').value = 'fast', orderStore.targetPage = 'fast',  getPathName()"
         >
           Быстрый заказ
           <span

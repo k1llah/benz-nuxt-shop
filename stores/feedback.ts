@@ -57,7 +57,6 @@ export const useFeedbackStore = defineStore({
             "http://localhost:3001/api/create-feedback",{
             method: 'POST',
             body: formData
-            
           }
           );
           this.modalFeedback = true;

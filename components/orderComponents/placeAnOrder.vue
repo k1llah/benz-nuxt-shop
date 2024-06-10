@@ -5,6 +5,9 @@ const allStore = useAllStore();
 const isDark = useDark();
 const orderStore = useOrderStore();
 const cartStore = useCartStore();
+onMounted(()=>{
+  console.log(useCookie('sneakerId').value)
+})
 </script>
 <template>
   <div>

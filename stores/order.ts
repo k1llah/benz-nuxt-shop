@@ -33,11 +33,7 @@ export const useOrderStore = defineStore({
     orderNumber: "",
   }),
   actions: {
-    targetPageDefine(targetName: string) {
-      this.targetPage = useCookie('pageT').value
-      console.log(useCookie('pageT').value)
-      this.targetPage = targetName;
-    },
+    
     validateOnClick() {
       if (
         this.firstName !== "" &&

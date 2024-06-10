@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useToggle, useDark } from '@vueuse/core'
 const orderStore = useOrderStore();
+const cartStore = useCartStore()
 const blog = useBlog()
 const allStore = useAllStore()
 const isDark = useDark()
@@ -13,6 +14,11 @@ onBeforeMount(() => {
 })
 const router = useRoute()
 const page = ref(router.path);
+if(page.value !== '/LazyOrder' && page.value !== '/LazySneakerDescription'){
+  orderStore.items = []
+  useCookie('pageT').value = ''
+  useCookie('sneakerId').value = ''
+}
 watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
 });

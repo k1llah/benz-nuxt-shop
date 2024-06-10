@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const cartStore = useCartStore();
-const orderStore = useOrderStore();
-let idItems = ref([] as any);
-let data = ref();
+const cartStore = useCartStore()
+const orderStore = useOrderStore()
+let idItems = ref([] as any)
+let data = ref()
 const getDataShoe = async function (params: any) {
   try {
     const dataShoe = await $fetch<any>(
@@ -13,7 +13,7 @@ const getDataShoe = async function (params: any) {
           id: params,
         }
       }
-    );
+    )
     data.value = dataShoe;
     orderStore.idParam = idItems.value
     orderStore.amount = dataShoe.reduce(
@@ -23,20 +23,20 @@ const getDataShoe = async function (params: any) {
   } catch (error) {
     console.log(error);
   }
-};
+}
 onBeforeMount(async () => {
   await cartStore.cartDataGet();
   cartStore.items.forEach((el: any) => {
     idItems.value.push(el.id);
-    useCookie("sneakerId").value = JSON.stringify(idItems.value)
-    orderStore.idParam = idItems.value
-  });
+    useCookie("sneakerId").value = idItems.value
+    console.log(idItems.value)
+  })
   if (idItems.value.length > 0) {
-    getDataShoe(idItems.value);
+    await getDataShoe(idItems.value);
   } else {
     console.log(data.value, "error");
   }
-});
+})
 </script>
 <template>
   <div v-if="data">

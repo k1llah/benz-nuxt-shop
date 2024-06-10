@@ -8,6 +8,15 @@ const toggleDark = useToggle(isDark);
 const role = ref();
 let timer = ref(false);
 const router = useRouter();
+let arrayIdSneakers = ref([] as any);
+// function consoleMethod () {
+//   cartStore.items.forEach(element => {
+//     // element.id
+//     arrayIdSneakers.value.push(element.id)
+//     console.log(element.id, arrayIdSneakers.value)
+//     useCookie('sneakerId').value = arrayIdSneakers.value 
+//   });
+// }
 const reloadPage = () => {
   router.push({
     path: router.currentRoute.value.fullPath,

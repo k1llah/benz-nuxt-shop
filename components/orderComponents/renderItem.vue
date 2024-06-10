@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const orderStore = useOrderStore();
-const cookieId = useCookie("sneakerId").value;
+const cookieId = useCookie("sneakerId").value
 let data = ref();
 let idItems = ref([] as any);
 const getDateShoe = async function (params: any) {
@@ -22,6 +22,7 @@ const getDateShoe = async function (params: any) {
 };
 onBeforeMount(() => {
   getDateShoe(cookieId);
+  console.log(cookieId)
 });
 </script>
 <template>
