@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useToggle, useDark } from '@vueuse/core'
 const orderStore = useOrderStore();
-const cartStore = useCartStore()
 const blog = useBlog()
 const allStore = useAllStore()
 const isDark = useDark()
@@ -21,11 +20,7 @@ if(page.value !== '/LazyOrder' && page.value !== '/LazySneakerDescription'){
 }
 watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
-});
-if(process.client == false){
-  console.log('sadly', process.client)
-}
-console.log('sadly', process.client)
+})
 </script>
 <template>
   <div class="md:w-[85%] sm:w-full m-auto bg-white rounded-xl shadow-xl mt-14 dark:bg-[#3f3f46]">
