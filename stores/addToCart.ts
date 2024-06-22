@@ -18,8 +18,13 @@ export const useCartStore = defineStore({
     counter: 1,
     totalPrice: 0,
     localPrice: parseInt(useCookie('totalPrice').value || "0", 10),
-    axiosGetParamsStore: function () {},
-    favorites: function () {},
+    itemsOnMain: [] as any,
+    // axiosGetParamsStore: function () {},
+    // stateUpdates: useStateStore(),
+    filters: {
+      sortBy: 'title',
+      title: ''
+    },
   }),
   actions: {
     counterPlus() {
@@ -46,7 +51,9 @@ export const useCartStore = defineStore({
         this.items = postAddData.items;
         item.isAdded = true;
         this.totalPrice += price;
-        this.axiosGetParamsStore();
+        const stateUpdates = useStateStore();
+        const allStore = useAllStore();
+        stateUpdates.updateCardsCart(this.filters)
         useCookie("totalPrice").value = this.totalPrice.toString()
         this.cartCounter = this.items.length;
         useCookie("cartCounter").value = this.cartCounter.toString();
@@ -81,8 +88,9 @@ export const useCartStore = defineStore({
           }
           this.items = this.items.filter(feedback => feedback.id !== id);
           item.isAdded = false;
-          this.axiosGetParamsStore();
-          this.favorites();
+          const stateUpdates = useStateStore();
+          const allStore = useAllStore();
+          stateUpdates.updateCardsCart(this.filters)
         } catch (error) {
           console.log(error);
         }

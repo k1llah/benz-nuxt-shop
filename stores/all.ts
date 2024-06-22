@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 export const useAllStore = defineStore({
   id: "all",
   state: () => ({
@@ -37,7 +36,7 @@ export const useAllStore = defineStore({
     idAddress: 0 as number,
     isOpenedFeedBack: false,
     addressData: [] as any[],
-    
+    items: [] as any,
   }),
   actions: {
     block(){
@@ -55,5 +54,18 @@ export const useAllStore = defineStore({
         return "";
       }
     },
+ 
+ 
+        async getItemsMethod(params: { sortBy: any; title?: any }) {
+          try {
+            const response = await $fetch("http://localhost:3001/api", {
+              method: "GET",
+              params: params,
+            });
+            this.items = response;
+          } catch (error) {
+            console.error(error);
+          }
+        },
   },
 });
