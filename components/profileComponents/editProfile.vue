@@ -17,11 +17,10 @@ const nameWarning = ref("");
 const emailWarning = ref("");
 const lastNameWarning = ref("");
 const router = useRouter()
+const allStore = useAllStore()
 const reloadPage = () => {
-  router.push({
-    path: router.currentRoute.value.fullPath,
-    force: true
-  })
+  allStore.isOpened = false
+  location.reload()
 }
 const correctDataInput = computed(
   () =>
@@ -294,6 +293,7 @@ watch([email, first_name, lastName, newProfileImg], () => {
         <button
           type="submit"
           class="bg-[#7747ff] w-max m-auto px-6 py-2 rounded text-white text-sm font-normal"
+          @click="submitForm($event)"
           :class="{ 'cursor-not-allowed bg-slate-800': !isChanged }"
         >
           Submit
