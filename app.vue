@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { useToggle, useDark } from '@vueuse/core'
 const orderStore = useOrderStore();
 const blog = useBlog()
 const allStore = useAllStore()
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
 const route = useRouter();
 const authStore = useAuthStore();
 onBeforeMount(() => {
   authStore.checkAuth();
   authStore.getRole();
+  useColorMode()
+})
+onMounted(() => {
+  authStore.checkAuth();
+  authStore.getRole();
+  
 })
 const router = useRoute()
 const page = ref(router.path);
-if(page.value !== '/LazyOrder' && page.value !== '/LazySneakerDescription'){
+if(page.value !== '/order' && page.value !== '/sneakerDescription'){
   orderStore.items = []
   useCookie('pageT').value = ''
   useCookie('sneakerId').value = ''
@@ -21,17 +24,18 @@ if(page.value !== '/LazyOrder' && page.value !== '/LazySneakerDescription'){
 watch(() => route.currentRoute.value.path, (newPath: any) => {
   page.value = newPath;
 })
+const colorMode = useColorMode()
 </script>
 <template>
-  <div class="md:w-[85%] sm:w-full m-auto bg-white rounded-xl shadow-xl mt-14 dark:bg-[#3f3f46]">
+  <div class="md:w-[85%] sm:w-full m-auto bg-white rounded-xl shadow-xl mt-14 content dark:bg-[#3f3f46]">
     <Header/>
     <section>
-      <div class="w-full min-h-[800px] m-auto">
+      <div class="w-full m-auto">
         <NuxtPage />
-        <backToTop v-if="page != '/LazyProfileUser' && !allStore.isOpenedFeedBack && !blog.isOpenedModal && !blog.isOpenedModalFeedback && !orderStore.errorPayment && !orderStore.success"/>
+        <backToTop v-if="page != '/profileUser' && !allStore.isOpenedFeedBack && !blog.isOpenedModal && !blog.isOpenedModalFeedback && !orderStore.errorPayment && !orderStore.success"/>
       </div>
     </section>
-    <Footer v-if="page != '/LazyProfileUser' && page != '/description'" />
+    <Footer v-if="page != '/profileUser' && page != '/description'" />
   </div>
 
   

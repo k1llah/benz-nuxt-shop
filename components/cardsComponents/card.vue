@@ -1,6 +1,5 @@
 <script setup script lang="ts">
-import { useDark } from "@vueuse/core";
-const isDark = useDark();
+const colorTheme = useColorMode();
 const props = defineProps({
   id: Number || String,
   imageUrl: String,
@@ -25,19 +24,19 @@ const onclckDelete = props.onclckDelete as (payload: MouseEvent) => void;
     @click="onClickOnCard && onClickOnCard(id)"
   >
     <img
-      v-if="!isFavorite && !isDark"
+      v-if="!isFavorite && colorTheme.preference == 'light'"
       src="/like-1.svg"
       class="absolute top-8 left-8"
       @click.stop="onFavoriteAdd && onFavoriteAdd(id)"
     />
     <img
-      v-if="isFavorite && !isDark"
+      v-if="isFavorite && colorTheme.preference == 'light'"
       src="/like-2.svg"
       class="absolute top-8 left-8"
       @click.stop="onFavoriteDelete && onFavoriteDelete(id)"
     />
     <svg
-      v-if="!isFavorite && isDark"
+      v-if="!isFavorite && colorTheme.preference == 'dark'"
       width="42"
       height="42"
       viewBox="0 0 32 32"
@@ -64,7 +63,7 @@ const onclckDelete = props.onclckDelete as (payload: MouseEvent) => void;
       />
     </svg>
     <svg
-      v-if="isFavorite && isDark"
+      v-if="isFavorite && colorTheme.preference == 'dark'"
       width="42"
       height="42"
       viewBox="0 0 32 32"

@@ -6,20 +6,25 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      bodyAttrs: {
-        class: "dark:bg-[#0a0a0a]"
-      },
+      // bodyAttrs: {
+      //   class: "dark:bg-[#0a0a0a]"
+      // },
       
     },
   },
   css: ['@/assets/main.css'],
   
-  modules: [[
+  modules: [ '@nuxtjs/color-mode', [
+    
     '@pinia/nuxt',
     {
       autoImports: ['defineStore']
-    }
+    },
+    
   ], "@nuxtjs/tailwindcss", '@formkit/auto-animate', '@vueuse/nuxt', 'nuxt-swiper', "@dargmuesli/nuxt-cookie-control"],
+  colorMode: {
+    classSuffix: ''
+  },
   pinia: {
     storesDirs: ['./stores/**', './stores'],
   },

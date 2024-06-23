@@ -24,26 +24,6 @@ const props = defineProps({
 });
 
 const showOverlay = ref(false)
-const onFavoriteRemove = async (sneakerId: number, item:Item) => {
-  try {
-    const postData = await $fetch<any>(
-      "http://localhost:3001/api/remove-from-favorites",
-      {
-        method: 'POST',
-        body:{
-          userId: useCookie('id').value,
-          sneakerId: sneakerId,
-        }
-      }
-    );
-    
-		item.isFavorite = false
-    favoritesStore.items = favoritesStore.items.filter((el:any) => el.id != sneakerId)
-    console.log('yep')
-  } catch (error) {
-    console.log(error);
-  }
-}
 </script>
 <template>
 <div v-if="items">
@@ -61,7 +41,7 @@ const onFavoriteRemove = async (sneakerId: number, item:Item) => {
       :is-added="item.isAdded"
       :is-favorite="item.isFavorite"
       :on-click-add="() => cartStore.onCartAdd(item.id, item, item.price)"
-      :on-favorite-delete=" () => onFavoriteRemove(item.id, item)"
+      :on-favorite-delete=" () => favoritesStore.onFavoriteRemove(item.id, item)"
       :onclck-delete="() => deleteFromCart(item.id, item, item.price)"
       
     />

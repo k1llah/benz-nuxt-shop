@@ -29,7 +29,6 @@ onBeforeMount(async () => {
   cartStore.items.forEach((el: any) => {
     idItems.value.push(el.id);
     useCookie("sneakerId").value = idItems.value
-    console.log(idItems.value)
   })
   if (idItems.value.length > 0) {
     await getDataShoe(idItems.value);

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { Pagination, Navigation, EffectFade, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { useDark } from '@vueuse/core'
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
-const isDark = useDark()
 const items = ref([
   { id: 1, imageUrl: "/verticalSlides/converse-img.jpeg" },
   { id: 2, imageUrl: "/verticalSlides/jordan-5-img.jpeg" },
@@ -19,11 +17,12 @@ const items = ref([
   // Добавьте свои изображения и другой контент слайдера
 ]);
 const modules = [Pagination, Navigation, EffectFade, Autoplay];
+const colorTheme = useColorMode();
 </script>
 
 
 <template>
-  <div class="bg min-h-[600px] flex justify-around flex-wrap" :class="{'darkBg': isDark}">
+  <div class="bg min-h-[600px] flex justify-around flex-wrap" :class="{'darkBg': $colorMode.preference === 'dark'}">
     <div class="bg-white mt-14 w-96 h-[400px] rounded-lg md:ml-0 lg:ml-20 sm:h-[450px] dark:bg-[#15001f]">
       <div class="flex p-3 gap-1">
         <div class="">

@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { useDark, useToggle } from '@vueuse/core';
 const cartStore = useCartStore();
 const localRole = ref(useCookie("role").value);
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
+const colorMode = useColorMode()
+
 const role = ref();
 let timer = ref(false);
 const router = useRouter();
 let arrayIdSneakers = ref([] as any);
-// function consoleMethod () {
-//   cartStore.items.forEach(element => {
-//     // element.id
-//     arrayIdSneakers.value.push(element.id)
-//     console.log(element.id, arrayIdSneakers.value)
-//     useCookie('sneakerId').value = arrayIdSneakers.value 
-//   });
-// }
+function consoleMethod () {
+  cartStore.items.forEach(element => {
+    // element.id
+    arrayIdSneakers.value.push(element.id)
+    useCookie('sneakerId').value = arrayIdSneakers.value 
+  });
+}
 const reloadPage = () => {
   router.push({
     path: router.currentRoute.value.fullPath,
@@ -93,10 +91,10 @@ const toggleDropdown = (index: number) => {
     <div class="flex justify-between w-full items-center">
       <div class="flex gap-3">
       <NuxtLink to="/">
-        <img v-if="!isDark" src="/logo_3.jpeg" alt="Logo" class="w-16" />
-        <img v-else-if="isDark" src="/footer-logo.jpeg" alt="Logo" class="w-16 rounded-[50%]" />
+        <img v-if="colorMode.preference == 'light'" src="/logo_3.jpeg" alt="Logo" class="w-16" />
+        <img v-else-if="colorMode.preference == 'dark'" src="/footer-logo.jpeg" alt="Logo" class="w-16 rounded-[50%]" />
       </NuxtLink>
-      <switchModeButton :isDark="!isDark" :changeTheme="toggleDark"/>
+      <switchModeButton/>
     </div>
       <input type="checkbox" id="checkbox" v-model="dropdowns[0]" @click="toggleDropdown(0)" />
       <label for="checkbox" class="toggle">
@@ -135,7 +133,7 @@ const toggleDropdown = (index: number) => {
         
         <li
           class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s pb-5 border-b-2 dark:border-black w-full justify-center"
-          @click="$router.push('/LazyProfileUser'), toggleDropdown(0)"
+          @click="$router.push('/profileUser'), toggleDropdown(0)"
         >
           <img src="/profile.svg" alt="Cart" />
           <span class="text-[19px] font-light md:text-[14px]">Профиль</span>

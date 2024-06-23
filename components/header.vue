@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { useDark, useToggle } from "@vueuse/core";
 const cartStore = useCartStore();
 const router = useRouter();
 const sneakerStore = useSneaker();
 const authStore = useAuthStore();
 const localRole = ref(useCookie("role").value);
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
+const colorMode = useColorMode()
+
 const reloadPage = () => {
   router.push({
     path: router.currentRoute.value.fullPath,
@@ -35,7 +34,7 @@ async function checkIsAdmin() {
   }
   setTimeout(() => {
     if (role.value === "ADMIN") {
-      router.push( "/LazyAdmin" );
+      router.push( "/admin" );
     } else {
       reloadPage()
       alert("Еще че придумал? сегодня не твой день салага");
@@ -59,6 +58,7 @@ let toggleShow = () => {
 };
 </script>
 <template>
+  <div>
   <header
     class="hidden justify-between border-b border-slate-200 p-5 responsive" id="header"
   >
@@ -71,8 +71,8 @@ let toggleShow = () => {
     <div class="" id="header">
       <div class="flex items-center md:gap-5 lg:gap-4">
         <NuxtLink to="/">
-          <img v-if="!isDark" src="/logo_3.jpeg" alt="Logo" class="w-16" />
-          <img v-else-if="isDark" src="/footer-logo.jpeg" alt="Logo" class="w-16 rounded-[50%]" />
+          <img v-if="$colorMode.preference == 'light'" src="/logo_3.jpeg" alt="Logo" class="w-16" />
+          <img v-else-if="$colorMode.preference == 'dark'" src="/footer-logo.jpeg" alt="Logo" class="w-16 rounded-[50%]" />
         </NuxtLink>
         <h2
           class="font-medium uppercase lg:text-xl md:text-base hidden sm:text-base"
@@ -87,7 +87,7 @@ let toggleShow = () => {
           </p>
         </NuxtLink>
         <div>
-          <switchModeButton :isDark="!isDark" :changeTheme="toggleDark"/>
+          <switchModeButton/>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@ let toggleShow = () => {
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push( '/LazyProfileUser' )"
+        @click="$router.push( '/profileUser' )"
       >
         <img src="/profile.svg" alt="Cart" />
         <span class="text-[19px] font-light md:text-[14px]">Профиль</span>
@@ -139,6 +139,7 @@ let toggleShow = () => {
       </li>
     </ul>
   </header>
+</div>
 </template>
 <style scoped>
 svg {

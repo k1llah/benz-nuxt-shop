@@ -55,7 +55,7 @@ export const useFavoritesStore = defineStore({
 				
 				item.isFavorite = false
 				this.items = this.items.filter((el:any) => el.id != sneakerId)
-				console.log('')
+				this.favorites()
 			} catch (error) {
 				console.log(error);
 			}

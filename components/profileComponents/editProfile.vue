@@ -40,9 +40,6 @@ const isFormChanged = computed(
     lastName.value !== prevLastName.value ||
     newProfileImg.value !== prevProfileImg.value
 );
-watchEffect(() => {
-  console.log(lastName.value, )
-})
 const handleFileUpload = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const files = target.files;

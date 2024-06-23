@@ -4,7 +4,7 @@
       <buttonBack/>
       <h2 class="text-3xl">Регистрация</h2>
     </div>
-    <Sign_Up/>
+    <Lazy_Sign_Up/>
   </div>
 </template>
 

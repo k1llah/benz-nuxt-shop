@@ -3,6 +3,6 @@
 	</script>
 <template>
 	<div>
-	<sexSeparate/>
+	<LazySexSeparate/>
 </div>
 </template>

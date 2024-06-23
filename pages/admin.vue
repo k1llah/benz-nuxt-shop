@@ -6,6 +6,8 @@ onBeforeMount(() => {
 })
 </script>
 <template>
+
   <allLinks/>
+  
 </template>
 

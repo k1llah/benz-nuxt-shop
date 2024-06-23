@@ -9,7 +9,6 @@ async function handleGetId(id: number | string) {
 }
 if (searchInput.value == "" || searchInput.value.length <= 2) {
   blog.getStrapiData();
-  console.log(searchInput.value);
 } else {
   blog.posts = [];
   blog.getPostByHashtag(searchInput.value);

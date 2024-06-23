@@ -15,8 +15,8 @@ export const useStateStore = defineStore({
         });
         const allStore = useAllStore()
 				const favoritesStore = useFavoritesStore()
-				allStore.items = response
-				if(cartItems !== undefined){
+				allStore.items = response        
+				if(cartItems.items !== undefined){
         cartItems.items.forEach((el: any) => {
           allStore.items.forEach((item: any) => {
             if (el.id === item.id) {
@@ -24,7 +24,6 @@ export const useStateStore = defineStore({
             }
           });
         });
-
 				favoritesStore.items.forEach((el: any) => {
 					allStore.items.forEach((item: any) => {
 						if (el.id == item.id) {

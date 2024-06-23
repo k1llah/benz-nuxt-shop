@@ -28,10 +28,10 @@ const getDateShoe = async function () {
 }
 function getPathName() {
   if (authData.isAuthenticated == true) {
-    router.push("/LazyOrder");
+    router.push("/order");
   } else {
     useCookie("prevPage").value = route.path
-    router.push("/LazySignUp");
+    router.push("/signUp");
   }
 }
 onMounted(async () => {

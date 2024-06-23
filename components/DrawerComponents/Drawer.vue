@@ -7,9 +7,7 @@ const authStore = useAuthStore();
 let arrayIdSneakers = ref([] as any);
 function consoleMethod () {
   cartStore.items.forEach(element => {
-    // element.id
     arrayIdSneakers.value.push(element.id)
-    console.log(element.id, arrayIdSneakers.value)
     useCookie('sneakerId').value = arrayIdSneakers.value 
   });
 }
@@ -23,14 +21,12 @@ onMounted(() => {
   if (authStore.isAuthenticated == true) {
     cartStore.cartDataGet();
   }
-  console.log(cartStore.items);
   cartStore.localPrice;
 });
 // function iterationFunc() {
 //   cartStore.items.forEach((el: any) => {
 //     arrayIdSneakers.value = el.id;
 //     useCookie("sneakerId").value = arrayIdSneakers.value;
-//     console.log(arrayIdSneakers.value, useCookie("sneakerId").value);
 //   });
 // }
 </script>
@@ -80,7 +76,7 @@ onMounted(() => {
             class="bg-lime-500 w-full rounded-xl py-3 text-white hover:bg-lime-700 transition disabled:bg-slate-400 cursor-pointer mt-4"
             @click="
               (useCookie('pageT').value = 'classic'),
-                router.push('/LazyOrder'),
+                router.push('/order'),
                 (sneakerStore.show = false),
                 consoleMethod()
             "

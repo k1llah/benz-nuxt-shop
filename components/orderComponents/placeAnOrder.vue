@@ -1,13 +1,8 @@
 <script setup lang="ts">
 // https://3dsec.sberbank.ru/payment/rest/register.do
-import { useDark } from "@vueuse/core";
 const allStore = useAllStore();
-const isDark = useDark();
 const orderStore = useOrderStore();
 const cartStore = useCartStore();
-onMounted(()=>{
-  console.log(useCookie('sneakerId').value)
-})
 </script>
 <template>
   <div>
@@ -27,12 +22,12 @@ onMounted(()=>{
             />
             <span class="radio-tile bg-white dark:bg-mainDark">
               <span class="radio-icon m-auto">
-                <img src="/sbp.svg" alt="" class="h-[100px]" v-if="!isDark" />
+                <img src="/sbp.svg" alt="" class="h-[100px]" v-if="$colorMode.preference == 'light'" />
                 <img
                   src="/sbpLight.svg"
                   alt=""
                   class="h-[100px]"
-                  v-if="isDark"
+                  v-if="$colorMode.preference == 'dark'"
                 />
               </span>
               <span class="radio-label dark:text-ghostWhiteText text-[#707070]"

@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { useDark } from "@vueuse/core";
-const isDark = useDark();
 const content = ref<HTMLElement | null>(null);
 const title = ref<HTMLElement | null>(null);
 const isVisible = ref(false);
-
 onMounted(() => {
   watchEffect(() => {
     if (isVisible.value) {
@@ -92,7 +89,7 @@ const toggleDropdown = (index: number) => {
               Достоинства низкой стоимости 💸
             </h2>
             <img
-            v-if="!isDark"
+            v-if="$colorMode.preference === 'light'"
               class="mr-2 w-8"
               src="/down.png"
               :class="{
@@ -102,7 +99,7 @@ const toggleDropdown = (index: number) => {
               alt=""
             />
             <svg
-            v-if="isDark"
+            v-if="$colorMode.preference === 'dark'"
               class="mr-2 w-8"
               viewBox="0 0 24 24"
               fill="none"
@@ -165,7 +162,7 @@ const toggleDropdown = (index: number) => {
               Достоинства быстрой доставки 🏎️
             </h2>
             <img
-              v-if="!isDark"
+              v-if="$colorMode.preference === 'light'"
               class="mr-2 w-8"
               src="/down.png"
               :class="{
@@ -175,7 +172,7 @@ const toggleDropdown = (index: number) => {
               alt=""
             />
             <svg
-            v-if="isDark"
+            v-if="$colorMode.preference === 'dark'"
               class="mr-2 w-8"
               viewBox="0 0 24 24"
               fill="none"
@@ -234,7 +231,7 @@ const toggleDropdown = (index: number) => {
               Безопасность и надежность всех покупок 🔐
             </h2>
             <img
-            v-if="!isDark"
+            v-if="$colorMode.preference === 'light'"
               class="mr-2 w-8"
               src="/down.png"
               :class="{
@@ -244,7 +241,7 @@ const toggleDropdown = (index: number) => {
               alt=""
             />
             <svg
-            v-if="isDark"
+            v-if="$colorMode.preference === 'dark'"
               class="mr-2 w-8"
               viewBox="0 0 24 24"
               fill="none"

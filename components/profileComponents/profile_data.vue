@@ -5,10 +5,6 @@ const first_name = ref("");
 const lastName = ref("");
 const profileImg = ref("");
 const authStore = useAuthStore();
-watchEffect(() => {
-  console.log(useCookie('page').value)
-  
-})
 const getData = async function () {
   const uuid = useCookie("uuid").value;
   const id = useCookie("id").value;

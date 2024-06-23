@@ -1,52 +1,51 @@
 <script setup lang="ts">
 const cartStore = useCartStore();
-const favoriteStore = useFavoritesStore();
 const authStore = useAuthStore();
-const items = ref<any>([]as any);
-const isFav = ref<Boolean>(true);
+const items = ref<any>([]);
+const isFav = ref<boolean>(true);
+const isLoading = ref<boolean>(true);
+const favoriteStore = useFavoritesStore()
 async function favorites() {
   try {
-    const data  = await $fetch<any>(
-      "http://localhost:3001/api/favorites-user",
-      {
-        method:"POST",
-        body:{
-          id: useCookie("id").value,
-        }
-      }
-    );
+    const data = await $fetch<any>("http://localhost:3001/api/favorites-user", {
+      method: "POST",
+      body: {
+        id: useCookie("id").value,
+      },
+    });
 
     items.value = data[0].Favorite;
-    console.log(data)
-    if(items !== undefined && items.value !== null){
+
+    if (items.value) {
       items.value.forEach((el: any) => {
         el.isFavorite = true;
       });
     }
-    if(cartStore.items !== undefined){
+
+    if (cartStore.items) {
       cartStore.items.forEach((el: any) => {
         items.value.forEach((item: any) => {
-          if (el.id == item.id) {
+          if (el.id === item.id) {
             item.isAdded = true;
           }
         });
       });
     }
-    if (items.value.length == 0) {
+
+    if (items.value.length === 0) {
       isFav.value = false;
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    isLoading.value = false;
   }
 }
-cartStore.favorites = favorites;
 onBeforeMount(() => {
   cartStore.cartDataGet();
   favorites();
+  favoriteStore.favorites()
 });
-watchEffect(() =>{
-  console.log(isFav.value, items.value.length)
-})
 </script>
 <template>
   <div>
@@ -58,40 +57,47 @@ watchEffect(() =>{
         </div>
       </div>
 
-      <div
-        v-if="authStore.isAuthenticated == true && isFav == true && items"
-        class="mt-[30px]"
-      >
-        <FavList :items="items" />
-      </div>
-      <div v-else-if=" authStore.isAuthenticated == true && !items">
+      <div v-if="isLoading" class="mt-[30px]">
         <badassLoader />
       </div>
-      <div
-        v-else-if="authStore.isAuthenticated == true && !isFav"
-        class="flex flex-col justify-center items-center h-[500px]"
-      >
-        <div class="md:w-[500px] sm:w-auto text-center">
-          <h1 class="text-2xl dark:text-ghostWhiteText">
-            К сожалению у вас нет добавленных
-            <span class="text-2xl text-[#7747ff] dark:text-green-600">избранных</span> товаров
-          </h1>
-        </div>
-        <p class="text-[70px]">👿</p>
-      </div>
 
-      <div
-        v-else="authStore.isAuthenticated == false"
-        class="flex flex-col justify-center items-center h-[500px]"
-      >
-        <div class="md:w-[500px] sm:w-auto text-center">
-          <h1 class="text-2xl dark:text-ghostWhiteText">
-            Зарегистрируйтесь или войдите в
-            <span class="text-2xl text-[#7747ff]">аккаунт</span> для просмотра и
-            добавления избранных товаров
-          </h1>
+      <div v-else>
+        <div
+          v-if="authStore.isAuthenticated && isFav && favoriteStore.items.length > 0"
+          class="mt-[30px]"
+          v-auto-animate
+        >
+          <FavList :items="items"/>
         </div>
-        <div class="max-w-[70px] mt-5"><img src="/emoji-1.png" alt="" /></div>
+
+        <div
+          v-else-if="authStore.isAuthenticated && favoriteStore.items.length === 0"  
+          class="flex flex-col justify-center items-center h-[500px]"
+        >
+          <div class="md:w-[500px] sm:w-auto text-center">
+            <h1 class="text-2xl dark:text-ghostWhiteText">
+              К сожалению у вас нет добавленных
+              <span class="text-2xl text-[#7747ff] dark:text-green-600">избранных</span> товаров
+            </h1>
+          </div>
+          <p class="text-[70px]">👿</p>
+        </div>
+
+        <div
+          v-else-if="!authStore.isAuthenticated"
+          class="flex flex-col justify-center items-center h-[500px]"
+        >
+          <div class="md:w-[500px] sm:w-auto text-center">
+            <h1 class="text-2xl dark:text-ghostWhiteText">
+              Зарегистрируйтесь или войдите в
+              <span class="text-2xl text-[#7747ff]">аккаунт</span> для просмотра и
+              добавления избранных товаров
+            </h1>
+          </div>
+          <div class="max-w-[70px] mt-5">
+            <img src="/emoji-1.png" alt="" />
+          </div>
+        </div>
       </div>
     </div>
   </div>

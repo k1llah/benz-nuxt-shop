@@ -1,20 +1,27 @@
 <script setup lang="ts">
+const colorTheme = useColorMode();
 const props = defineProps({
 	isDark: Boolean,
 	changeTheme: Function
 })
-let isDark = ref(props.isDark);
-watch(() => props.isDark, (newValue) => {
-  isDark.value = newValue
-})
+const colorMode = useColorMode();
+// let isDark = ref(props.isDark);
+// watch(() => props.isDark, (newValue) => {
+//   isDark.value = newValue
+// })\
 const toggleTheme = () => {
-  props.changeTheme!(isDark.value);
+  if(colorMode.preference == 'dark'){
+    colorMode.preference = 'light';
+  } 
+  else{
+    colorMode.preference = 'dark';
+  }
 }
 </script>
 <template>
     <div class="relative flex rounded-[50%] items-center justify-center cursor-pointer ml-5" @click="toggleTheme">
-      <div class="absolute" :class="{'scale-0': isDark == true, 
-			'scale-1': isDark == false }" >
+      <div class="absolute" :class="{'scale-0': $colorMode.preference == 'light', 
+			'scale-1': $colorMode.preference == 'dark' }" >
         <svg
           height="15"
           width="15"
@@ -31,8 +38,8 @@ const toggleTheme = () => {
         </svg>
       </div>
 
-    <div class="absolute" :class="{'scale-1': isDark == true, 
-			'scale-0': isDark == false }"  >
+    <div class="absolute" :class="{'scale-1': $colorMode.preference == 'light', 
+			'scale-0': $colorMode.preference == 'dark' }"  >
         <svg
           height="20"
           width="20"

@@ -31,7 +31,7 @@ defineProps({
 });
 let paramsId;
 const onClickOnCard = async (sneakerId: number) => {
-  router.push(`/LazySneakerDescription`);
+  router.push(`/sneakerDescription`);
   paramsId = sneakerId
   useCookie('sneakerId').value = paramsId.toString()
 };

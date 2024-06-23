@@ -11,7 +11,6 @@ const getDateShoe = async function (params: any) {
         id: params,
       },
     });
-    console.log(dataShoe);
     data.value = dataShoe;
     idItems.value = [dataShoe.id];
     orderStore.idParam = idItems.value;
@@ -22,7 +21,6 @@ const getDateShoe = async function (params: any) {
 };
 onBeforeMount(() => {
   getDateShoe(cookieId);
-  console.log(cookieId)
 });
 </script>
 <template>

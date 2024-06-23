@@ -12,7 +12,6 @@ let realStateOfCart = ref(cartStore.items);
 let onMountedCartState = cartStore.items;
 const onChangeSelect = (event: any) => {
   filters.sortBy = event.target.value;
-  console.log("Selected sortBy:", filters.sortBy); // Debug log
 };
 
 const stateUpdate = useStateStore();
@@ -24,8 +23,6 @@ const axiosGetParams = async () => {
       sortBy: filters.sortBy,
       title: filters.title,
     };
-
-    console.log("Fetching items with params:", params.sortBy); // Debug log
     await allStore.getItemsMethod(params);
     await stateUpdate.updateCardsCart(params)
   } catch (error) {

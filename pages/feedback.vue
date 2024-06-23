@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useDark } from '@vueuse/core';
-const isDark = useDark();
 </script>
 <template>
-  <div class="container-bg"  :class="{'container-dark': isDark}">
+  <div class="container-bg"  :class="{'container-dark': $colorMode.preference === 'dark'}">
 	
   <div>
     <feedBack />

@@ -19,11 +19,10 @@ function clearDataAfterOrdered () {
   useCookie('totalPrice').value = '0'
   cartStore.totalPrice = 0
   cartStore.items = []
-  cartStore.axiosGetParamsStore()
   cartStore.cartDataGet()
 }
 onBeforeRouteLeave ((to, from, next) => {
-  if (to.path === '/LazyProfileUser' || to.path === '/sneakers-page') {
+  if (to.path === '/profileUser' || to.path === '/sneakers-page') {
     orderStore.success = false;
     orderStore.isSelected = false;
     orderStore.isFormCorrect = false;
@@ -72,7 +71,7 @@ onBeforeRouteLeave ((to, from, next) => {
             </p>
           
           <div class="flex gap-2">
-            <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]" @click="router.push('/LazyProfileUser'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, handleOpenPage('orders'), clearDataAfterOrdered() , allStore.unlock()">
+            <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]" @click="router.push('/profileUser'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, handleOpenPage('orders'), clearDataAfterOrdered() , allStore.unlock()">
               К заказу
             </button>
             <button type="button" class="text-sm p-2 rounded-md hover:bg-green-200 transition-all duration-200 dark:hover:bg-[#14532d]"@click="router.push('/sneakers-page'), orderStore.success = false, orderStore.isSelected = false, orderStore.isFormCorrect = false, clearDataAfterOrdered(), allStore.unlock()">

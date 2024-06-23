@@ -5,6 +5,9 @@ export const useAuthStore = defineStore({
     id: "",
     uuid: "",
     role: "",
+    idLocal: useCookie('id').value,
+    uuidLocal: useCookie('uuid').value,
+    roleLocal: useCookie('role').value,
     isAuthenticated: false,
     currentUser: { id: "", uuid: "" },
   }),
@@ -26,14 +29,12 @@ export const useAuthStore = defineStore({
       }
     },
     async checkAuth() {
-      const idLocal = useCookie('id').value
-      const uuidLocal = useCookie('uuid').value
-      const roleLocal = useCookie('role').value
+    
       this.isAuthenticated = true;
       
-      if (idLocal && uuidLocal && roleLocal) {
+      if (this.idLocal && this.uuidLocal && this.roleLocal) {
         this.isAuthenticated = true;
-        this.currentUser = { id: idLocal, uuid: uuidLocal };
+        this.currentUser = { id: this.idLocal, uuid: this.uuidLocal };
         this.getRole();
       } else {
         this.isAuthenticated = false;

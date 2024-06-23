@@ -35,7 +35,6 @@ const logInFunc = async (event: any) => {
         authStore.checkAuth();        
         if (authStore.isAuthenticated == true && cartStore.items.length > 0) {
           await cartStore.cartDataGet();
-          console.log('true')
           await cartStore.items.forEach((el: any) => {
             cartStore.totalPrice += el.price;
             useCookie("totalPrice").value = cartStore.totalPrice.toString();
@@ -51,13 +50,7 @@ const logInFunc = async (event: any) => {
     }
   }
 };
-watchEffect(() => {
-  if (authStore.isAuthenticated == true) {
-    // Действия после успешного входа
 
-    console.log('User is authenticated', authStore.isAuthenticated);
-  }
-});
 </script>
 <template>
   <div
@@ -119,7 +112,7 @@ watchEffect(() => {
     </form>
     <div class="text-sm text-center mt-[1.6rem]">
       У вас нет аккаунта?
-      <NuxtLink to="/LazySignUp">
+      <NuxtLink to="/signUp">
         <p class="text-sm text-[#7747ff] dark:text-green-500">
           Зарегистрируйтесь
         </p></NuxtLink>
