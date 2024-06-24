@@ -3,6 +3,14 @@ import { Pagination, Autoplay, FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import gsap from "gsap";
+const resolutionUser = useMediaQuery("(max-width: 645px)");
+let contentPerView = ref();
+if(resolutionUser.value) {
+  contentPerView.value = 2
+}
+else{
+  contentPerView.value = 4
+}
 const modules = ref([Pagination, Autoplay, FreeMode]);
 const items = ref([
   {
@@ -139,8 +147,8 @@ const animateText = () => {
   <swiper
     class="swiper md:w-[95%] sm:w-full"
     :modules="modules"
-    :space-between="10"
-    :slides-per-view="4"
+    :space-between="5"
+    :slides-per-view="contentPerView"
 		:free-mode="true"
 		:autoplay="{
 			delay: 2000,
@@ -148,7 +156,7 @@ const animateText = () => {
 		}"
   >
     <swiper-slide class="slide  flex flex-col items-center text-center w-[100px] dark:p-5 sm:p-0 dark:pb-28" v-for="item in items" key="item.id">
-			<img :src="item.imageUrl" alt="" class="m-auto brightness-0 dark:brightness-[100] md:w-[unset] sm:w-[50px]">
+			<img :src="item.imageUrl" alt="" class="m-auto brightness-0 dark:brightness-[100] md:w-[unset] sm:w-[70px]">
 			<p class="brandName pt-5 sm:text-xs dark:text-ghostWhiteText">{{ item.brandName }}</p>
 		</swiper-slide>
    
