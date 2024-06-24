@@ -32,9 +32,9 @@ const authStore = useAuthStore()
         </button>
       </div>
     </div>
-    <ClientOnly >
-      <sign_in/>
-    </ClientOnly>
+    
+    <profile-data />
+    
     
   </div>
 </template>

@@ -5,6 +5,7 @@ const first_name = ref("");
 const lastName = ref("");
 const profileImg = ref("");
 const authStore = useAuthStore();
+const router = useRouter()
 const getData = async function () {
   const uuid = useCookie("uuid").value;
   const id = useCookie("id").value;
@@ -47,6 +48,9 @@ watch(
     toggle.value = newValue;
   }
 );
+if(authStore.isAuthenticated == false){
+  router.push('/signIn')
+}
 </script>
 
 <template>

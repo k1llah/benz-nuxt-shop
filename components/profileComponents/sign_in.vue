@@ -5,6 +5,7 @@ const email = ref("");
 const password = ref("");
 const formReport = ref("");
 const authStore = useAuthStore();
+const router = useRouter()
 const setCookiesAndState = async (user: any) => {
   useCookie("id").value = user.id;
   useCookie("uuid").value = user.uuid;
@@ -52,16 +53,14 @@ const logInFunc = async (event: any) => {
       }
   }
 };
-
+if(authStore.isAuthenticated == true){
+  router.push('/profileUser')
+}
 </script>
 <template>
   <div>
-   <div v-if="authStore.isLoading == true">
-    <ClientOnly>
-    <BadassLoader/>
-  </ClientOnly>
-  </div>
-  <div v-else>
+ 
+
   <div 
     class="max-w-[330px] m-auto relative flex flex-col p-4 rounded-md text-black bg-white dark:bg-transparent dark:text-ghostWhiteText"
     v-if="authStore.isAuthenticated == false"
@@ -128,9 +127,5 @@ const logInFunc = async (event: any) => {
     </div>
   </div>
  
-  <div class="p-5" v-else-if="authStore.isAuthenticated">
-    <profile-data />
-  </div>
-</div>
 </div>
 </template>

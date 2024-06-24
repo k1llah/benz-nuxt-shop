@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Lazy_Sign_Up from '/components/profileComponents/Lazy_Sign_up'
+import Lazy_Sign_up from '~/components/profileComponents/Lazy_Sign_up.vue';
 </script>
 <template>
 		<div class="min-h-[600px]">

@@ -40,6 +40,7 @@ export const useAuthStore = defineStore({
         this.isLoading = false
       } else {
         this.isAuthenticated = false;
+        this.isLoading = false
         this.currentUser = this.currentUser = { id: "", uuid: "" };
         useCookie('totalPrice').value = '0'
       }
