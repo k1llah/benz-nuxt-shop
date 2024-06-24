@@ -33,7 +33,7 @@ onBeforeMount(() => {
  
   <div
     v-if="authStore.isAuthenticated == true &&  cartStore.localCounter <= 0 "
-    class="flex flex-col gap-4 items-center md:min-h-[70%] sm:min-h-[60%] justify-center"
+    class="flex flex-col gap-4 items-center md:min-h-[70%] sm:max-h-[60%] justify-center"
   >
     <img src="/package-icon.png" alt="" class="max-w-[100px]" />
     <h3 class="text-2xl">Корзина пустая</h3>
