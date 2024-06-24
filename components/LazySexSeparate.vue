@@ -32,6 +32,7 @@ onMounted(() => {
 });
 </script>
 <template>
+  <div>
   <div class="flex ml-[50px] mt-5 gap-[15px]">
     <div class="flex gap-5">
       <button
@@ -46,4 +47,5 @@ onMounted(() => {
   <div class="mt-[30px]">
     <CardList :items="items" />
   </div>
+</div>
 </template>

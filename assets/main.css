@@ -7,12 +7,6 @@
 .light body  {
   @apply bg-[#d6e7ffc7]
 }
-/* .dark-mode .content{
-  @apply bg-[#3f3f46]
-}
-.light-mode .content{
-  @apply bg-white
-} */
 html {
   scroll-behavior: smooth;
 }

@@ -1,8 +1,8 @@
-	<script setup lang="ts">
-	let genderStore = useGenderStore()
-	</script>
+<script setup lang="ts">
+import LazySexSeparate from '~/components/LazySexSeparate.vue';
+</script>
 <template>
-	<div>
-	<LazySexSeparate/>
-</div>
+  <div>
+    <LazySexSeparate />
+  </div>
 </template>

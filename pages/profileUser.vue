@@ -9,8 +9,8 @@ const authStore = useAuthStore()
      <buttonBack/>
       <h2 class="md:text-3xl sm:text-2xl dark:text-ghostWhiteText">Профиль</h2>
     </div>
-
-      <div v-if="authStore.isAuthenticated == true">
+      
+      <div>
         <button 
           class="group flex items-center justify-start w-10 h-10 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-900 shadow-lg hover:w-[115px] hover:rounded-[20px] active:translate-x-1 active:translate-y-1 md:mr-[30px] sm:mr-[15px]"
           @click="authStore.logOut(), cartStore.cartCounter = 0"
@@ -32,9 +32,9 @@ const authStore = useAuthStore()
         </button>
       </div>
     </div>
-
-    <div></div>
-    <sign_in/>
+    <ClientOnly >
+      <sign_in/>
+    </ClientOnly>
     
   </div>
 </template>

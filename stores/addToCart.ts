@@ -98,7 +98,11 @@ export const useCartStore = defineStore({
     },
 
     async cartDataGet() {
+      const auth = useAuthStore()
       try {
+        if(auth.isAuthenticated) {
+          
+       
         const dataCart = await $fetch<any>(
           "http://localhost:3001/api/get-cart-items",
           {
@@ -124,7 +128,9 @@ export const useCartStore = defineStore({
         );
         if(this.items !== undefined) this.cartCounter = this.items.length;
         useCookie("cartCounter").value = this.cartCounter.toString();
-      } catch (error) {
+      } 
+    }
+    catch (error) {
         console.log(error);
       }
     },

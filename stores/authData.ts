@@ -10,10 +10,12 @@ export const useAuthStore = defineStore({
     roleLocal: useCookie('role').value,
     isAuthenticated: false,
     currentUser: { id: "", uuid: "" },
+    isLoading: true,
   }),
   actions: {
     async getRole() {
       try {
+        if(this.isAuthenticated){
         const data = await $fetch<any>("http://localhost:3001/api/get-data", {
           method: "POST",
           body:{
@@ -22,20 +24,20 @@ export const useAuthStore = defineStore({
           }
         });
         this.role = data.user.role;
-        if(this.role !== '') useCookie('role').value = this.role
-        
-      } catch (error) {
+        if(this.role !== '') useCookie('role').value = this.role        
+      } 
+    }
+    catch (error) {
         console.log(error);
-      }
-    },
-    async checkAuth() {
-    
-      this.isAuthenticated = true;
+      } 
       
+    },
+    async checkAuth() {  
       if (this.idLocal && this.uuidLocal && this.roleLocal) {
         this.isAuthenticated = true;
         this.currentUser = { id: this.idLocal, uuid: this.uuidLocal };
         this.getRole();
+        this.isLoading = false
       } else {
         this.isAuthenticated = false;
         this.currentUser = this.currentUser = { id: "", uuid: "" };

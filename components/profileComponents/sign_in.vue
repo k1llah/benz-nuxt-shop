@@ -33,7 +33,7 @@ const logInFunc = async (event: any) => {
         password.value = "";
         formReport.value = "";
         authStore.checkAuth();        
-        if (authStore.isAuthenticated == true && cartStore.items.length > 0) {
+        if (authStore.isAuthenticated == true && cartStore.items) {
           await cartStore.cartDataGet();
           await cartStore.items.forEach((el: any) => {
             cartStore.totalPrice += el.price;
@@ -47,13 +47,22 @@ const logInFunc = async (event: any) => {
         formReport.value = "";
       }, 3000);
       formReport.value = "Неверный email или пароль";
-    }
+    } finally{
+       authStore.isLoading = false 
+      }
   }
 };
 
 </script>
 <template>
-  <div
+  <div>
+   <div v-if="authStore.isLoading == true">
+    <ClientOnly>
+    <BadassLoader/>
+  </ClientOnly>
+  </div>
+  <div v-else>
+  <div 
     class="max-w-[330px] m-auto relative flex flex-col p-4 rounded-md text-black bg-white dark:bg-transparent dark:text-ghostWhiteText"
     v-if="authStore.isAuthenticated == false"
   >
@@ -118,8 +127,10 @@ const logInFunc = async (event: any) => {
         </p></NuxtLink>
     </div>
   </div>
-
-  <div class="p-5" v-if="authStore.isAuthenticated">
+ 
+  <div class="p-5" v-else-if="authStore.isAuthenticated">
     <profile-data />
   </div>
+</div>
+</div>
 </template>

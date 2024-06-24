@@ -13,10 +13,7 @@ const apartment = ref();
 let warningAll = ref("");
 const router = useRouter();
 const reloadPage = () => {
-  router.push({
-    path: router.currentRoute.value.fullPath,
-    force: true
-  })
+  location.reload()
 }
 const correctDataInput = computed(
   () =>
