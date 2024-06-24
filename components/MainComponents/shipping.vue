@@ -20,7 +20,7 @@
         <NuxtLink to="/feedback">
     <div class="relative hover:scale-[1.05] transition-all 1.3s">
       <div class="absolute inset-0 bg-black opacity-50 z-10 hover:opacity-0 transition-all 1.1s cursor-pointer"></div>
-      <div class="md:w-[350px] md:h-[150px] sm:min-w-[320px] sm:h-[200px] flex justify-center bg-cover bg-center top-[-300px] items-end bg-[url('/feedBack2.avif')]"   >
+      <div class="md:w-[350px] p-3 md:h-[180px] sm:min-w-[320px] sm:h-[200px] flex justify-center bg-cover bg-center top-[-300px] items-end bg-[url('/vecteezy_customer-review-rating-different-people-give-review-rating_18997991.svg')]"   >
         <p class="text-center md:text-2xl sm:text-xl font-xl mb-3 text-white z-20">Отзывы</p>
       </div>
     </div>

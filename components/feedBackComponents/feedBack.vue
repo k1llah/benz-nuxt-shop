@@ -9,7 +9,7 @@ onBeforeMount(() => {
   <div
     class="flex md:mt-0 md:p-0 flex-wrap md:pr-10 justify-between items-baseline gap-5 p-3 sm:p-5 sm:mt-5"
   >
-    <div class="flex md:ml-[50px] sm:ml-[20px] gap-[15px]">
+    <div class="flex md:ml-[50px] sm:ml-0 gap-[15px]">
       <div
         class="flex gap-5 items-center mt-5 bg-white bg-opacity-90 dark:bg-opacity-20 p-3 rounded-2xl"
       >
