@@ -75,7 +75,7 @@ onBeforeMount(() => {
           class="flex flex-col justify-center items-center h-[500px]"
         >
           <div class="md:w-[500px] sm:w-auto text-center">
-            <h1 class="text-2xl dark:text-ghostWhiteText">
+            <h1 class="md:text-2xl sm:text-xl dark:text-ghostWhiteText">
               К сожалению у вас нет добавленных
               <span class="text-2xl text-[#7747ff] dark:text-green-600">избранных</span> товаров
             </h1>
@@ -85,17 +85,17 @@ onBeforeMount(() => {
 
         <div
           v-else-if="!authStore.isAuthenticated"
-          class="flex flex-col justify-center items-center h-[500px]"
+          class="flex flex-col justify-center items-center h-[500px] md:p-0 sm:p-2"
         >
           <div class="md:w-[500px] sm:w-auto text-center">
-            <h1 class="text-2xl dark:text-ghostWhiteText">
+            <h1 class="md:text-2xl sm:text-xl dark:text-ghostWhiteText">
               Зарегистрируйтесь или войдите в
               <span class="text-2xl text-[#7747ff]">аккаунт</span> для просмотра и
               добавления избранных товаров
             </h1>
           </div>
-          <div class="max-w-[70px] mt-5">
-            <img src="/emoji-1.png" alt="" />
+          <div class="md:text-[70px] sm:text-[50px] mt-5">
+            😕
           </div>
         </div>
       </div>
