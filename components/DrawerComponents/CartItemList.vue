@@ -33,22 +33,22 @@ onBeforeMount(() => {
  
   <div
     v-if="authStore.isAuthenticated == true &&  cartStore.localCounter <= 0 "
-    class="flex flex-col gap-4 items-center md:min-h-[70%] sm:max-h-[60%] justify-center"
+    class="flex flex-col gap-4 items-center md:min-h-[70%] sm:min-h-[55%] justify-center"
   >
-    <img src="/package-icon.png" alt="" class="max-w-[100px]" />
-    <h3 class="text-2xl">Корзина пустая</h3>
-    <p class="text-slate-500 dark:text-slate-400">
+    <img src="/package-icon.png" alt="" class=" md:max-w-[100px] sm:max-w-[80px]" />
+    <h3 class="md:text-2xl sm:text-xl">Корзина пустая</h3>
+    <p class="text-slate-500 dark:text-slate-400 sm:text-center md:text-left sm:text-sm md:text-lg">
       Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
     </p>
   </div>
 
   <div
     v-else-if="authStore.isAuthenticated == false"
-    class="flex flex-col gap-4 items-center min-h-[70%] justify-center"
+    class="flex flex-col gap-4 items-center md:min-h-[70%] sm:min-h-[60%] justify-center"
   >
-    <img src="/package-icon.png" alt="" class="max-w-[100px]" />
-    <h3 class="text-2xl">Корзина пустая</h3>
-    <p class="text-slate-500">
+    <img src="/package-icon.png" alt="" class="md:max-w-[100px] sm:max-w-[80px]" />
+    <h3 class="text-2xl sm:text-xl">Корзина пустая</h3>
+    <p class="text-slate-500 sm:text-center md:text-left sm:text-sm md:text-lg">
      <NuxtLink to="/profileUser" @click="sneakerStore.show = !sneakerStore.show" class="text-[#7747ff]"> Войдите </NuxtLink> или <NuxtLink to="/signUp" @click="sneakerStore.show = !sneakerStore.show" class="text-[#7747ff]">зарегистрируйтесь</NuxtLink> чтобы добавлять товары в корзину
     </p>
   </div>
