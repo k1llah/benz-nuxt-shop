@@ -44,7 +44,7 @@ const colorMode = useColorMode()
   </transition>
 </template>
 
-<style scoped>
+<style>
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
@@ -53,15 +53,5 @@ const colorMode = useColorMode()
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

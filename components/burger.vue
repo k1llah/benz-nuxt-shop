@@ -164,6 +164,10 @@ const toggleDropdown = (index: number) => {
 #checkbox {
   display: none;
 }
+.animate{
+  transition: all 0.3s ease;
+
+}
 
 .toggle {
   position: relative;
