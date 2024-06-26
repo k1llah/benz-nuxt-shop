@@ -98,9 +98,9 @@ export const useCartStore = defineStore({
     },
 
     async cartDataGet() {
-      const auth = useAuthStore()
+      
       try {
-        if(auth.isAuthenticated) {
+        if(useCookie('id').value !== '') {
           
        
         const dataCart = await $fetch<any>(
