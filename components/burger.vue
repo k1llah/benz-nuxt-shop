@@ -6,7 +6,7 @@ const colorMode = useColorMode()
 const authStore = useAuthStore()
 const counter = ref(useCookie('cartCounter').value)
 function middleware(){
-if(authStore.uuidLocal !== ''){
+if(useCookie('uuid').value !== ''){
   router.push('/profileUser')
 }
 else{
@@ -129,7 +129,7 @@ const toggleDropdown = (index: number) => {
           @click="toggleShow(), toggleDropdown(0)"
         >
         <img src="/cart.svg" alt="Cart" />
-        <p class="text-[13px] font-[500] mt-[-22px] ml-[-13px] rounded-[50%] bg-gray-100 block dark:text-black  w-[20px] h-[20px] text-center" >{{ counter }}</p>
+        <p class="text-[13px] font-[500] mt-[-22px] ml-[-13px] rounded-[50%] bg-gray-100 block dark:text-black  w-[20px] h-[20px] text-center" v-html="cartStore.localCounter"></p>
         <span class="text-[19px] font-light md:text-[14px]">Корзина</span>
       </li>
         <li
