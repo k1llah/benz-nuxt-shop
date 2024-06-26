@@ -5,7 +5,14 @@ const sneakerStore = useSneaker();
 const authStore = useAuthStore();
 const localRole = ref(useCookie("role").value);
 const colorMode = useColorMode()
-
+function middleware(){
+if(authStore.uuidLocal !== ''){
+  router.push('/profileUser')
+}
+else{
+  router.push('/signIn')
+}
+}
 const reloadPage = () => {
   router.push({
     path: router.currentRoute.value.fullPath,
@@ -121,7 +128,7 @@ let toggleShow = () => {
       </li>
       <li
         class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s dark:hover:text-[#ff0]"
-        @click="$router.push( '/profileUser' )"
+        @click="middleware()"
       >
         <img src="/profile.svg" alt="Cart" />
         <span class="text-[19px] font-light md:text-[14px]">Профиль</span>

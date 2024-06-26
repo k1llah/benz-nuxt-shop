@@ -1,35 +1,6 @@
 <script setup lang="ts">
+const profileData = useProfileDataStore()
 const myOrders = useMyOrderStore();
-const email = ref("");
-const first_name = ref("");
-const lastName = ref("");
-const profileImg = ref("");
-const authStore = useAuthStore();
-const router = useRouter()
-const getData = async function () {
-  const uuid = useCookie("uuid").value;
-  const id = useCookie("id").value;
-  if (authStore.isAuthenticated == true && uuid && id) {
-    try {
-      const data = await $fetch<any>("http://localhost:3001/api/get-data", {
-        method: "POST",
-        body: {
-          uuid,
-          id,
-        }
-      });
-      email.value = data.user.email;
-      first_name.value = data.user.first_name;
-      lastName.value = data.user.last_name;
-      profileImg.value = data.user.profileImg;
-    } catch (error) {
-      authStore.isAuthenticated = false;
-    }
-  } else {
-    authStore.isAuthenticated = false;
-  }
-};
-getData();
 const allStore = useAllStore();
 let toggle = ref(false);
 let target = ref("");
@@ -48,9 +19,11 @@ watch(
     toggle.value = newValue;
   }
 );
-if(authStore.isAuthenticated == false){
-  router.push('/signIn')
-}
+
+onBeforeMount(async() => {
+  profileData.getData()
+  
+});
 </script>
 
 <template>
@@ -58,13 +31,13 @@ if(authStore.isAuthenticated == false){
     class="flex m-auto mt-20 gap-16 justify-center flex-wrap"
     v-auto-animate
     v-if="
-      email !== '' || first_name !== '' || lastName !== '' || profileImg !== ''
+     profileData.profileImg != '' && profileData.first_name != '' && profileData.lastName != '' && profileData.email != ''
     "
   >
     <div class="flex items-center">
       <img
-        v-if="profileImg"
-        :src="'http://localhost:3001/img/tablet/' + profileImg"
+        v-if="profileData.profileImg"
+        :src="'http://localhost:3001/img/tablet/' + profileData.profileImg"
         alt="profile image"
         class="w-[200px] rounded-[50%]"
       />
@@ -78,7 +51,7 @@ if(authStore.isAuthenticated == false){
           >Фамилия:</span
         >
         <h4 class="text-black text-[20px] dark:text-[#f5f5f5]">
-          {{ lastName }}
+          {{ profileData.lastName }}
         </h4>
       </div>
       <div
@@ -88,7 +61,7 @@ if(authStore.isAuthenticated == false){
           >Имя:</span
         >
         <h4 class="text-black text-[20px] dark:text-[#f5f5f5]">
-          {{ first_name }}
+          {{ profileData.first_name }}
         </h4>
       </div>
       <div
@@ -97,7 +70,7 @@ if(authStore.isAuthenticated == false){
         <span class="text-slate-400 text-[16px] dark:text-ghostWhiteText"
           >Email:</span
         >
-        <h4 class="text-black text-[20px] dark:text-[#f5f5f5]">{{ email }}</h4>
+        <h4 class="text-black text-[20px] dark:text-[#f5f5f5]">{{ profileData.email }}</h4>
       </div>
     </div>
     <div>

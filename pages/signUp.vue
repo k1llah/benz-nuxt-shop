@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Lazy_Sign_up from '~/components/profileComponents/Lazy_Sign_up.vue';
+import LazySignUp from '~/components/profileComponents/LazySignUp.vue';
 </script>
 <template>
 		<div class="min-h-[600px]">
@@ -7,7 +7,7 @@ import Lazy_Sign_up from '~/components/profileComponents/Lazy_Sign_up.vue';
       <buttonBack/>
       <h2 class="text-3xl dark:text-ghostWhiteText">Регистрация</h2>
     </div>
-    <Lazy_Sign_Up/>
+    <LazySignUp/>
   </div>
 </template>
 

@@ -6,6 +6,7 @@ const password = ref("");
 const formReport = ref("");
 const authStore = useAuthStore();
 const router = useRouter()
+const profileData = useProfileDataStore()
 const setCookiesAndState = async (user: any) => {
   useCookie("id").value = user.id;
   useCookie("uuid").value = user.uuid;
@@ -33,14 +34,18 @@ const logInFunc = async (event: any) => {
         email.value = "";
         password.value = "";
         formReport.value = "";
-        authStore.checkAuth();        
-        if (authStore.isAuthenticated == true && cartStore.items) {
+        await authStore.checkAuth();        
+        if (true) {
           await cartStore.cartDataGet();
           await cartStore.items.forEach((el: any) => {
             cartStore.totalPrice += el.price;
             useCookie("totalPrice").value = cartStore.totalPrice.toString();
           });
+          console.log(useCookie("totalPrice").value, cartStore.totalPrice);
         }
+      }
+      if(authStore.uuidLocal !== ''){
+        await profileData.getData()
       }
     } catch (error) {
       console.log(error);
@@ -49,21 +54,21 @@ const logInFunc = async (event: any) => {
       }, 3000);
       formReport.value = "Неверный email или пароль";
     } finally{
-       authStore.isLoading = false 
+      router.push('/profileUser')
+      if(authStore.uuidLocal !== ''){
+        await profileData.getData()
+      }
+      
       }
   }
 };
-if(authStore.isAuthenticated == true){
-  router.push('/profileUser')
-}
+
 </script>
 <template>
   <div>
- 
-
+  <div >
   <div 
     class="max-w-[330px] m-auto relative flex flex-col p-4 rounded-md text-black bg-white dark:bg-transparent dark:text-ghostWhiteText"
-    v-if="authStore.isAuthenticated == false"
   >
     <div class="flex mt-[50px] flex-col justify-center items-center">
       <h3 class="text-[28px] font-light">
@@ -111,7 +116,6 @@ if(authStore.isAuthenticated == true){
         </a>
       </div>
       <button
-        type="submit"
         class="bg-[#7747ff] dark:bg-green-500 w-max m-auto px-6 py-2 rounded text-white text-sm font-normal"
         @click="logInFunc($event)"
       >
@@ -126,6 +130,6 @@ if(authStore.isAuthenticated == true){
         </p></NuxtLink>
     </div>
   </div>
- 
+</div>
 </div>
 </template>

@@ -1,19 +1,24 @@
 <script setup lang="ts">
-const cartStore = useCartStore()
-const authStore = useAuthStore()
+const cartStore = useCartStore();
+const authStore = useAuthStore();
+const router = useRouter()
 </script>
 <template>
   <div class="min-h-[600px]">
-    <div class="flex md:ml-[50px] sm:ml-[20px] mt-5 gap-[15px] justify-between items-center">
+    <div
+      class="flex md:ml-[50px] sm:ml-[20px] mt-5 gap-[15px] justify-between items-center" 
+    >
       <div class="flex gap-5 items-center">
-     <buttonBack/>
-      <h2 class="md:text-3xl sm:text-2xl dark:text-ghostWhiteText">Профиль</h2>
-    </div>
-      
+        <buttonBack />
+        <h2 class="md:text-3xl sm:text-2xl dark:text-ghostWhiteText">
+          Профиль
+        </h2>
+      </div>
+
       <div>
-        <button 
+        <button
           class="group flex items-center justify-start w-10 h-10 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-900 shadow-lg hover:w-[115px] hover:rounded-[20px] active:translate-x-1 active:translate-y-1 md:mr-[30px] sm:mr-[15px]"
-          @click="authStore.logOut(), cartStore.cartCounter = 0"
+          @click="authStore.logOut(), (cartStore.cartCounter = 0)"
         >
           <div
             class="flex items-center justify-center w-full transition-all duration-1200 group-hover:justify-start group-hover:px-3"
@@ -32,9 +37,9 @@ const authStore = useAuthStore()
         </button>
       </div>
     </div>
-    
+    <div class="p-5">
     <profile-data />
-    
+  </div>
     
   </div>
 </template>

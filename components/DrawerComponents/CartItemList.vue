@@ -32,7 +32,7 @@ onBeforeMount(() => {
   </div>
  
   <div
-    v-if="authStore.isAuthenticated == true &&  cartStore.localCounter <= 0 "
+    v-if="authStore.uuidLocal !== '' &&  cartStore.localCounter <= 0 "
     class="flex flex-col gap-4 items-center md:min-h-[70%] sm:min-h-[55%] justify-center"
   >
     <img src="/package-icon.png" alt="" class=" md:max-w-[100px] sm:max-w-[80px]" />
@@ -43,7 +43,7 @@ onBeforeMount(() => {
   </div>
 
   <div
-    v-else-if="authStore.isAuthenticated == false"
+    v-else-if="authStore.uuidLocal == ''"
     class="flex flex-col gap-4 items-center md:min-h-[70%] sm:min-h-[60%] justify-center"
   >
     <img src="/package-icon.png" alt="" class="md:max-w-[100px] sm:max-w-[80px]" />

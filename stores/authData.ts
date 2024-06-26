@@ -54,6 +54,8 @@ export const useAuthStore = defineStore({
       this.isAuthenticated = false;
       this.currentUser = this.currentUser = { id: "", uuid: "" };
       this.role = "";
+      const router = useRouter()
+      router.push('/signIn')
     },
   },
 });
