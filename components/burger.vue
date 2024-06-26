@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import gsap from "gsap";
-const cartStore = useCartStore();
-const localRole = ref(useCookie("role").value);
+const cartStore = useCartStore()
+const localRole = ref(useCookie("role").value)
 const colorMode = useColorMode()
-
+const authStore = useAuthStore()
+const counter = ref(useCookie('cartCounter').value)
+function middleware(){
+if(authStore.uuidLocal !== ''){
+  router.push('/profileUser')
+}
+else{
+  router.push('/signIn')
+}
+}
 const role = ref();
 let timer = ref(false);
 const router = useRouter();
@@ -120,7 +129,7 @@ const toggleDropdown = (index: number) => {
           @click="toggleShow(), toggleDropdown(0)"
         >
         <img src="/cart.svg" alt="Cart" />
-        <p class="text-[13px] font-[500] mt-[-22px] ml-[-13px] rounded-[50%] bg-gray-100 block dark:text-black  w-[20px] h-[20px] text-center" >{{ cartStore.localCounter }}</p>
+        <p class="text-[13px] font-[500] mt-[-22px] ml-[-13px] rounded-[50%] bg-gray-100 block dark:text-black  w-[20px] h-[20px] text-center" >{{ counter }}</p>
         <span class="text-[19px] font-light md:text-[14px]">Корзина</span>
       </li>
         <li
@@ -133,7 +142,7 @@ const toggleDropdown = (index: number) => {
         
         <li
           class="flex items-center gap-3 text-grey-500 hover:text-black cursor-pointer hover:scale-[1.05] transition-all 1.3s pb-5 border-b-2 dark:border-black w-full justify-center"
-          @click="$router.push('/profileUser'), toggleDropdown(0)"
+          @click="middleware(), toggleDropdown(0)"
         >
           <img src="/profile.svg" alt="Cart" />
           <span class="text-[19px] font-light md:text-[14px]">Профиль</span>

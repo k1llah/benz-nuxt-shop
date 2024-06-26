@@ -46,6 +46,8 @@ export const useAuthStore = defineStore({
       }
     },
     logOut() {
+      const cartStore = useCartStore()
+      cartStore.localCounter = 0
       useCookie("id").value = "";
       useCookie("uuid").value = "";
       useCookie("role").value = "";

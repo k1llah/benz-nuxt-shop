@@ -5,8 +5,10 @@ const sneakerStore = useSneaker();
 const authStore = useAuthStore();
 const localRole = ref(useCookie("role").value);
 const colorMode = useColorMode()
+let counter = cartStore.localCounter
+
 function middleware(){
-if(authStore.uuidLocal !== ''){
+if(useCookie('uuid').value !== ''){
   router.push('/profileUser')
 }
 else{
@@ -52,9 +54,9 @@ async function checkIsAdmin() {
 }
 
 watch(
-  () => cartStore.cartCounter,
+  () => counter,
   (newValue: any) => {
-    cartStore.localCounter = newValue;
+    counter = newValue;
   }
 );
 watch(() => authStore.role, (newValue) => {
@@ -63,6 +65,11 @@ watch(() => authStore.role, (newValue) => {
 let toggleShow = () => {
   sneakerStore.show = !sneakerStore.show;
 };
+onBeforeMount(() => {
+  if(authStore.uuidLocal !== ''){
+    cartStore.cartDataGet()
+  }
+})
 </script>
 <template>
   <div>
@@ -103,13 +110,13 @@ let toggleShow = () => {
         class="flex items-center gap-3 text-grey-500 hover:text-black 
         dark:hover:text-yellow-500 cursor-pointer hover:scale-[1.05] transition-all 1.3s"
         @click="toggleShow()"
-        v-if="localRole != 'ADMIN'"
+        v-if="localRole !== 'ADMIN'"
       >
         <img src="/cart.svg" alt="Cart" />
         <p
-          class="text-[13px] font-[500] mt-[-22px] ml-[-13px] rounded-[50%] bg-gray-300 block w-[20px] h-[20px] text-center dark:text-black "
+          class="text-[13px] font-[500] mt-[-22px] ml-[-13px] rounded-[50%] bg-gray-300 block w-[20px] h-[20px] text-center dark:text-black " v-html="cartStore.localCounter"
         >
-          {{ cartStore.localCounter }}
+          
         </p>
       </li>
       <li

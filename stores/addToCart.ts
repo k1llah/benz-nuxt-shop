@@ -13,7 +13,7 @@ export const useCartStore = defineStore({
   state: () => ({
     items: [] as CartItem[],
     isAdded: false,
-    cartCounter: 0,
+    cartCounter: null as number | null,
     localCounter: parseInt(useCookie('cartCounter').value || "0", 10),
     counter: 1,
     totalPrice: 0,
@@ -74,10 +74,10 @@ export const useCartStore = defineStore({
               }
             }
           );
-          if (this.cartCounter > 0) {
-            this.cartCounter -= 1;
-            useCookie("cartCounter").value = this.cartCounter.toString()
-          }
+        if (this.cartCounter !== null && this.cartCounter > 0) {
+          this.cartCounter -= 1;
+          useCookie("cartCounter").value = this.cartCounter.toString();
+        }
 
           if (this.totalPrice > 0) {
             this.totalPrice -= price;
@@ -127,7 +127,8 @@ export const useCartStore = defineStore({
           10
         );
         if(this.items !== undefined) this.cartCounter = this.items.length;
-        useCookie("cartCounter").value = this.cartCounter.toString();
+        if(this.cartCounter !== null) useCookie("cartCounter").value = this.cartCounter.toString();
+        
       } 
     }
     catch (error) {
