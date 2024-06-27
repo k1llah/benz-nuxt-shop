@@ -27,6 +27,9 @@ export const useCartStore = defineStore({
     },
   }),
   actions: {
+    setFilters(filters: any) {
+     this.filters = filters 
+    },
     counterPlus() {
       this.counter += 1;
     },

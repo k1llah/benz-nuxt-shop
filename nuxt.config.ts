@@ -14,14 +14,14 @@ export default defineNuxtConfig({
   },
   css: ['@/assets/main.css'],
   
-  modules: [ '@nuxtjs/color-mode', [
+  modules: ['@nuxtjs/color-mode', [
     
     '@pinia/nuxt',
     {
       autoImports: ['defineStore']
     },
     
-  ], "@nuxtjs/tailwindcss", '@formkit/auto-animate', '@vueuse/nuxt', 'nuxt-swiper', "@dargmuesli/nuxt-cookie-control"],
+  ], "@nuxtjs/tailwindcss", '@formkit/auto-animate', '@vueuse/nuxt', 'nuxt-swiper', "@dargmuesli/nuxt-cookie-control", "@nuxt/image"],
   colorMode: {
     classSuffix: ''
   },

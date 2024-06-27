@@ -3,15 +3,15 @@ import { debounce } from "lodash";
 const cartStore = useCartStore();
 const favoritesStore = useFavoritesStore();
 
-const filters = reactive({
+const filters = ref({
   sortBy: "title",
   title: "",
 });
-cartStore.filters = filters
+cartStore.setFilters(filters.value)
 let realStateOfCart = ref(cartStore.items);
 let onMountedCartState = cartStore.items;
 const onChangeSelect = (event: any) => {
-  filters.sortBy = event.target.value;
+  filters.value.sortBy = event.target.value;
 };
 
 const stateUpdate = useStateStore();
@@ -20,9 +20,9 @@ const allStore = useAllStore();
 const axiosGetParams = async () => {
   try {
     const params = {
-      sortBy: filters.sortBy,
-      title: filters.title,
-    };
+      sortBy: filters.value.sortBy,
+      title: filters.value.title,
+    }
     await allStore.getItemsMethod(params);
     await stateUpdate.updateCardsCart(params)
   } catch (error) {
@@ -43,7 +43,9 @@ onMounted(async () => {
   await axiosGetParams();
 });
 
-watch(filters, debounce(axiosGetParams, 350))
+watch(filters,  debounce(axiosGetParams, 500),{
+  deep: true 
+})
 </script>
 
 <template>
