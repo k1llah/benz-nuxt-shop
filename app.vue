@@ -27,7 +27,7 @@ watch(() => route.currentRoute.value.path, (newPath: any) => {
 const colorMode = useColorMode()
 </script>
 <template>
-  <div class="md:w-[85%] sm:w-full m-auto bg-white rounded-xl shadow-xl mt-14 content dark:bg-[#3f3f46]">
+  <div class="md:w-[85%] sm:w-full m-auto bg-white rounded-xl shadow-xl md:mt-14 sm:mt-7 content dark:bg-[#3f3f46]">
     <Header/>
     <section>
       <div class="w-full m-auto">
