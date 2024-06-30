@@ -1,34 +1,32 @@
-import { defineStore } from "pinia"
+import { defineStore } from 'pinia'
 export const useIsAdmin = defineStore({
-  id: "isAdmin",
-  state: () => ({
-  role: '',
-	router: useRouter()
-  }),
-  actions: {
+	id: 'isAdmin',
+	state: () => ({
+		role: '',
+		router: useRouter(),
+	}),
+	actions: {
 		async checkIsAdmin() {
 			try {
-						const data = await $fetch<any>("http://localhost:3001/api/get-data", {
-							method: "POST",
-							body: {
-								uuid: useCookie('uuid').value,
-								id: useCookie('id').value,
-							}
-						});
-						this.role = data.user.role
-						
-					}catch(error){
-						console.log(error)
-					}
-						if (this.role === "ADMIN") {
-							console.log(this.role)
-						}
-						else{
-							let setRole = useCookie('role').value
-							setRole = 'USER'
-							this.router.push('/')
-							alert('Еще че придумал? сегодня не твой день салага')
-						}
-		}
-  },
-});
+				const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-data', {
+					method: 'POST',
+					body: {
+						uuid: useCookie('uuid').value,
+						id: useCookie('id').value,
+					},
+				})
+				this.role = data.user.role
+			} catch (error) {
+				console.log(error)
+			}
+			if (this.role === 'ADMIN') {
+				console.log(this.role)
+			} else {
+				let setRole = useCookie('role').value
+				setRole = 'USER'
+				this.router.push('/')
+				alert('Еще че придумал? сегодня не твой день салага')
+			}
+		},
+	},
+})
