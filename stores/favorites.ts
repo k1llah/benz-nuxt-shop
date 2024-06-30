@@ -16,15 +16,12 @@ export const useFavoritesStore = defineStore({
 	actions: {
 		async favorites() {
 			try {
-				const data = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/favorites-user',
-					{
-						method: 'POST',
-						body: {
-							id: useCookie('id').value,
-						},
+				const data = await $fetch<any>('http://localhost:3001/api/favorites-user', {
+					method: 'POST',
+					body: {
+						id: useCookie('id').value,
 					},
-				)
+				})
 
 				this.isFav = true
 				this.items = data[0].Favorite
@@ -41,16 +38,13 @@ export const useFavoritesStore = defineStore({
 		},
 		async onFavoriteRemove(sneakerId: number, item: Item) {
 			try {
-				const postData = await $fetch(
-					'https://sneaker-server-three.vercel.app/api/remove-from-favorites',
-					{
-						method: 'POST',
-						body: {
-							userId: useCookie('id').value,
-							sneakerId: sneakerId,
-						},
+				const postData = await $fetch('http://localhost:3001/api/remove-from-favorites', {
+					method: 'POST',
+					body: {
+						userId: useCookie('id').value,
+						sneakerId: sneakerId,
 					},
-				)
+				})
 
 				item.isFavorite = false
 				this.items = this.items.filter((el: any) => el.id != sneakerId)

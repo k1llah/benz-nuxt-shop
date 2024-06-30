@@ -5,7 +5,7 @@
 	let idItems = ref([] as any)
 	const getDateShoe = async function (params: any) {
 		try {
-			const dataShoe = await $fetch<any>(`https://sneaker-server-three.vercel.app/api/sneaker`, {
+			const dataShoe = await $fetch<any>(`http://localhost:3001/api/sneaker`, {
 				method: 'GET',
 				params: {
 					id: params,

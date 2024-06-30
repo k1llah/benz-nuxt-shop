@@ -8,7 +8,7 @@
 	let counter = cartStore.localCounter
 
 	function middleware() {
-		if (useCookie('uuid').value !== '') {
+		if (useCookie('uuid').value) {
 			router.push('/profileUser')
 		} else {
 			router.push('/signIn')
@@ -28,7 +28,7 @@
 	})
 	async function checkIsAdmin() {
 		try {
-			const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-data', {
+			const data = await $fetch<any>('http://localhost:3001/api/get-data', {
 				method: 'POST',
 				body: {
 					uuid: useCookie('uuid').value,

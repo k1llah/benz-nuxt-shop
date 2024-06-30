@@ -57,7 +57,7 @@
 	}
 	const getData = async function () {
 		try {
-			let infoUser = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-data', {
+			let infoUser = await $fetch<any>('http://localhost:3001/api/get-data', {
 				method: 'POST',
 				body: {
 					uuid,
@@ -98,13 +98,10 @@
 					}),
 				)
 				if (formData) {
-					const changedData = $fetch<any>(
-						'https://sneaker-server-three.vercel.app/api/edit-profile',
-						{
-							method: 'POST',
-							body: formData,
-						},
-					)
+					const changedData = $fetch<any>('http://localhost:3001/api/edit-profile', {
+						method: 'POST',
+						body: formData,
+					})
 					reloadPage()
 				}
 			} else if (lastName.value.includes(' ') || lastName.value.length < 2) {
@@ -179,11 +176,7 @@
 	<div class="m-auto flex flex-col items-center mt-10 gap-9">
 		<div>
 			<img
-				:src="
-					prevProfileImg
-						? 'https://sneaker-server-three.vercel.app/img/tablet/' + prevProfileImg
-						: tempFileURL
-				"
+				:src="prevProfileImg ? 'http://localhost:3001/img/tablet/' + prevProfileImg : tempFileURL"
 				alt="profile image"
 				class="md:w-[150px] sm:w-[110px] rounded-[50%]"
 			/>

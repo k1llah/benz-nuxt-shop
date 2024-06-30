@@ -54,7 +54,7 @@ export default defineNuxtConfig({
 	],
 	runtimeConfig: {
 		public: {
-			apiBase: 'https://sneaker-server-three.vercel.app/api',
+			apiBase: 'http://localhost:3001/api',
 		},
 	},
 	ssr: true,

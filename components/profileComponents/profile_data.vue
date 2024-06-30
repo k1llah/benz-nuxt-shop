@@ -39,7 +39,7 @@
 		<div class="flex items-center">
 			<img
 				v-if="profileData.profileImg"
-				:src="'https://sneaker-server-three.vercel.app/img/tablet/' + profileData.profileImg"
+				:src="'http://localhost:3001/img/tablet/' + profileData.profileImg"
 				alt="profile image"
 				class="w-[200px] rounded-[50%]"
 			/>

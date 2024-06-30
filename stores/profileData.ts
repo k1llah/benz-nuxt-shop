@@ -13,7 +13,7 @@ export const useProfileDataStore = defineStore({
 			const id = useCookie('id').value
 			if (id && uuid) {
 				try {
-					const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-data', {
+					const data = await $fetch<any>('http://localhost:3001/api/get-data', {
 						method: 'POST',
 						body: {
 							uuid,

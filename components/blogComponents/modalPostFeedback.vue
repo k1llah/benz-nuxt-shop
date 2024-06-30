@@ -19,7 +19,7 @@
 				ideaText.value.length < 700 &&
 				name.value.length >= 2
 			) {
-				const submit = await $fetch<any>('https://sneaker-server-three.vercel.app/api/post-idea', {
+				const submit = await $fetch<any>('http://localhost:3001/api/post-idea', {
 					method: 'POST',
 					body: {
 						name: name.value,

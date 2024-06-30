@@ -65,7 +65,7 @@
 	}
 	const editAddress = async () => {
 		try {
-			const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-address', {
+			const data = await $fetch<any>('http://localhost:3001/api/get-address', {
 				method: 'POST',
 				body: {
 					addressId: allStore.idAddress,
@@ -102,7 +102,7 @@
 
 	const updateAddress = async () => {
 		try {
-			const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/update-address', {
+			const data = await $fetch<any>('http://localhost:3001/api/update-address', {
 				method: 'POST',
 				body: {
 					id: allStore.idAddress,

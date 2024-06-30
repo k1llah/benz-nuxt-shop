@@ -54,7 +54,7 @@
 			password === password_confirmation
 		) {
 			try {
-				const create = await $fetch<any>('https://sneaker-server-three.vercel.app/api/createUser', {
+				const create = await $fetch<any>('http://localhost:3001/api/createUser', {
 					method: 'POST',
 					body: {
 						name: name,

@@ -7,7 +7,7 @@
 	const favoriteStore = useFavoritesStore()
 	async function favorites() {
 		try {
-			const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/favorites-user', {
+			const data = await $fetch<any>('http://localhost:3001/api/favorites-user', {
 				method: 'POST',
 				body: {
 					id: useCookie('id').value,

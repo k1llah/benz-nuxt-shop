@@ -9,7 +9,7 @@
 
 	async function getIdeas() {
 		try {
-			const response = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-ideas', {
+			const response = await $fetch<any>('http://localhost:3001/api/get-ideas', {
 				method: 'GET',
 			})
 			dataIdeas.value = response
@@ -19,15 +19,12 @@
 	}
 	async function deleteIdea(id: number) {
 		try {
-			const response = await $fetch<any>(
-				'https://sneaker-server-three.vercel.app/api/delete-idea',
-				{
-					method: 'POST',
-					body: {
-						id: id,
-					},
+			const response = await $fetch<any>('http://localhost:3001/api/delete-idea', {
+				method: 'POST',
+				body: {
+					id: id,
 				},
-			)
+			})
 			dataIdeas.value = dataIdeas.value.filter((idea: any) => idea.id !== id)
 		} catch (error) {
 			console.log(error)

@@ -8,15 +8,12 @@ export const useAddressStore = defineStore({
 	actions: {
 		async dataAddress() {
 			try {
-				const data = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/get-addresses',
-					{
-						method: 'POST',
-						body: {
-							userId: useCookie('id').value,
-						},
+				const data = await $fetch<any>('http://localhost:3001/api/get-addresses', {
+					method: 'POST',
+					body: {
+						userId: useCookie('id').value,
 					},
-				)
+				})
 				this.addressData = data
 				this.isAddress = this.addressData.length > 0
 			} catch (error) {
@@ -25,16 +22,13 @@ export const useAddressStore = defineStore({
 		},
 		async deleteAddress(id: number) {
 			try {
-				const data = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/delete-address',
-					{
-						method: 'POST',
-						body: {
-							id: id,
-							userId: useCookie('id').value,
-						},
+				const data = await $fetch<any>('http://localhost:3001/api/delete-address', {
+					method: 'POST',
+					body: {
+						id: id,
+						userId: useCookie('id').value,
 					},
-				)
+				})
 				this.addressData = this.addressData.filter((address) => address.id !== id)
 			} catch (error) {
 				console.log(error)

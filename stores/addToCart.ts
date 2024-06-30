@@ -41,16 +41,13 @@ export const useCartStore = defineStore({
 
 		async onCartAdd(sneakerId: number, item: any, price: any) {
 			try {
-				const postAddData = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/add-to-cart',
-					{
-						method: 'POST',
-						body: {
-							userId: useCookie('id').value,
-							sneakerId: sneakerId,
-						},
+				const postAddData = await $fetch<any>('http://localhost:3001/api/add-to-cart', {
+					method: 'POST',
+					body: {
+						userId: useCookie('id').value,
+						sneakerId: sneakerId,
 					},
-				)
+				})
 				this.items = postAddData.items
 				item.isAdded = true
 				this.totalPrice += price
@@ -67,16 +64,13 @@ export const useCartStore = defineStore({
 		async onDeleteItem(id: number, item: any, price: any) {
 			if (item.isAdded) {
 				try {
-					const removeData = await $fetch(
-						'https://sneaker-server-three.vercel.app/api/remove-from-cart',
-						{
-							method: 'POST',
-							body: {
-								userId: useCookie('id').value,
-								sneakerId: id,
-							},
+					const removeData = await $fetch('http://localhost:3001/api/remove-from-cart', {
+						method: 'POST',
+						body: {
+							userId: useCookie('id').value,
+							sneakerId: id,
 						},
-					)
+					})
 					if (this.cartCounter !== null && this.cartCounter > 0) {
 						this.cartCounter -= 1
 						useCookie('cartCounter').value = this.cartCounter.toString()
@@ -103,15 +97,12 @@ export const useCartStore = defineStore({
 		async cartDataGet() {
 			try {
 				if (useCookie('id').value !== '') {
-					const dataCart = await $fetch<any>(
-						'https://sneaker-server-three.vercel.app/api/get-cart-items',
-						{
-							method: 'POST',
-							body: {
-								userId: useCookie('id').value,
-							},
+					const dataCart = await $fetch<any>('http://localhost:3001/api/get-cart-items', {
+						method: 'POST',
+						body: {
+							userId: useCookie('id').value,
 						},
-					)
+					})
 					this.items = dataCart.items
 					if (this.items !== undefined) {
 						this.isAdded = this.items.length > 0

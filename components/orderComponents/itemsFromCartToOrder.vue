@@ -5,15 +5,12 @@
 	let data = ref()
 	const getDataShoe = async function (params: any) {
 		try {
-			const dataShoe = await $fetch<any>(
-				`https://sneaker-server-three.vercel.app/api/sneakers-to-order`,
-				{
-					method: 'POST',
-					body: {
-						id: params,
-					},
+			const dataShoe = await $fetch<any>(`http://localhost:3001/api/sneakers-to-order`, {
+				method: 'POST',
+				body: {
+					id: params,
 				},
-			)
+			})
 			data.value = dataShoe
 			orderStore.idParam = idItems.value
 			orderStore.amount = dataShoe.reduce((acc: any, item: any) => acc + item.price, 0)

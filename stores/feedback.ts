@@ -31,7 +31,7 @@ export const useFeedbackStore = defineStore({
 		async createFeedback() {
 			event?.preventDefault()
 			try {
-				const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-data', {
+				const data = await $fetch<any>('http://localhost:3001/api/get-data', {
 					method: 'POST',
 					body: {
 						uuid: useCookie('uuid').value,
@@ -53,13 +53,10 @@ export const useFeedbackStore = defineStore({
 					formData.append('messageFeedback', this.message)
 					formData.append('authorName', this.authorName)
 					formData.append('rating', this.starRating.toString())
-					const createFeedback = await $fetch(
-						'https://sneaker-server-three.vercel.app/api/create-feedback',
-						{
-							method: 'POST',
-							body: formData,
-						},
-					)
+					const createFeedback = await $fetch('http://localhost:3001/api/create-feedback', {
+						method: 'POST',
+						body: formData,
+					})
 					this.modalFeedback = true
 					this.message = ''
 					this.imageFeedback = undefined
@@ -96,9 +93,7 @@ export const useFeedbackStore = defineStore({
 		},
 		async getFeedbacksToModerate() {
 			try {
-				const dataFeedback = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/get-feedback-to-moderate',
-				)
+				const dataFeedback = await $fetch<any>('http://localhost:3001/api/get-feedback-to-moderate')
 				{
 					method: 'GET'
 				}
@@ -114,12 +109,9 @@ export const useFeedbackStore = defineStore({
 		},
 		async getFeedbacks() {
 			try {
-				const dataFeedback = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/get-feedback',
-					{
-						method: 'GET',
-					},
-				)
+				const dataFeedback = await $fetch<any>('http://localhost:3001/api/get-feedback', {
+					method: 'GET',
+				})
 				this.feedBackData = dataFeedback
 			} catch (error) {
 				console.log(error)
@@ -127,15 +119,12 @@ export const useFeedbackStore = defineStore({
 		},
 		async moderateFeedback(id: number) {
 			try {
-				const dataFeedback = await $fetch(
-					'https://sneaker-server-three.vercel.app/api/moderate-feedback',
-					{
-						method: 'POST',
-						body: {
-							id: id,
-						},
+				const dataFeedback = await $fetch('http://localhost:3001/api/moderate-feedback', {
+					method: 'POST',
+					body: {
+						id: id,
 					},
-				)
+				})
 				this.isModeratedFeedback = true
 				this.feedBackData = this.feedBackData.filter((feedback) => feedback.id !== id)
 			} catch (error) {
@@ -144,15 +133,12 @@ export const useFeedbackStore = defineStore({
 		},
 		async feedbackDelete(id: number) {
 			try {
-				const dataFeedback = await $fetch(
-					'https://sneaker-server-three.vercel.app/api/delete-feedback',
-					{
-						method: 'POST',
-						body: {
-							id: id,
-						},
+				const dataFeedback = await $fetch('http://localhost:3001/api/delete-feedback', {
+					method: 'POST',
+					body: {
+						id: id,
 					},
-				)
+				})
 				this.isModeratedFeedback = true
 				this.feedBackData = this.feedBackData.filter((feedback) => feedback.id !== id)
 			} catch (error) {

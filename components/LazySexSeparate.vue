@@ -11,12 +11,9 @@
 	async function genderRoute() {
 		try {
 			if (useCookie('gender').value == 'man' || useCookie('gender').value == 'woman') {
-				const data = await $fetch<any>(
-					`https://sneaker-server-three.vercel.app/api/${params}Sneakers`,
-					{
-						method: 'GET',
-					},
-				)
+				const data = await $fetch<any>(`http://localhost:3001/api/${params}Sneakers`, {
+					method: 'GET',
+				})
 				items.value = data
 			}
 		} catch (error) {

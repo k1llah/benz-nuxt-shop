@@ -9,7 +9,7 @@ export const useStateStore = defineStore({
 		async updateCardsCart(params: { sortBy: any; title?: any }) {
 			try {
 				const cartItems = useCartStore()
-				const response = await $fetch('https://sneaker-server-three.vercel.app/api', {
+				const response = await $fetch('http://localhost:3001/api', {
 					method: 'GET',
 					params: params,
 				})

@@ -30,25 +30,22 @@
 	const createAddress = async () => {
 		try {
 			if (correctDataInput.value == true) {
-				const newAddress = await $fetch<any>(
-					'https://sneaker-server-three.vercel.app/api/create-address',
-					{
-						method: 'POST',
-						body: {
-							userId: useCookie('id').value,
-							firstName: name.value,
-							lastName: lastName.value,
-							surname: surname.value,
-							city: city.value,
-							street: street.value,
-							phoneNumber: phoneNumber.value,
-							postalCode: postalCode.value,
-							buildingNumber: buildingNumber.value,
-							houseNumber: houseNumber.value,
-							apartment: apartment.value,
-						},
+				const newAddress = await $fetch<any>('http://localhost:3001/api/create-address', {
+					method: 'POST',
+					body: {
+						userId: useCookie('id').value,
+						firstName: name.value,
+						lastName: lastName.value,
+						surname: surname.value,
+						city: city.value,
+						street: street.value,
+						phoneNumber: phoneNumber.value,
+						postalCode: postalCode.value,
+						buildingNumber: buildingNumber.value,
+						houseNumber: houseNumber.value,
+						apartment: apartment.value,
 					},
-				)
+				})
 				reloadPage()
 			} else if (!correctDataInput.value) {
 				setTimeout(() => {

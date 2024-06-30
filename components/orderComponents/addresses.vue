@@ -4,7 +4,7 @@
 
 	const dataAddress = async () => {
 		try {
-			const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/get-addresses', {
+			const data = await $fetch<any>('http://localhost:3001/api/get-addresses', {
 				method: 'POST',
 				body: {
 					userId: useCookie('id').value,

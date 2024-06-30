@@ -22,7 +22,7 @@
 		event.preventDefault()
 		if (email.value !== null && password.value !== null) {
 			try {
-				const data = await $fetch<any>('https://sneaker-server-three.vercel.app/api/login', {
+				const data = await $fetch<any>('http://localhost:3001/api/login', {
 					method: 'POST',
 					body: {
 						email: email.value,

@@ -64,7 +64,7 @@ export const useOrderStore = defineStore({
 			try {
 				if (this.isSelected == true && this.methodPayment == 'online') {
 					// const pay = await $fetch<any>(
-					//   "https://sneaker-server-three.vercel.app/api/sberbank/pay",
+					//   "http://localhost:3001/api/sberbank/pay",
 					//   {
 					//     userName: "",
 					//     password: "",
@@ -77,25 +77,22 @@ export const useOrderStore = defineStore({
 					this.isSelected &&
 					this.idParam.length > 0
 				) {
-					const pay = await $fetch<any>(
-						'https://sneaker-server-three.vercel.app/api/create-new-order',
-						{
-							method: 'POST',
-							body: JSON.stringify({
-								userId: useCookie('id').value,
-								sneakerDataId: this.idParam,
-								amount: this.amount,
-								addressId: this.addressId,
-								PayStatus: 'whenReceived',
-							}),
-						},
-					)
+					const pay = await $fetch<any>('http://localhost:3001/api/create-new-order', {
+						method: 'POST',
+						body: JSON.stringify({
+							userId: useCookie('id').value,
+							sneakerDataId: this.idParam,
+							amount: this.amount,
+							addressId: this.addressId,
+							PayStatus: 'whenReceived',
+						}),
+					})
 
 					if (pay) {
 						this.orderNumber = pay.orderNumber
 						this.success = true
 						document.body.style.overflow = 'hidden'
-						const clear = await $fetch('https://sneaker-server-three.vercel.app/api/clear-cart', {
+						const clear = await $fetch('http://localhost:3001/api/clear-cart', {
 							method: 'POST',
 							body: JSON.stringify({
 								userId: useCookie('id').value,
@@ -117,45 +114,39 @@ export const useOrderStore = defineStore({
 					isFormCorrect &&
 					this.idParam.length > 0
 				) {
-					const newAddress = await $fetch<any>(
-						'https://sneaker-server-three.vercel.app/api/create-address',
-						{
-							method: 'POST',
-							body: JSON.stringify({
-								userId: useCookie('id').value,
-								firstName: this.firstName,
-								lastName: this.lastName,
-								surname: this.surname,
-								city: this.city,
-								street: this.street,
-								phoneNumber: this.phone,
-								postalCode: this.postalCode,
-								buildingNumber: this.buildingNumber,
-								houseNumber: this.house,
-								apartment: this.apartment,
-							}),
-						},
-					)
+					const newAddress = await $fetch<any>('http://localhost:3001/api/create-address', {
+						method: 'POST',
+						body: JSON.stringify({
+							userId: useCookie('id').value,
+							firstName: this.firstName,
+							lastName: this.lastName,
+							surname: this.surname,
+							city: this.city,
+							street: this.street,
+							phoneNumber: this.phone,
+							postalCode: this.postalCode,
+							buildingNumber: this.buildingNumber,
+							houseNumber: this.house,
+							apartment: this.apartment,
+						}),
+					})
 					this.addressId = newAddress.id
 
-					const pay = await $fetch.raw<any>(
-						'https://sneaker-server-three.vercel.app/api/create-new-order',
-						{
-							method: 'POST',
-							body: JSON.stringify({
-								userId: useCookie('id').value,
-								sneakerDataId: this.idParam,
-								amount: this.amount,
-								addressId: this.addressId,
-								PayStatus: 'whenReceived',
-								orderMessage: this.comment,
-							}),
-						},
-					)
+					const pay = await $fetch.raw<any>('http://localhost:3001/api/create-new-order', {
+						method: 'POST',
+						body: JSON.stringify({
+							userId: useCookie('id').value,
+							sneakerDataId: this.idParam,
+							amount: this.amount,
+							addressId: this.addressId,
+							PayStatus: 'whenReceived',
+							orderMessage: this.comment,
+						}),
+					})
 					if (pay.ok) {
 						this.success = true
 						this.orderNumber = pay._data.orderNumber
-						const clear = await $fetch('https://sneaker-server-three.vercel.app/api/clear-cart', {
+						const clear = await $fetch('http://localhost:3001/api/clear-cart', {
 							method: 'POST',
 							body: JSON.stringify({
 								userId: useCookie('id').value,

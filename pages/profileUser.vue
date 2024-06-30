@@ -2,6 +2,7 @@
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const router = useRouter()
+
 </script>
 <template>
   <div class="min-h-[600px]">

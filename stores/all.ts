@@ -56,7 +56,7 @@ export const useAllStore = defineStore({
 
 		async getItemsMethod(params: { sortBy: any; title?: any }) {
 			try {
-				const response = await $fetch('https://sneaker-server-three.vercel.app/api', {
+				const response = await $fetch('http://localhost:3001/api', {
 					method: 'GET',
 					params: params,
 				})

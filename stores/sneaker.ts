@@ -17,7 +17,7 @@ export const useSneaker = defineStore('sneaker', {
 	actions: {
 		async fetchItems() {
 			try {
-				const response = await $fetch<any>('https://sneaker-server-three.vercel.app/api/items', {
+				const response = await $fetch<any>('http://localhost:3001/api/items', {
 					method: 'GET',
 				})
 				this.items = response
@@ -27,16 +27,13 @@ export const useSneaker = defineStore('sneaker', {
 		},
 		async addToFavorites(userId: string, sneakerId: number) {
 			try {
-				const response = await $fetch(
-					'https://sneaker-server-three.vercel.app/api/add-to-favorites',
-					{
-						method: 'POST',
-						body: JSON.stringify({
-							userId: userId,
-							sneakerId: sneakerId,
-						}),
-					},
-				)
+				const response = await $fetch('http://localhost:3001/api/add-to-favorites', {
+					method: 'POST',
+					body: JSON.stringify({
+						userId: userId,
+						sneakerId: sneakerId,
+					}),
+				})
 				// Обновляем состояние элемента, чтобы отразить его в избранном
 				const index = this.items.findIndex((item) => item.id === sneakerId)
 				if (index !== -1) {

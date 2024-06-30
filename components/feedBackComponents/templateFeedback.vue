@@ -21,7 +21,7 @@
 			class="w-full h-40 object-cover rounded-t-lg"
 			alt="Card Image"
 			v-if="props.image"
-			:src="'https://sneaker-server-three.vercel.app/img/tablet/' + props.image"
+			:src="'http://localhost:3001/img/tablet/' + props.image"
 		/>
 		<div class="p-4 bg-[#efefef] rounded-lg dark:bg-slate-800">
 			<p class="text-gray-800 text-lg pb-7 dark:text-ghostWhiteText">

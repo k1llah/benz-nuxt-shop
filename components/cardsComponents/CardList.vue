@@ -36,16 +36,13 @@
 	let showOverlay = ref(false)
 	const onFavoriteAdd = async (sneakerId: number, item: Item) => {
 		try {
-			const postData = await $fetch(
-				'https://sneaker-server-three.vercel.app/api/add-to-favorites',
-				{
-					method: 'POST',
-					body: {
-						userId: useCookie('id').value,
-						sneakerId: sneakerId,
-					},
+			const postData = await $fetch('http://localhost:3001/api/add-to-favorites', {
+				method: 'POST',
+				body: {
+					userId: useCookie('id').value,
+					sneakerId: sneakerId,
 				},
-			)
+			})
 			item.isFavorite = true
 			showOverlay.value = true
 			setTimeout(() => {
